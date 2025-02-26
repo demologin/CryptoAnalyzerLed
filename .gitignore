@@ -5,6 +5,7 @@ target/
 !**/src/test/**/out/
 *.iml
 .idea/
+.vscode
 
 
 ### Mac OS ###

@@ -1,5 +1,6 @@
 package com.javarush.pukhov.controller;
 
+import com.javarush.pukhov.exception.ApplicationException;
 import com.javarush.pukhov.runner.Runner;
 
 public class Controller {
@@ -13,9 +14,9 @@ public class Controller {
     public void start() {
         try {
             runner.run();
-        } catch (Exception e) {
+        } catch (ApplicationException e) {
             /*
-             * 
+             *
              */
         }
     }

@@ -1,10 +1,6 @@
 package com.javarush.chesnokov.command;
 
-public class BruteForce extends AbstractCommand{
-
-    public BruteForce() {
-        super("Brute force");
-    }
+public class BruteForce implements Command{
 
     @Override
     public void execute() {

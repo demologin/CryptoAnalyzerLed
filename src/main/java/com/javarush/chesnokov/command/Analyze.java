@@ -1,10 +1,6 @@
 package com.javarush.chesnokov.command;
 
-public class Analyze extends AbstractCommand{
-
-    public Analyze() {
-        super("Analyze");
-    }
+public class Analyze implements Command{
 
     @Override
     public void execute() {

@@ -1,6 +1,10 @@
 package com.javarush.chesnokov.command;
 
-public class Exit implements Command{
+public class Exit extends AbstractCommand{
+
+    public Exit() {
+        super("Exit");
+    }
 
     @Override
     public void execute() {

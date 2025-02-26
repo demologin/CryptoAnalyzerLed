@@ -13,6 +13,7 @@ public class Menu {
     public static final int COMMAND_BRUTE_FORCE = 3;
     public static final int COMMAND_ANALYZE = 4;
     public static final int COMMAND_EXIT = 5;
+    public static final int DECORATION_COUNT = 20;
 
     private final Map<Integer, Command> commands = new HashMap<>();
 
@@ -29,12 +30,12 @@ public class Menu {
     }
 
     public void showMenu() {
-        System.out.println("-".repeat(20));
+        System.out.println("-".repeat(DECORATION_COUNT));
         System.out.println("Выберите команду:");
         for (var entry : commands.entrySet()) {
-            System.out.println(entry.getKey() + " - " + entry.getValue().getClass().getSimpleName());
+            System.out.println(entry.getKey() + " - " + entry.getValue().getName());
         }
-        System.out.println("-".repeat(20));
+        System.out.println("-".repeat(DECORATION_COUNT));
     }
 
     public void executeCommand(int command) {

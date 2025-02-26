@@ -18,7 +18,7 @@ public class Controller {
         try {
             runner.run();
         } catch (ApplicationException e) {
-            outputError.print();
+            outputError.print(e);
         }
     }
 

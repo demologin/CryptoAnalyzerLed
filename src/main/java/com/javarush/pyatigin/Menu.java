@@ -10,12 +10,11 @@ public class Menu {
         System.out.println("1. Encode file ");
         System.out.println("2. Decode file ");
         System.out.println("3. Brute Force ");
-        System.out.println("4. Exit");
         Scanner scanner = new Scanner(System.in);
         while (true) {
             try {
                 int option = scanner.nextInt();
-                if (option < 1 || option > 4) {
+                if (option < 1 || option > 3) {
                     System.out.println("Invalid option. Please select a valid option (1-4).");
                 } else {
                     return option;

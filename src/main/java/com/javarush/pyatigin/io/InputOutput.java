@@ -1,4 +1,5 @@
 package com.javarush.pyatigin.io;
+
 import com.javarush.pyatigin.GetOptions;
 import com.javarush.pyatigin.decode.BruteForce;
 import com.javarush.pyatigin.decode.Decode;
@@ -11,7 +12,7 @@ public class InputOutput {
     public InputOutput(GetOptions getOptions) {
         Path pathFileInput = getOptions.path;
         CreateFileWithDate createFileWithDate = new CreateFileWithDate();
-        Path pathFileOutput=createFileWithDate.CreateFileNameWithDate(pathFileInput);
+        Path pathFileOutput = createFileWithDate.CreateFileNameWithDate(pathFileInput);
 //        String dest = "C:\\vs\\log1.txt";
 //        File outputFileName = new File(dest);
 
@@ -27,7 +28,7 @@ public class InputOutput {
                         line = decode.getDecode(line, getOptions.key);
                     } else if (getOptions.option == 3) {
                         BruteForce bf = new BruteForce();
-                        line = bf.BruteForce(line, getOptions.key);
+                        line = bf.getBruteForce(line, getOptions.key);
                     }
                     writer.write(line);
                 }

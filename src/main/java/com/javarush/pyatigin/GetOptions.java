@@ -11,19 +11,18 @@ public class GetOptions {
     public Path path;
     public int key;
 
-    public GetOptions() {
-    }
-
     public GetOptions(int option) {
         if (option == 1) {
             this.option = option;
             System.out.println("File to be encrypted");
             Scanner scanner = new Scanner(System.in);
-            while(true) {
+            while (true) {
                 this.path = Paths.get(scanner.nextLine());
-                if(!isRegularFile(this.path)) {
+                if (!isRegularFile(this.path)) {
                     System.out.println("File not found");
-                } else{break;}
+                } else {
+                    break;
+                }
             }
             System.out.println("Encryption key");
             this.key = scanner.nextInt();

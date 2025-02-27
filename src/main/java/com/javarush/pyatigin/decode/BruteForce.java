@@ -18,7 +18,7 @@ public class BruteForce {
 
     int lengthAlphabet = ALPHABET.getALPHABETLength();
 
-    public String BruteForce(String line, int key) {
+    public String getBruteForce(String line, int key) {
 
         for (int i = 1; i < lengthAlphabet; i++) {
             key = i;

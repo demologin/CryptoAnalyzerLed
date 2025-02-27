@@ -11,8 +11,7 @@ public class Decode {
     public String getDecode(String line, int key) {
         StringBuilder stringBuilder = new StringBuilder();
         char[] chars = line.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            char c = chars[i];
+        for (char c : chars) {
             int index = ALPHABET.getIndexOfAlphabet(c);
             if (index == -1) {
                 stringBuilder.append(c);

@@ -6,11 +6,11 @@ public class Alphabet {
     private static final String ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     private static final String SYMBOLS = ",.? \";:'";
 
-    public Map <Integer, Character> getAlphabetToMap(){
-        Map<Integer, Character> alphabet = new HashMap<>();
-        char[] chars = ALPHABET.toCharArray();
-        for (int i = 0; i < chars.length; i++) {
-            alphabet.put(i, chars[i]);
+    public List <Character> getAlphabetToList(){
+        List<Character> alphabet = new ArrayList<>();
+        char[] chars = ALPHABET.toLowerCase().toCharArray();
+        for (char aChar : chars) {
+            alphabet.add(aChar);
         }
         return alphabet;
     }

@@ -21,16 +21,15 @@ public class BruteForce {
     public String getBruteForce(String line) {
 
         for (int i = 1; i < lengthAlphabet; i++) {
-            int key = i;
             Decode decode = new Decode();
-            String textEncode = decode.getDecode(line, key);
+            String textEncode = decode.getDecode(line, i);
             //добавить варианты
             System.out.println(textEncode);
             System.out.println("BruteForce: 1 ok 2 not");
             Scanner scanner = new Scanner(System.in);
             int resultEncode = scanner.nextInt();
             if (resultEncode == 1) {
-                System.out.println("Key " + key + " ok");
+                System.out.println("Key " + i + " ok");
                 return textEncode;
             }
         }

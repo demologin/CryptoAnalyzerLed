@@ -2,7 +2,6 @@ package com.javarush.pyatigin;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Map;
 import java.util.Scanner;
 
 public class GetOptions {

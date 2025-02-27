@@ -9,12 +9,7 @@ public class ALPHABET {
         return ALPHABET.length;
     }
     public static char getCharAlphabet(int index) {
-        for (int i = 0; i < ALPHABET.length; i++) {
-            if (ALPHABET[i] == index) {
-                return ALPHABET[i];
-            }
-        }
-        return ' ';
+        return ALPHABET[index];
     }
     public static int getIndexOfAlphabet(char c) {
         for (int i = 0; i < ALPHABET.length; i++) {

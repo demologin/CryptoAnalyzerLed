@@ -12,8 +12,8 @@ public class Encode {
         for (int i = 0; i < chars.length; i++) {
             char c = chars[i];
             int index = ALPHABET.getIndexOfAlphabet(c);
-            if ((index + key) > lengthAlphabet) {
-                index = index + key - chars.length;
+            if (index + key > lengthAlphabet) {
+                index = index + key - lengthAlphabet;
 //                System.out.println(ALPHABET.getCharAlphabet(index));
                 stringBuilder.append(ALPHABET.getCharAlphabet(index));
             } else {

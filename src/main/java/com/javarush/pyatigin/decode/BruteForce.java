@@ -23,7 +23,7 @@ public class BruteForce {
         for (int i = 1; i < lengthAlphabet; i++) {
             key = i;
             Decode decode = new Decode();
-            String textEncode = decode.Decode(line, key);
+            String textEncode = decode.getDecode(line, key);
             //добавить варианты
             System.out.println(textEncode);
             System.out.println("BruteForce: 1 ok 2 not");

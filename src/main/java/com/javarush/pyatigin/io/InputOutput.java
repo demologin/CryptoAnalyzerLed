@@ -21,10 +21,10 @@ public class InputOutput {
                 while ((line = reader.readLine()) != null) {
                     if (getOptions.option == 1) {
                         Encode encode = new Encode();
-                        line = encode.Encode(line, getOptions.key);
+                        line = encode.getEncode(line, getOptions.key);
                     } else if (getOptions.option == 2) {
                         Decode decode = new Decode();
-                        line = decode.Decode(line, getOptions.key);
+                        line = decode.getDecode(line, getOptions.key);
                     } else if (getOptions.option == 3) {
                         BruteForce bf = new BruteForce();
                         line = bf.BruteForce(line, getOptions.key);

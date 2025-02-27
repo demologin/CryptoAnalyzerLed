@@ -8,7 +8,7 @@ public class Decode {
     public Decode() {
     }
 
-    public String Decode(String line, int key) {
+    public String getDecode(String line, int key) {
         StringBuilder stringBuilder = new StringBuilder();
         char[] chars = line.toCharArray();
         for (int i = 0; i < chars.length; i++) {

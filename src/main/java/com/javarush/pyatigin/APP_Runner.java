@@ -7,7 +7,7 @@ public class APP_Runner {
         Menu menu = new Menu();
         int option = menu.MenuOption();
         GetOptions getOptions = new GetOptions(option);
-        InputOutput io = new InputOutput(getOptions);
+        new InputOutput(getOptions);
     }
 }
 

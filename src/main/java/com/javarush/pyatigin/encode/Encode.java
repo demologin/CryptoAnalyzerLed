@@ -8,7 +8,7 @@ public class Encode {
     public Encode() {
     }
 
-    public String Encode(String line, int key) {
+    public String getEncode(String line, int key) {
         StringBuilder stringBuilder = new StringBuilder();
         char[] chars = line.toCharArray();
         for (int i = 0; i < chars.length; i++) {

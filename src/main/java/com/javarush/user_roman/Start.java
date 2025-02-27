@@ -3,9 +3,10 @@ package com.javarush.user_roman;
 import java.util.Scanner;
 
 public class Start {
+
     public static void main(String[] args) {
-        System.err.println("Выберите действие:");
-        System.out.print("\t1-Запись текста в файл \n \t2-Чтение текста из файла \n \t3-Шифрование \n \t4-Расшифровка \n \t5-Выход \n");
+        Menu.startMenu();
+
         Scanner sc = new Scanner(System.in);
         int button = sc.nextInt();
         switch (button) {
@@ -28,6 +29,14 @@ public class Start {
             default:
                 System.out.println("Нет такой команды");
         }
+        /*while (true) {
+            String print = sc.nextLine();
+            System.out.println(print);
+            if (print.equals("exit")) {
+                System.out.println("Выход");
+                break;
+            }
+        }*/
     }
 
 }

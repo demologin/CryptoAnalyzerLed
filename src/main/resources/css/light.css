@@ -1,0 +1,143 @@
+#root {
+    -surface-a0: #eeeeee;
+    -surface-a10: #e1e1e1;
+    -surface-a20: #d5d5d5;
+    -surface-a30: #c8c8c8;
+    -surface-a40: #bcbcbc;
+    -surface-a50: #afafaf;
+
+    -primary-a0: #19d8e6;
+    -primary-a10: #3eceda;
+    -primary-a20: #50c4ce;
+    -primary-a30: #5dbac3;
+    -primary-a40: #67b1b7;
+    -primary-a50: #6fa7ac;
+
+    -tonal-a0: #e0eced;
+    -tonal-a10: #d5dfe0;
+    -tonal-a20: #cad3d4;
+    -tonal-a30: #bfc7c7;
+    -tonal-a40: #b4bbbb;
+    -tonal-a50: #a9afaf;
+
+    -text-light: #eeeeee;
+    -text-hyperlink: #118088;
+    -text-dark: #242e2f;
+    -text-exception: #ff3f3f;
+
+    -fx-background-color: -surface-a10;
+
+}
+
+#menuBar {
+    -fx-background-color: -surface-a20;
+}
+
+.switch-button {
+    -fx-cursor: hand;
+}
+
+.switch-rectangle {
+    -fx-fill: -tonal-a10;
+    -fx-stroke: -tonal-a50;
+}
+
+.switch-circle {
+    -fx-fill: -primary-a20;
+    -fx-stroke: -tonal-a0;
+}
+
+#menuBar .label .text {
+    -fx-fill: -text-dark;
+}
+
+.separator:horizontal .line {
+    -fx-border-color: -surface-a30;
+}
+
+#menuBar .button {
+    -fx-background-color: transparent;
+    -fx-background-radius: null;
+    -fx-pref-height: 50;
+}
+
+#menuBar .button .text {
+    -fx-fill: -text-dark;
+    -fx-font-size: 14;
+    -fx-font-weight: bold;
+}
+
+#menuBar .button:hover {
+    -fx-background-color: -primary-a20;
+    -fx-cursor: hand;
+}
+
+#menuBar .button:hover .text {
+    -fx-fill: -text-dark;
+}
+
+#welcomeScreen .label .text {
+    -fx-fill: -text-dark;
+}
+
+#welcomeMessage {
+    -fx-fill: -text-dark;
+}
+
+#translate .label .text, #analyze .label .text {
+    -fx-fill: -text-dark;
+}
+
+#modeLabel .text {
+    -fx-font-size: 25;
+    -fx-font-weight: bold;
+}
+
+.text-field {
+    -fx-background-radius: 12;
+    -fx-background-color: -surface-a20;
+    -fx-text-fill: -text-dark;
+}
+
+.hyperlink .text {
+    -fx-fill: -text-hyperlink;
+}
+
+#keySpinner, #keySpinner .increment-arrow-button, #keySpinner .decrement-arrow-button {
+    -fx-background-color: transparent;
+}
+
+#keySpinner .increment-arrow-button, #keySpinner .decrement-arrow-button {
+    -fx-cursor: hand;
+}
+
+#keySpinner .increment-arrow-button .increment-arrow, #keySpinner .decrement-arrow-button .decrement-arrow {
+    -fx-background-color: -primary-a0;
+    -fx-effect: null;
+}
+
+#keySpinner .increment-arrow-button:pressed, #keySpinner .decrement-arrow-button:pressed {
+    -fx-background-color: -tonal-a0;
+}
+
+#submitButton {
+    -fx-font-size: 14;
+    -fx-fill: -text-dark;
+    -fx-background-color: -primary-a0;
+    -fx-background-radius: 18;
+    -fx-border-color: -primary-a10;
+    -fx-border-radius: 18;
+}
+
+#submitButton:hover {
+    -fx-background-color: -primary-a30;
+    -fx-border-color: -primary-a40;
+}
+
+#exceptionText {
+    -fx-fill: -text-exception;
+}
+
+#resultScreen .text, #resultText, #example {
+    -fx-fill: -text-dark;
+}

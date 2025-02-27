@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<VBox fx:id="welcomeScreen" alignment="CENTER" prefHeight="400.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/21.0.5" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javarush.kazakov.controllers.screen.WelcomeScreenController">
+   <children>
+      <Label alignment="CENTER" prefWidth="400.0" text="Welcome!">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Text fx:id="welcomeMessage" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="380.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Text>
+   </children>
+</VBox>

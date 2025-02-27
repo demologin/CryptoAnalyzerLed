@@ -28,7 +28,7 @@ public class InputOutput {
                         line = decode.getDecode(line, getOptions.key);
                     } else if (getOptions.option == 3) {
                         BruteForce bf = new BruteForce();
-                        line = bf.getBruteForce(line, getOptions.key);
+                        line = bf.getBruteForce(line);
                     }
                     writer.write(line);
                 }

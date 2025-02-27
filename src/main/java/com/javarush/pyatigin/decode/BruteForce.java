@@ -18,10 +18,10 @@ public class BruteForce {
 
     int lengthAlphabet = ALPHABET.getALPHABETLength();
 
-    public String getBruteForce(String line, int key) {
+    public String getBruteForce(String line) {
 
         for (int i = 1; i < lengthAlphabet; i++) {
-            key = i;
+            int key = i;
             Decode decode = new Decode();
             String textEncode = decode.getDecode(line, key);
             //добавить варианты

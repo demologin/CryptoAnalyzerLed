@@ -1,16 +1,16 @@
 package com.javarush.Apalinskiy.Constants;
 
-import java.util.ArrayList;
+import java.util.*;
 
 public class Alphabet {
     private static final String ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     private static final String SYMBOLS = ",.? \";:'";
 
-    public ArrayList <Character> getAlphabetToList(){
-        ArrayList<Character> alphabet = new ArrayList<>();
+    public Map <Integer, Character> getAlphabetToMap(){
+        Map<Integer, Character> alphabet = new HashMap<>();
         char[] chars = ALPHABET.toCharArray();
-        for (char aChar : chars) {
-            alphabet.add(aChar);
+        for (int i = 0; i < chars.length; i++) {
+            alphabet.put(i, chars[i]);
         }
         return alphabet;
     }

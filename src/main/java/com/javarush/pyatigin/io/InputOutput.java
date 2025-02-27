@@ -1,16 +1,22 @@
-package com.javarush.pyatigin.encode;
+package com.javarush.pyatigin.io;
 import com.javarush.pyatigin.GetOptions;
+import com.javarush.pyatigin.decode.BruteForce;
+import com.javarush.pyatigin.decode.Decode;
+import com.javarush.pyatigin.encode.Encode;
+
 import java.io.*;
 import java.nio.file.Path;
 
 public class InputOutput {
     public InputOutput(GetOptions getOptions) {
-        Path path = getOptions.path;
-        String dest = "C:\\vs\\log1.txt";
-        File outputFileName = new File(dest);
+        Path pathFileInput = getOptions.path;
+        CreateFileWithDate createFileWithDate = new CreateFileWithDate();
+        Path pathFileOutput=createFileWithDate.CreateFileNameWithDate(pathFileInput);
+//        String dest = "C:\\vs\\log1.txt";
+//        File outputFileName = new File(dest);
 
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(path.toFile())))) {
-            try (BufferedWriter writter = new BufferedWriter(new FileWriter(outputFileName))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(pathFileInput.toFile())))) {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileOutput.toFile()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     if (getOptions.option == 1) {
@@ -23,7 +29,7 @@ public class InputOutput {
                         BruteForce bf = new BruteForce();
                         line = bf.BruteForce(line, getOptions.key);
                     }
-                    writter.write(line);
+                    writer.write(line);
                 }
             }
         } catch (IOException e) {

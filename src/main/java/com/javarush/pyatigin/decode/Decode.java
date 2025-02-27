@@ -1,4 +1,4 @@
-package com.javarush.pyatigin.encode;
+package com.javarush.pyatigin.decode;
 
 import com.javarush.pyatigin.ALPHABET;
 

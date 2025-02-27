@@ -1,5 +1,6 @@
 package com.javarush.pyatigin;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
@@ -11,19 +12,19 @@ public class Menu {
         System.out.println("3. Brute Force ");
         System.out.println("4. Exit");
         Scanner scanner = new Scanner(System.in);
-        int option = scanner.nextInt();
-        switch (option) {
-            case 1 -> {
-                return 1;
-            }
-            case 2 -> {
-                return 2;
-            }
-            case 3 -> {
-                return 3;
+        while (true) {
+            try {
+                int option = scanner.nextInt();
+                if (option < 1 || option > 4) {
+                    System.out.println("Invalid option. Please select a valid option (1-4).");
+                } else {
+                    return option;
+                }
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number between 1 and 4.");
+                scanner.next();
             }
         }
-        return 0;
     }
 }
 

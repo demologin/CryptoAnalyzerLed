@@ -6,7 +6,7 @@ public class Alphabet {
     private static final String ALPHABET = "АБВГДЕЁЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
     private static final String SYMBOLS = ",.? \";:'";
 
-    public ArrayList <Character> AlphabetToList(){
+    public ArrayList <Character> getAlphabetToList(){
         ArrayList<Character> alphabet = new ArrayList<>();
         char[] chars = ALPHABET.toCharArray();
         for (char aChar : chars) {

@@ -1,25 +1,15 @@
 package com.javarush.Apalinskiy.IO;
 
-import java.nio.file.Files;
+import com.javarush.Apalinskiy.Constants.Const;
+
 import java.nio.file.Path;
+import java.util.Scanner;
 
 
 public class FilePathResolver {
-
-    private final Path inputPath;
-    private final Path outputPath;
-
-    public FilePathResolver(String input, String output) {
-        this.inputPath = Path.of(input);
-        this.outputPath = Path.of(output).toAbsolutePath();
-
-        if (!Files.exists(inputPath)) {
-            throw new IllegalArgumentException("Файл ввода не существует: " + inputPath);
-        }
-        if (Files.isDirectory(outputPath)) {
-            throw new IllegalArgumentException("Путь вывода не может быть папкой: " + outputPath);
-        }
-    }
+    Scanner scanner = new Scanner(System.in);
+    private final Path inputPath = Path.of(scanner.nextLine());
+    private final Path outputPath = Path.of(Const.txtPath).toAbsolutePath();;
 
     public Path getInputPath() {
         return inputPath;

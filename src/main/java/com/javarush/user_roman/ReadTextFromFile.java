@@ -5,11 +5,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.List;
 
-public class ReadTextFromFile {
+class ReadTextFromFile {
     public static void readTextFromFile() {
         Path path = Path.of("src\\main\\java\\com\\javarush\\user_roman\\test.txt");
+        List<String> strings = null;
         if (Files.exists(path)) {
-            List<String> strings = null;
             try {
                 strings = Files.readAllLines(path);
             } catch (IOException e) {

@@ -7,7 +7,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
-public class WriteTextToFile {
+class WriteTextToFile {
     public static void writeTextToFile() {
         /*String file1 = "src\\main\\java\\com\\javarush\\user_roman\\readme.txt";
                 Path path = Path.of(file1);

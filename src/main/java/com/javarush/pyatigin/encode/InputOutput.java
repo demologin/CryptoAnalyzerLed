@@ -1,7 +1,10 @@
 package com.javarush.pyatigin.encode;
+
 import com.javarush.pyatigin.GetOptions;
+
 import java.io.*;
 import java.nio.file.Path;
+
 public class InputOutput {
     public InputOutput(GetOptions getOptions) {
         Path path = getOptions.path;

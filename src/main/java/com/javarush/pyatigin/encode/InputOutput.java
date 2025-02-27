@@ -1,7 +1,5 @@
 package com.javarush.pyatigin.encode;
-
 import com.javarush.pyatigin.GetOptions;
-
 import java.io.*;
 import java.nio.file.Path;
 
@@ -21,6 +19,9 @@ public class InputOutput {
                     } else if (getOptions.option == 2) {
                         Decode decode = new Decode();
                         line = decode.Decode(line, getOptions.key);
+                    } else if (getOptions.option == 3) {
+                        BruteForce bf = new BruteForce();
+                        line = bf.BruteForce(line, getOptions.key);
                     }
                     writter.write(line);
                 }

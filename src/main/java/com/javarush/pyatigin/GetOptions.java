@@ -27,6 +27,12 @@ public class GetOptions {
             this.path = Paths.get(scanner.nextLine());
             System.out.println("Decryption key");
             this.key = scanner.nextInt();
+        } else if (option == 3) {
+            this.option = 3;
+            System.out.println("File to be decrypted");
+            Scanner scanner = new Scanner(System.in);
+            this.path = Paths.get(scanner.nextLine());
+            this.key = 0;
         }
     }
 }

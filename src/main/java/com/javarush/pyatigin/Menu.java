@@ -20,7 +20,7 @@ public class Menu {
                 return 2;
             }
             case 3 -> {
-
+                return 3;
             }
         }
         return 0;

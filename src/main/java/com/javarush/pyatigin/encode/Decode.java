@@ -2,11 +2,11 @@ package com.javarush.pyatigin.encode;
 
 import com.javarush.pyatigin.ALPHABET;
 
-public class Encode {
+public class Decode {
     int lengthAlphabet = ALPHABET.getALPHABETLength();
-    public Encode() {
+    public Decode() {
     }
-    public String Encode(String line, int key) {
+    public String Decode(String line, int key) {
         StringBuilder stringBuilder = new StringBuilder();
         char[] chars = line.toCharArray();
         for (int i = 0; i < chars.length; i++) {
@@ -14,13 +14,13 @@ public class Encode {
             int index = ALPHABET.getIndexOfAlphabet(c);
             if(index == -1) {
                 stringBuilder.append(c);
-            } else{
-            if (index + key >= lengthAlphabet) {
-                index = index + key - lengthAlphabet;
+            } else {
+            if (index - key < 0) {
+                index = index - key + lengthAlphabet;
 //                System.out.println(ALPHABET.getCharAlphabet(index));
                 stringBuilder.append(ALPHABET.getCharAlphabet(index));
             } else {
-                char x = ALPHABET.getCharAlphabet(index+key);
+                char x = ALPHABET.getCharAlphabet(index-key);
 //                System.out.println(x);
                 stringBuilder.append(x);
             }}
@@ -29,3 +29,4 @@ public class Encode {
         return stringBuilder.toString();
     }
 }
+

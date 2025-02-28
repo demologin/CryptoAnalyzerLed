@@ -5,7 +5,7 @@ import com.javarush.pyatigin.constatnt.PopularLetters;
 
 import java.util.LinkedList;
 import java.util.Scanner;
-
+// Подумать логику, когда алфавит не знаем
 public class BruteForce {
 
     public String getBruteForce(String line) {
@@ -26,7 +26,7 @@ public class BruteForce {
                 return textDecode;
             }
         }
-        //Если не удалось то включить простой брут как был
+        //Если не удалось, то включить простой брут как был
         return line;
     }
 }

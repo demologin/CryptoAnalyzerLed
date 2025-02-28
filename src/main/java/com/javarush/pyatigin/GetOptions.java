@@ -1,7 +1,6 @@
 package com.javarush.pyatigin;
 
 
-
 import com.javarush.pyatigin.constatnt.ALPHABET;
 
 import java.nio.file.Path;
@@ -55,10 +54,11 @@ public class GetOptions {
             while (true) {
                 try {
                     int keyTemp = Integer.parseInt(scanner.nextLine());
-                    if(keyTemp >= ALPHABET.getALPHABETLength()) {
+                    if (keyTemp >= ALPHABET.getALPHABETLength()) {
                         System.out.println("Long key. Please try again.");
                     } else {
-                    return keyTemp;}
+                        return keyTemp;
+                    }
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid key. Please enter a valid integer.");
                     scanner.next(); // Clear the invalid input

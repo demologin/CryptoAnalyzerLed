@@ -58,7 +58,7 @@ public class GetOptions {
                     if(keyTemp >= ALPHABET.getALPHABETLength()) {
                         System.out.println("Long key. Please try again.");
                     } else {
-                    return scanner.nextInt();}
+                    return keyTemp;}
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid key. Please enter a valid integer.");
                     scanner.next(); // Clear the invalid input

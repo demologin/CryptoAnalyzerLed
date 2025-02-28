@@ -12,9 +12,9 @@ import java.util.Scanner;
 import static java.nio.file.Files.isRegularFile;
 
 public class GetOptions {
-    private int option;
-    private Path path;
-    private int key;
+    private final int option;
+    private final Path path;
+    private final int key;
 
     public int getOption() {
         return option;

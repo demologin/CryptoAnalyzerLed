@@ -12,6 +12,8 @@ public class APP_Runner {
             }
             GetOptions getOptions = new GetOptions(option);
             new inputOutput(getOptions);
+            System.out.println("Congratulations, the file has been created");
+            System.out.println("Select menu item for new operation or exit");
         }
     }
 }

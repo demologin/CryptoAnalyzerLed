@@ -1,6 +1,6 @@
-package com.javarush.Apalinskiy.IO;
+package com.javarush.apalinskiy.io;
 
-import com.javarush.Apalinskiy.Constants.Const;
+import com.javarush.apalinskiy.constants.Const;
 
 import java.nio.file.Path;
 import java.util.Scanner;

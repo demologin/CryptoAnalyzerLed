@@ -1,4 +1,4 @@
-package com.javarush.Apalinskiy.Constants;
+package com.javarush.apalinskiy.constants;
 
 import java.io.File;
 

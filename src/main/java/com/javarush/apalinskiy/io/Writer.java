@@ -1,4 +1,4 @@
-package com.javarush.Apalinskiy.IO;
+package com.javarush.apalinskiy.io;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

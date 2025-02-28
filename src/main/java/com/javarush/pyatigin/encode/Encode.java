@@ -1,6 +1,6 @@
 package com.javarush.pyatigin.encode;
 
-import com.javarush.pyatigin.ALPHABET;
+import com.javarush.pyatigin.constatnt.ALPHABET;
 
 public class Encode {
     int lengthAlphabet = ALPHABET.getALPHABETLength();

@@ -1,4 +1,4 @@
-package com.javarush.pyatigin;
+package com.javarush.pyatigin.constatnt;
 
 public class ALPHABET {
     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е','ё', 'ж', 'з',

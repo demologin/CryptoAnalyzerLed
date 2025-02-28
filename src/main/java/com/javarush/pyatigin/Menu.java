@@ -4,7 +4,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
-    public int MenuOption() {
+    public int menuOption() {
         System.out.println("Welcome to Pyatigin APP");
         System.out.println("Select menu item");
         System.out.println("1. Encode file ");

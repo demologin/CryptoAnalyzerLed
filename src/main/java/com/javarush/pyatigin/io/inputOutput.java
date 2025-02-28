@@ -8,11 +8,11 @@ import com.javarush.pyatigin.encode.Encode;
 import java.io.*;
 import java.nio.file.Path;
 
-public class InputOutput {
-    public InputOutput(GetOptions getOptions) {
-        Path pathFileInput = getOptions.path;
+public class inputOutput {
+    public inputOutput(GetOptions getOptions) {
+        Path pathFileInput = getOptions.getPath();
         CreateFileWithDate createFileWithDate = new CreateFileWithDate();
-        Path pathFileOutput = createFileWithDate.CreateFileNameWithDate(pathFileInput);
+        Path pathFileOutput = createFileWithDate.createFileNameWithDate(pathFileInput);
 //        String dest = "C:\\vs\\log1.txt";
 //        File outputFileName = new File(dest);
 
@@ -20,13 +20,13 @@ public class InputOutput {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileOutput.toFile()))) {
                 String line;
                 while ((line = reader.readLine()) != null) {
-                    if (getOptions.option == 1) {
+                    if (getOptions.getOption() == 1) {
                         Encode encode = new Encode();
-                        line = encode.getEncode(line, getOptions.key);
-                    } else if (getOptions.option == 2) {
+                        line = encode.getEncode(line, getOptions.getKey());
+                    } else if (getOptions.getOption() == 2) {
                         Decode decode = new Decode();
-                        line = decode.getDecode(line, getOptions.key);
-                    } else if (getOptions.option == 3) {
+                        line = decode.getDecode(line, getOptions.getKey());
+                    } else if (getOptions.getOption() == 3) {
                         BruteForce bf = new BruteForce();
                         line = bf.getBruteForce(line);
                     }

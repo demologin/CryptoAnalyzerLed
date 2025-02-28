@@ -1,64 +1,71 @@
 package com.javarush.pyatigin;
 
-import com.javarush.pyatigin.exception.FilePrompter;
-import com.javarush.pyatigin.exception.KeyPrompter;
+
+
+import com.javarush.pyatigin.constatnt.ALPHABET;
 
 import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+import static java.nio.file.Files.isRegularFile;
 
 public class GetOptions {
-    public int option;
-    public Path path;
-    public int key;
+    private int option;
+    private Path path;
+    private int key;
+
+    public int getOption() {
+        return option;
+    }
+
+    public Path getPath() {
+        return path;
+    }
+
+    public int getKey() {
+        return key;
+    }
 
     public GetOptions(int option) {
+        this.option = option;
         Scanner scanner = new Scanner(System.in);
-        FilePrompter filePrompter = new FilePrompter();
-        KeyPrompter keyPrompter = new KeyPrompter();
-        switch (option) {
-            case 1:
-                this.path = filePrompter.promptFile("File to be encrypted", scanner);
-                this.key = keyPrompter.promptKey("Encryption key", scanner);
+        this.path = promptFile(option == 1 ? "File to be encrypted" : "File to be decrypted", scanner);
+        this.key = promptKey(option, scanner);
+    }
+
+    private Path promptFile(String message, Scanner scanner) {
+        System.out.println(message);
+        Path filePath;
+        while (true) {
+            filePath = Paths.get(scanner.nextLine());
+            if (!isRegularFile(filePath)) {
+                System.out.println("File not found. Please try again.");
+            } else {
                 break;
-            case 2:
-                this.path = filePrompter.promptFile("File to be decrypted", scanner);
-                this.key = keyPrompter.promptKey("Decryption key", scanner);
-                break;
-            case 3:
-                this.path = filePrompter.promptFile("File to be decrypted", scanner);
-                this.key = 0;
-                break;
+            }
+        }
+        return filePath;
+    }
+
+    private int promptKey(int option, Scanner scanner) {
+        if (option == 1 || option == 2) {
+            System.out.println(option == 1 ? "Encryption key" : "Decryption key");
+            while (true) {
+                try {
+                    int keyTemp = Integer.parseInt(scanner.nextLine());
+                    if(keyTemp >= ALPHABET.getALPHABETLength()) {
+                        System.out.println("Long key. Please try again.");
+                    } else {
+                    return scanner.nextInt();}
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid key. Please enter a valid integer.");
+                    scanner.next(); // Clear the invalid input
+                }
+            }
+        } else {
+            return 0; // Key is 0 for option 3
         }
     }
 }
-//        if (option == 1) {
-//            this.option = option;
-//            System.out.println("File to be encrypted");
-//            Scanner scanner = new Scanner(System.in);
-//            while (true) {
-//                this.path = Paths.get(scanner.nextLine());
-//                if (!isRegularFile(this.path)) {
-//                    System.out.println("File not found");
-//                } else {
-//                    break;
-//                }
-//            }
-//            System.out.println("Encryption key");
-//            this.key = scanner.nextInt();
-//        } else if (option == 2) {
-//            this.option = option;
-//            System.out.println("File to be decrypted");
-//            Scanner scanner = new Scanner(System.in);
-//            this.path = Paths.get(scanner.nextLine());
-//            System.out.println("Decryption key");
-//            this.key = scanner.nextInt();
-//        } else if (option == 3) {
-//            this.option = option;
-//            System.out.println("File to be decrypted");
-//            Scanner scanner = new Scanner(System.in);
-//            this.path = Paths.get(scanner.nextLine());
-//            this.key = 0;
-//        }
-//    }
-//}

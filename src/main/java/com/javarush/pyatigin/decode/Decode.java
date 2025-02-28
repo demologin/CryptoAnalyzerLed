@@ -1,6 +1,6 @@
 package com.javarush.pyatigin.decode;
 
-import com.javarush.pyatigin.ALPHABET;
+import com.javarush.pyatigin.constatnt.ALPHABET;
 
 public class Decode {
     int lengthAlphabet = ALPHABET.getALPHABETLength();

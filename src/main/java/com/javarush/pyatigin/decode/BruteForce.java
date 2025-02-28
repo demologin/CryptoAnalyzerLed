@@ -1,38 +1,32 @@
-//Пространственный символ (пробел) - около 15-20%
-//        О - около 10.97%
-//        Е - около 8.45%
-//        А - около 7.96%
-//        И - около 7.34%
-//        Н - около 6.70%
-//        Т - около 6.62%
-//        С - около 5.43%
-//        Р - около 4.95%
-//        Л - около 4.29%
 package com.javarush.pyatigin.decode;
 
-import com.javarush.pyatigin.ALPHABET;
+import com.javarush.pyatigin.constatnt.ALPHABET;
+import com.javarush.pyatigin.constatnt.PopularLetters;
 
+import java.util.LinkedList;
 import java.util.Scanner;
 
 public class BruteForce {
 
-    int lengthAlphabet = ALPHABET.getALPHABETLength();
-
     public String getBruteForce(String line) {
-
-        for (int i = 1; i < lengthAlphabet; i++) {
+        LinkedList<Character> list = new StatisticalAnalyse().statisticalAnalysis(line);
+        for (int i = 0; i < list.size(); i++) {
+            char c = list.get(i);
+            int index = ALPHABET.getIndexOfAlphabet(PopularLetters.getCharPopularLetters(i));
+            int index1 = ALPHABET.getIndexOfAlphabet(c);
+            int key = Math.abs(index - index1);
             Decode decode = new Decode();
-            String textEncode = decode.getDecode(line, i);
-            //добавить варианты
-            System.out.println(textEncode);
+            String textDecode = decode.getDecode(line, key);
+            System.out.println(textDecode);
             System.out.println("BruteForce: 1 ok 2 not");
             Scanner scanner = new Scanner(System.in);
             int resultEncode = scanner.nextInt();
             if (resultEncode == 1) {
-                System.out.println("Key " + i + " ok");
-                return textEncode;
+                System.out.println("Key " + key + " ok");
+                return textDecode;
             }
         }
+        //Если не удалось то включить простой брут как был
         return line;
     }
 }

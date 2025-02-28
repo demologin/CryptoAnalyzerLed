@@ -1,13 +1,13 @@
 package com.javarush.pyatigin;
 
-import com.javarush.pyatigin.io.InputOutput;
+import com.javarush.pyatigin.io.inputOutput;
 
 public class APP_Runner {
     public static void main(String[] args) {
         Menu menu = new Menu();
-        int option = menu.MenuOption();
+        int option = menu.menuOption();
         GetOptions getOptions = new GetOptions(option);
-        new InputOutput(getOptions);
+        new inputOutput(getOptions);
     }
 }
 

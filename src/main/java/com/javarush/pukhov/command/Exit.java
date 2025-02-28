@@ -1,10 +1,10 @@
 package com.javarush.pukhov.command;
 
-public class Exit implements Action {
+public final class Exit implements Action {
 
     @Override
     public void execute() {
-        
+
     }
 
 }

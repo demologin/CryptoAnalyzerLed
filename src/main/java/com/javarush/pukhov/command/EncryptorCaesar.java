@@ -1,6 +1,6 @@
 package com.javarush.pukhov.command;
 
-public class EncryptorCaesar extends Encryptor {
+public final class EncryptorCaesar extends Encryptor {
 
     @Override
     public void encrypt() {

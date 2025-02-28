@@ -1,6 +1,6 @@
 package com.javarush.pukhov.command;
 
-public class DecryptAnalyze extends Decryptor {
+public final class DecryptAnalyze extends Decryptor {
 
     @Override
     public void decrypt() {

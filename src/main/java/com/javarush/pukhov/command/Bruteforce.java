@@ -1,6 +1,6 @@
 package com.javarush.pukhov.command;
 
-public class Bruteforce extends Decryptor {
+public final class Bruteforce extends Decryptor {
 
     @Override
     public void decrypt() {

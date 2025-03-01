@@ -2,20 +2,27 @@ package com.javarush.apalinskiy.logic;
 
 import com.javarush.apalinskiy.constants.Alphabet;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Encryption {
-    public char[] encryption(char[] chars, int key) {
-        ArrayList<Character> alphabet = Alphabet.getAlphabet();
-        char[] encryptedText = new char[chars.length];
-        for (int i = 0; i < chars.length; i++) {
-            if (alphabet.contains(chars[i])) {
-                int index = alphabet.indexOf(chars[i]) + key;
-                if (index >= alphabet.size()) {
-                    encryptedText[i] = alphabet.get(index - alphabet.size());
-                } else encryptedText[i] = alphabet.get(index);
+    public void encryption(int key, String inputPath, String outputPath) throws IOException {
+        try(BufferedReader reader = Files.newBufferedReader(Path.of(inputPath));
+        BufferedWriter writer = Files.newBufferedWriter(Path.of(outputPath))) {
+            ArrayList<Character> alphabet = Alphabet.getAlphabet();
+            int symbol;
+            while ((symbol = reader.read()) > -1) {
+                if (alphabet.contains((char) symbol)) {
+                    int index = alphabet.indexOf((char) symbol) + key;
+                    if (index >= alphabet.size()) {
+                        writer.write(alphabet.get(index - alphabet.size()));
+                    } else writer.write(alphabet.get(index));
+                }
             }
         }
-        return encryptedText;
     }
 }

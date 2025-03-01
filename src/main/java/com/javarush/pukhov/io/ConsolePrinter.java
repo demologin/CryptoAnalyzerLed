@@ -1,6 +1,6 @@
 package com.javarush.pukhov.io;
 
-public class ConsolePrinter implements Output {
+public class ConsolePrinter implements Output, OutputError {
 
     @Override
     public void print(String message) {

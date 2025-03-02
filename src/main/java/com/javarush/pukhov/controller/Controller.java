@@ -1,7 +1,6 @@
 package com.javarush.pukhov.controller;
 
 import com.javarush.pukhov.exception.ApplicationException;
-import com.javarush.pukhov.io.Output;
 import com.javarush.pukhov.io.OutputError;
 import com.javarush.pukhov.runner.Runner;
 
@@ -9,6 +8,7 @@ public class Controller {
 
     private final Runner runner;
     private final OutputError outputError;
+    private boolean isError;
 
     public Controller(Runner runner, OutputError outputError) {
         this.runner = runner;
@@ -16,11 +16,13 @@ public class Controller {
     }
 
     public void start() {
-        try {
-            runner.run();
-        } catch (ApplicationException e) {
-            outputError.print(e);
-        }
+        do {
+            try {
+                runner.run();
+            } catch (ApplicationException e) {
+                isError = true;
+                outputError.print(e);
+            }
+        } while (isError);
     }
-
 }

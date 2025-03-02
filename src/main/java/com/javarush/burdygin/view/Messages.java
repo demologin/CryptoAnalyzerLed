@@ -5,10 +5,10 @@ interface Messages {
        // base message
        String MODE_MESSAGE = """
             Select mode:
-            0 Exit
             1 Encode
             2 Decode
-            3 Brut Force""";
+            3 Brut Force
+            Exit""";
 
        //source messages
        String SOURCE_FILE_ENCRYPT_MESSAGE = "Enter the source path or press enter for default: \"text.txt\"";

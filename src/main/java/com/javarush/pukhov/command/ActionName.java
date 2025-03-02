@@ -13,14 +13,14 @@ public enum ActionName {
      * @param actionName
      */
     private ActionName(String actionName) {
-        this.actionName = actionName;
+        this.actionNameString = actionName;
     }
 
-    private String actionName;
+    private final String actionNameString;
 
     @Override
     public String toString() {
-        return actionName;
+        return actionNameString;
     }
 
 }

@@ -1,13 +1,15 @@
 package com.javarush.artemov.console;
 
+import com.javarush.artemov.config.AppData;
+import com.javarush.artemov.config.OperationType;
+import com.javarush.artemov.utils.Utils;
+
 import java.util.Scanner;
 
 public class Menu {
     private static final String INPUT_FILE = "Введите путь к исходному файлу";
     private static final String OUTPUT_FILE = "Укажите путь к файлу для сохранения результата";
-    private static final String KEY = "Введите ключ для шифрования / дешифрования";
-    private static final String CODE = "Операция шифрования";
-    private static final String DECODE = "Операция дешифрования";
+    private static final String KEY = "Введите ключ для шифрования / дешифрования - целое число";
     private static final String[] MENU = {
             "***********************",
             "* Выберете операцию:  *",
@@ -15,26 +17,47 @@ public class Menu {
             "* 2. Дешифрование     *",
             "***********************"
     };
-    ;
 
-    public String[] getInputData() {
-        String[] inputData = new String[4];
+    Utils utils = new Utils();
+    public AppData getInputData() {
+        AppData appData = new AppData();
         Scanner console = new Scanner(System.in);
 
         for (String line : MENU) {
             System.out.println(line);
         }
-        inputData[0] = console.nextLine();
+
+        while (true) {
+            String operation = console.nextLine();
+            if (operation.equals("1")) {
+                appData.setOperation(OperationType.CODE);
+                break;
+            } else if (operation.equals("2")) {
+                appData.setOperation(OperationType.DECODE);
+                break;
+            } else {
+                System.out.println("Введите корректный номер операции");
+            }
+        }
 
         System.out.println(INPUT_FILE);
-        inputData[1] = console.nextLine();
+        String inputFile = console.nextLine();
+        appData.setInputFile(inputFile); // "c:\\1\\1.txt"; //
 
-        System.out.println(OUTPUT_FILE);
-        inputData[2] = console.nextLine();
+        String outputFile = console.nextLine();
+        appData.setOutputFile(outputFile); // console.nextLine();
 
         System.out.println(KEY);
-        inputData[3] = console.nextLine();
+        while (true) {
+            if (console.hasNextInt()) {
+                int key = console.nextInt();
+                appData.setKey(utils.getKey(key, appData.getOperation()));
+                break;
+            } else {
+                System.out.println("Введите корректное значение ключа");
+            }
+        }
 
-        return inputData;
+        return appData;
     }
 }

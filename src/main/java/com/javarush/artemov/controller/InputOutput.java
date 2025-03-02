@@ -1,5 +1,7 @@
 package com.javarush.artemov.controller;
 
+import com.javarush.artemov.config.AppData;
+import com.javarush.artemov.config.OperationType;
 import com.javarush.artemov.config.SymbolType;
 import com.javarush.artemov.config.Symbols;
 import com.javarush.artemov.service.EncryptDecrypt;
@@ -19,11 +21,11 @@ public class InputOutput {
     Symbols symbols = new Symbols();
 
 
-    public void encryptDecryptFile(String[] inputData) {
-        String operation = inputData[0];
-        String inputFilePath = inputData[1];
-        String outputFilePath = inputData[2];
-        int key = (inputData[3]);
+    public void encryptDecryptFile(AppData inputData) {
+        OperationType operation = inputData.getOperation();
+        String inputFilePath = inputData.getInputFile();
+        String outputFilePath = inputData.getOutputFile();
+        int key = inputData.getKey();
 
         Map<Character, Integer> rusSymbolMapLowCase = symbols.createSymbolsMap(Symbols.alphabetRus);
         Map<Character, Integer> rusSymbolMapUpperCase = symbols.createSymbolsMap(Symbols.alphabetRus.toUpperCase());

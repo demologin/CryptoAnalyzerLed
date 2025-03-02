@@ -1,5 +1,6 @@
 package com.javarush.artemov;
 
+import com.javarush.artemov.config.AppData;
 import com.javarush.artemov.console.Menu;
 import com.javarush.artemov.controller.InputOutput;
 
@@ -8,7 +9,7 @@ public class ConsoleRunner {
         Menu menu = new Menu();
         InputOutput inputOutput = new InputOutput();
 
-        String[] inputData = menu.getInputData();
+        AppData inputData = menu.getInputData();
         inputOutput.encryptDecryptFile(inputData);
 
     }

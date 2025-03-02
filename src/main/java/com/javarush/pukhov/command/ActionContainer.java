@@ -12,8 +12,7 @@ import com.javarush.pukhov.exception.ErrorHandler;
 import com.javarush.pukhov.view.console.constants.Messages;
 
 public class ActionContainer {
-
-    private static ActionContainer actionContainer;
+    
     private final Action action;
     private final List<String> subqueries;
     private final List<String> defaultFiles;
@@ -68,7 +67,7 @@ public class ActionContainer {
     }
 
     public static ActionContainer get(String actionString) {
-        actionContainer = null;
+        ActionContainer actionContainer = null;
         ErrorHandler errorHandler = new ErrorHandler();
         boolean skipCheckName = false;
         try {

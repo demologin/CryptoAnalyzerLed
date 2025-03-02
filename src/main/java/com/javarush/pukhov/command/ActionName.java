@@ -4,7 +4,7 @@ import com.javarush.pukhov.constant.Constants;
 
 public enum ActionName {
     ENCRYPT(Constants.ENCRYPT),
-    DECRYPT_KEY(Constants.DECRYPT),
+    DECRYPT(Constants.DECRYPT),
     BRUTEFORCE(Constants.BRUTE_FORCE),
     ANALYZE(Constants.ANALYZE),
     EXIT(Constants.EXIT);

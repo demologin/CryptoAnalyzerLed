@@ -6,6 +6,7 @@ import com.javarush.kazakov.controllers.style.Stylesheets;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import picocli.CommandLine.Command;
@@ -24,6 +25,8 @@ public class GUIMode extends Application implements Runnable {
         primaryStage.setTitle("CryptoAnalyzer");
         primaryStage.centerOnScreen();
         primaryStage.setResizable(false);
+        Image icon = new Image(getClass().getResourceAsStream("/icon.png"));
+        primaryStage.getIcons().add(icon);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuBar.fxml"));
         Pane root = loader.load();

@@ -1,5 +1,6 @@
 package com.javarush.kazakov.commands;
 
+import com.javarush.kazakov.constants.Constants;
 import com.javarush.kazakov.core.Translator;
 import com.javarush.kazakov.core.files.FileManager;
 
@@ -24,7 +25,7 @@ public abstract class AbstractCommand implements Callable<String> {
         long start = System.currentTimeMillis();
         long count = fileManager.translateFile(new Translator(key));
         long end = System.currentTimeMillis();
-        return String.format(msg, count, output, end - start);
+        return String.format(msg, count, fileManager.getOutput(), end - start);
     }
 
     protected int specify(String msg, int val) {
@@ -55,7 +56,7 @@ public abstract class AbstractCommand implements Callable<String> {
 
     private boolean isPermissionGranted() {
         while (true) {
-            System.out.printf(DECRYPTION_OFFER_MESSAGE, input);
+            System.out.printf(DECRYPTION_OFFER_MESSAGE, input.getFileName());
             String s = scanner.nextLine();
             if (s.equals("y")) {
                 return true;

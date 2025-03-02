@@ -32,7 +32,7 @@ public class FileValidator {
     }
 
     private void isTxtFile(Path path) {
-        if (!path.getFileName().toString().endsWith(".txt")) {
+        if (!path.getFileName().toString().toLowerCase().endsWith(".txt")) {
             throw new CryptoAnalyzerException(path + " is not a txt file.");
         }
     }

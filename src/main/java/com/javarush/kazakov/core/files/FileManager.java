@@ -1,5 +1,6 @@
 package com.javarush.kazakov.core.files;
 
+import com.javarush.kazakov.constants.Constants;
 import com.javarush.kazakov.core.Collector;
 import com.javarush.kazakov.core.Translator;
 import com.javarush.kazakov.core.exceptions.CryptoAnalyzerException;
@@ -17,14 +18,14 @@ public class FileManager {
     private final Path output;
 
     public FileManager(Path input) {
-        this.input = input;
+        this.input = absolutizePath(input);
         this.output = TEMP;
         validatePaths(this.input, this.output);
     }
 
     public FileManager(Path input, Path output) {
-        this.input = input;
-        this.output = output;
+        this.input = absolutizePath(input);
+        this.output = absolutizePath(output);
         validatePaths(this.input, this.output);
     }
 
@@ -88,6 +89,21 @@ public class FileManager {
     private void validatePaths(Path... paths) {
         FileValidator validator = new FileValidator(paths);
         validator.validate();
+    }
+
+    private Path absolutizePath(Path path) {
+        if (!path.isAbsolute()) {
+            return path.toAbsolutePath().normalize();
+        }
+        return path;
+    }
+
+    public Path getInput() {
+        return input;
+    }
+
+    public Path getOutput() {
+        return output;
     }
 }
 

@@ -1,18 +1,27 @@
 
-
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.util.ArrayList;
 import java.util.StringJoiner;
 
 import com.javarush.pukhov.command.ActionName;
+import com.javarush.pukhov.constant.Constants;
+import com.javarush.pukhov.util.BuilderPath;
 import com.javarush.pukhov.view.console.constants.Messages;
 
 public class Test {
     public static void main(String[] args) {
-        testActionName("123");
+        testURL();
+        // testActionName("123");
         // testActionNameSize(10);
         // testErrorMessage();
         // testStackTrace();
+    }
+
+    private static void testURL() {
+        ArrayList<String> list;
+        System.out.println(Constants.PATH_REPOSITORY);
+        System.out.println(BuilderPath.buildPath("dict.txt"));
     }
 
     private static void testStackTrace() {
@@ -23,7 +32,8 @@ public class Test {
             throw new Exception("Check stack trace");
         } catch (Exception e) {
             e.printStackTrace(pw);
-            // errorBuilder.append("Сообщение: ").append(e.getMessage()).append("\nСтек вызовов:\n").append(sw.toString());
+            // errorBuilder.append("Сообщение: ").append(e.getMessage()).append("\nСтек
+            // вызовов:\n").append(sw.toString());
         }
         try {
             throw new Exception("New check stack trace");

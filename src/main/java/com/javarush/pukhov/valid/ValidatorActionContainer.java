@@ -36,11 +36,16 @@ public class ValidatorActionContainer<T extends CharSequence> implements Validat
     }
 
     private String getActionNameFor(int index) {
+        int startIndex = 1;
+        int endIndex = ActionName.values().length;
         try {
+            if (index < startIndex || index > endIndex) {
+                throw new ArrayIndexOutOfBoundsException();
+            }
             return ActionName.values()[index - 1].toString();
         } catch (ArrayIndexOutOfBoundsException e) {
-            String message = String.format(Messages.INCORRECT_NUMBER,
-                    checkedObject);
+            String message = String.format(Messages.INCORRECT_INDEX,
+                    checkedObject, startIndex, endIndex);
             errorHandler.addProcessing(message, e);
             return "";
         }

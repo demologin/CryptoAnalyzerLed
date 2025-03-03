@@ -7,12 +7,7 @@ public class Menu {
 
     public static void startMenu() {
         System.err.println("Выберите действие:");
-        System.out.print("\t1-Запись текста в файл \n "
-                + "\t2-Чтение текста из записанного файла test.txt \n "
-                + "\t3-Чтение текста из готового файла text.txt \n "
-                + "\t4-Шифрование \n "
-                + "\t5-Расшифровка \n "
-                + "\t6-Выход \n");
+        System.out.print(FinalConstant.getMenuAction());
     }
 
     static void switchMenu() {

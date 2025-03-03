@@ -11,6 +11,5 @@ public class ConsoleRunner {
 
         AppData inputData = menu.getInputData();
         inputOutput.encryptDecryptFile(inputData);
-
     }
 }

@@ -16,9 +16,13 @@ import java.nio.file.Path;
 import java.util.Map;
 
 public class InputOutput {
-    Utils utils = new Utils();
     EncryptDecrypt encryptDecrypt = new EncryptDecrypt();
     Symbols symbols = new Symbols();
+
+    Map<Character, Integer> rusSymbolMap = symbols.createSymbolsMap(Symbols.alphabetRus);
+    Map<Character, Integer> latSymbolMap = symbols.createSymbolsMap(Symbols.alphabetLat);
+    Map<Character, Integer> punctuationMarksMap = symbols.createSymbolsMap(Symbols.symbols);
+    Map<Character, Integer> numbersMap = symbols.createSymbolsMap(Symbols.numbers);
 
 
     public void encryptDecryptFile(AppData inputData) {
@@ -26,13 +30,6 @@ public class InputOutput {
         String inputFilePath = inputData.getInputFile();
         String outputFilePath = inputData.getOutputFile();
         int key = inputData.getKey();
-
-        Map<Character, Integer> rusSymbolMapLowCase = symbols.createSymbolsMap(Symbols.alphabetRus);
-        Map<Character, Integer> rusSymbolMapUpperCase = symbols.createSymbolsMap(Symbols.alphabetRus.toUpperCase());
-        Map<Character, Integer> latSymbolMapLowCase = symbols.createSymbolsMap(Symbols.alphabetLat);
-        Map<Character, Integer> latSymbolMapUpperCase = symbols.createSymbolsMap(Symbols.alphabetLat.toUpperCase());
-        Map<Character, Integer> symbolsMap = symbols.createSymbolsMap(Symbols.symbols);
-        Map<Character, Integer> numbersMap = symbols.createSymbolsMap(Symbols.numbers);
 
         Path source = Path.of(inputFilePath);
         Path target = Path.of(outputFilePath);
@@ -42,14 +39,12 @@ public class InputOutput {
         ) {
             while (reader.ready()) {
                 char character = (char) reader.read();
-                SymbolType symbolType = utils.getSymbolType(character);
+                SymbolType symbolType = symbols.getSymbolType(character);
                 char newCharacter = switch (symbolType) {
-                    case ALFPHABET_UPPER_CASE_RUS -> encryptDecrypt.process(rusSymbolMapUpperCase, character, key);
-                    case ALFPHABET_LOW_CASE_RUS -> encryptDecrypt.process(rusSymbolMapLowCase, character, key);
-                    case ALFPHABET_UPPER_CASE_LAT -> encryptDecrypt.process(latSymbolMapUpperCase, character, key);
-                    case ALFPHABET_LOW_CASE_LAT -> encryptDecrypt.process(latSymbolMapLowCase, character, key);
+                    case ALPHABET_RUS -> encryptDecrypt.process(rusSymbolMap, character, key);
+                    case ALPHABET_LAT -> encryptDecrypt.process(latSymbolMap, character, key);
                     case NUMBERS -> encryptDecrypt.process(numbersMap, character, key);
-                    case PUNCTUATION_MARKS -> encryptDecrypt.process(symbolsMap, character, key);
+                    case PUNCTUATION_MARKS -> encryptDecrypt.process(punctuationMarksMap, character, key);
                     case NOT_DEFINED -> throw new AppException("Тип символа не определен!");
                 };
 

@@ -13,7 +13,8 @@ public class Utils {
      * поиск индекса символа в мапе Map<Character, Integer>
      */
     public int searchSymbolIndex(Map<Character, Integer> symbolsMap, char symbol) {
-        return symbolsMap.get(symbol);
+        char character = Character.toLowerCase(symbol);
+        return symbolsMap.get(character);
     }
 
     /**
@@ -29,26 +30,7 @@ public class Utils {
         return 0; // если символ не найден
     }
 
-    /**
-     * определение типа символа
-     */
-    public SymbolType getSymbolType(char symbol) {
-        if (Symbols.alphabetRus.indexOf(symbol) != -1) {
-            return SymbolType.ALFPHABET_LOW_CASE_RUS;
-        } else if (Symbols.alphabetRus.toUpperCase().indexOf(symbol) != -1) {
-            return SymbolType.ALFPHABET_UPPER_CASE_RUS;
-        } else if (Symbols.alphabetLat.indexOf(symbol) != -1) {
-            return SymbolType.ALFPHABET_LOW_CASE_LAT;
-        } else if (Symbols.alphabetLat.toUpperCase().indexOf(symbol) != -1) {
-            return SymbolType.ALFPHABET_UPPER_CASE_LAT;
-        } else if (Symbols.numbers.indexOf(symbol) != -1) {
-            return SymbolType.NUMBERS;
-        } else if (Symbols.symbols.indexOf(symbol) != -1) {
-            return SymbolType.PUNCTUATION_MARKS;
-        } else {
-            return SymbolType.NOT_DEFINED;
-        }
-    }
+
 
     /**
      * вычисление ключа в зависимости от режима работы - шифрование / дешифрование

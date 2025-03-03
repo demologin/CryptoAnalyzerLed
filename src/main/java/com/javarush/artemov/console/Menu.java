@@ -19,6 +19,7 @@ public class Menu {
     };
 
     Utils utils = new Utils();
+    
     public AppData getInputData() {
         AppData appData = new AppData();
         Scanner console = new Scanner(System.in);
@@ -26,7 +27,19 @@ public class Menu {
         for (String line : MENU) {
             System.out.println(line);
         }
+        
+        choosingOperation(console, appData);
 
+        enterSourceFilePath(console, appData);
+
+        enterReceiverFilePath(console, appData);
+
+        enterKey(console, appData);
+
+        return appData;
+    }
+
+    private static void choosingOperation(Scanner console, AppData appData) {
         while (true) {
             String operation = console.nextLine();
             if (operation.equals("1")) {
@@ -39,14 +52,21 @@ public class Menu {
                 System.out.println("Введите корректный номер операции");
             }
         }
+    }
 
+    private static void enterSourceFilePath(Scanner console, AppData appData) {
         System.out.println(INPUT_FILE);
         String inputFile = console.nextLine();
         appData.setInputFile(inputFile); // "c:\\1\\1.txt"; //
+    }
 
+    private static void enterReceiverFilePath(Scanner console, AppData appData) {
+        System.out.println(OUTPUT_FILE);
         String outputFile = console.nextLine();
         appData.setOutputFile(outputFile); // console.nextLine();
+    }
 
+    private void enterKey(Scanner console, AppData appData) {
         System.out.println(KEY);
         while (true) {
             if (console.hasNextInt()) {
@@ -57,7 +77,5 @@ public class Menu {
                 System.out.println("Введите корректное значение ключа");
             }
         }
-
-        return appData;
     }
 }

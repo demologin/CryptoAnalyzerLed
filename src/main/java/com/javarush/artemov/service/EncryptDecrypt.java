@@ -18,6 +18,9 @@ public class EncryptDecrypt {
         if (newChar == 0) {
             throw new AppException("Символ не найден!");
         }
+        if (Character.isUpperCase(symbol)) {
+            newChar = Character.toUpperCase(newChar);
+        }
         return newChar;
     }
 }

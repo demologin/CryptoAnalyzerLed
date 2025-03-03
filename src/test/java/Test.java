@@ -2,20 +2,29 @@
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Map;
 import java.util.StringJoiner;
 
 import com.javarush.pukhov.command.ActionName;
+import com.javarush.pukhov.constant.AlphabetCaesar;
 import com.javarush.pukhov.constant.Constants;
 import com.javarush.pukhov.util.BuilderPath;
 import com.javarush.pukhov.view.console.constants.Messages;
 
 public class Test {
     public static void main(String[] args) {
-        testURL();
+        testAlphabet();
+        // testURL();
         // testActionName("123");
         // testActionNameSize(10);
         // testErrorMessage();
         // testStackTrace();
+    }
+
+    private static void testAlphabet() {
+        Map<Character, Integer> alphabet = AlphabetCaesar.getAlphabet();
+        alphabet.remove('к');
+        System.out.println(alphabet);
     }
 
     private static void testURL() {

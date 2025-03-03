@@ -6,26 +6,28 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
     public static void main(String[] args) {
-        System.out.println("program started");
-        System.out.println("choose an option:");
-        System.out.println("1. Encode");
-        System.out.println("2. Decode");
-        System.out.println("3. Exit");
+        for (int i = 0; i < Constants.start.length; i++) {
+            System.out.println(Constants.start[i]);
+        }
         Scanner scanner = new Scanner(System.in);
-        int mode = 0;
         try {
-            mode = scanner.nextInt();
+            int mode = scanner.nextInt();
+            switch (mode){
+                case 1:
+                    System.out.println(Constants.ok);
+                    break;
+                case 2:
+                    System.out.println(Constants.ok);
+                    break;
+                case 3:
+                    System.out.println(Constants.end);
+                    break;
+                default:
+                    System.out.println(Constants.incorInput);
+            }
         } catch (Exception e) {
-            System.out.println("incorrect input");
+            System.out.println(Constants.incorInput);
         }
-        if (mode == 1){
-            System.out.println("ok");
-        } else if (mode == 2){
-            System.out.println("ok");
-        } else if (mode == 3){
-            System.out.println("program ended");
-        } else {
-            System.out.println("incorrect input");
-        }
+
     }
 }

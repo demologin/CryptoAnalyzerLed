@@ -30,7 +30,7 @@ public final class Menu {
         for (int i = 0; i < listActions.length; i++) {
             menuBuilder.append(i + 1).append(". ").append(listActions[i]).append("\n");
         }
-        
+
         joiner.add(menuBuilder);
         MENU_STRING = joiner.toString();
     }
@@ -45,7 +45,7 @@ public final class Menu {
     public Action selectAction(String action) {
         ActionContainer actionContainer = ActionContainer.get(action);
         subqueries = new ArrayDeque<>(actionContainer.getSubqueries());
-        defaultValues = new ArrayDeque<>(actionContainer.getDefaultFiles());
+        defaultValues = new ArrayDeque<>(actionContainer.getDefaultValues());
         return actionContainer.getAction();
     }
 

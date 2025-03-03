@@ -30,9 +30,9 @@ public class ActionContainer {
 
     private final Action action;
     private final List<String> subqueries;
-    private final List<String> defaultFiles;
+    private final List<String> defaultValues;
     private static final Map<String, Action> mapAction = new HashMap<>();
-    private static final Map<String, List<String>> mapDefaultFiles = new HashMap<>();
+    private static final Map<String, List<String>> mapDefaultValues = new HashMap<>();
     private static final Map<String, List<String>> mapSubqueries = new HashMap<>();
 
     static {
@@ -71,14 +71,14 @@ public class ActionContainer {
         for (int i = 0; i < keys.length; i++) {
             mapAction.put(keys[i].toString(), valuesAction[i]);
             mapSubqueries.put(keys[i].toString(), valuesSubquery[i]);
-            mapDefaultFiles.put(keys[i].toString(), valuesFile[i]);
+            mapDefaultValues.put(keys[i].toString(), valuesFile[i]);
         }
     }
 
     private ActionContainer(String actionName) {
         action = mapAction.get(actionName);
         subqueries = mapSubqueries.get(actionName);
-        defaultFiles = mapDefaultFiles.get(actionName);
+        defaultValues = mapDefaultValues.get(actionName);
     }
 
     public static ActionContainer get(String actionString) {
@@ -110,8 +110,8 @@ public class ActionContainer {
     /**
      * @return the defaultFiles
      */
-    public List<String> getDefaultFiles() {
-        return defaultFiles;
+    public List<String> getDefaultValues() {
+        return defaultValues;
     }
 
 }

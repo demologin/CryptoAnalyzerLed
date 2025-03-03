@@ -1,18 +1,33 @@
 package com.javarush.pukhov.command;
 
-import static com.javarush.pukhov.view.console.constants.Messages.*;
+import static com.javarush.pukhov.view.console.constants.Messages.FILE_ANALYZE;
+import static com.javarush.pukhov.view.console.constants.Messages.FILE_BRUTEFORCE;
+import static com.javarush.pukhov.view.console.constants.Messages.FILE_DECRYPT;
+import static com.javarush.pukhov.view.console.constants.Messages.FILE_DICTIONARY;
+import static com.javarush.pukhov.view.console.constants.Messages.FILE_ENCRYPT;
+import static com.javarush.pukhov.view.console.constants.Messages.FILE_SOURCE;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_DESTINATION_ANALYZE;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_DESTINATION_BRUTEFORCE;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_DESTINATION_ENCRYPT;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_DESTINATION_KEY;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_DICTIONARY;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_KEY;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_SOURCE_DECRYPT;
+import static com.javarush.pukhov.view.console.constants.Messages.INPUT_SOURCE_ENCRYPT;
+import static com.javarush.pukhov.view.console.constants.Messages.KEY;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.javarush.pukhov.exception.ApplicationException;
 import com.javarush.pukhov.exception.ErrorHandler;
-import com.javarush.pukhov.view.console.constants.Messages;
+import com.javarush.pukhov.exception.ErrorHandlerConsole;
+import com.javarush.pukhov.valid.Validator;
+import com.javarush.pukhov.valid.ValidatorActionContainer;
 
 public class ActionContainer {
-    
+
     private final Action action;
     private final List<String> subqueries;
     private final List<String> defaultFiles;
@@ -68,36 +83,14 @@ public class ActionContainer {
 
     public static ActionContainer get(String actionString) {
         ActionContainer actionContainer = null;
-        ErrorHandler errorHandler = new ErrorHandler();
-        boolean skipCheckName = false;
-        try {
-            int numberAction = Integer.parseInt(actionString);
-            String actionName = ActionName.values()[numberAction - 1].toString();
-            actionContainer = new ActionContainer(actionName);
-        } catch (NumberFormatException e) {
-            String message = String.format(Messages.INCORRECT_NUMBER,
-                    actionString);
-            errorHandler.addProcessing(message, e);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            skipCheckName = true;
-            String message = String.format(Messages.INCORRECT_INDEX,
-                    actionString, 1, ActionName.values().length);
-            errorHandler.addProcessing(message, e);
-        }
-        if (!skipCheckName) {
-            try {
-                ActionName actionName = ActionName.valueOf(actionString.toUpperCase().replace(" ", ""));
-                actionContainer = new ActionContainer(actionName.toString());
-            } catch (IllegalArgumentException e) {
-                String message = String.format(Messages.INCORRECT_ACTION, actionString);
-                errorHandler.addProcessing(message, e);
-            }
-        }
-        if (actionContainer != null) {
+        ErrorHandler errorHandler = new ErrorHandlerConsole();
+        Validator<String> validator = new ValidatorActionContainer<>(errorHandler);
+        if (validator.check(actionString)) {
+            String validValue = validator.getValidValue();
+            actionContainer = new ActionContainer(validValue);
             return actionContainer;
-        } else {
-            throw new ApplicationException(errorHandler.getMessageError());
         }
+        return actionContainer;
     }
 
     /**

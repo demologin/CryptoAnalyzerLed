@@ -1,5 +1,10 @@
 package com.javarush.pukhov.runner;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
+
 import com.javarush.pukhov.io.ConsoleInput;
 import com.javarush.pukhov.io.ConsolePrinter;
 import com.javarush.pukhov.io.Input;
@@ -10,10 +15,9 @@ public class ConsoleRunner implements Runner {
 
     @Override
     public void run() {
-        Input input = new ConsoleInput();
-        Output output = new ConsolePrinter();
+        Input<InputStream, Reader> input = new ConsoleInput<>();
+        Output<OutputStream, Writer> output = new ConsolePrinter<>();
         ConsoleApp app = new ConsoleApp(input, output);
         app.start();
     }
-
 }

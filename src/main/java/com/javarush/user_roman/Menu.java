@@ -1,6 +1,5 @@
 package com.javarush.user_roman;
 
-import java.nio.file.Path;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -9,10 +8,11 @@ public class Menu {
     public static void startMenu() {
         System.err.println("Выберите действие:");
         System.out.print("\t1-Запись текста в файл \n "
-                + "\t2-Чтение текста из файла \n "
-                + "\t3-Шифрование \n "
-                + "\t4-Расшифровка \n "
-                + "\t5-Выход \n");
+                + "\t2-Чтение текста из записанного файла test.txt \n "
+                + "\t3-Чтение текста из готового файла text.txt \n "
+                + "\t4-Шифрование \n "
+                + "\t5-Расшифровка \n "
+                + "\t6-Выход \n");
     }
 
     static void switchMenu() {
@@ -23,19 +23,23 @@ public class Menu {
                 int button = sc.nextInt();
                 switch (button) {
                     case 1:
-                        WriteTextToFile.writeTextToFile();
+                        WriteTextToFile.writeTextToFile(FinalConstant.getTest());
                         break;
                     case 2:
-                        System.out.println("Чтение текста из файла");
-                        ReadTextFromFile.readTextFromFile();
+                        System.out.println("Чтение текста из файла test.txt");
+                        ReadTextFromFile.readTextFromFile(FinalConstant.getTest());
                         break;
                     case 3:
-                        System.out.println("Шифрование");
+                        System.out.println("Чтение text.txt");
+                        ReadTextFromFile.readTextFromFile(FinalConstant.getText());
                         break;
                     case 4:
-                        System.out.println("Расшифровка");
+                        System.out.println("Шифрование");
                         break;
                     case 5:
+                        System.out.println("Расшифровка");
+                        break;
+                    case 6:
                         System.out.println("Выход");
                         isExit = true;
                         break;

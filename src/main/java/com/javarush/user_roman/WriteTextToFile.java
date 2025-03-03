@@ -8,7 +8,7 @@ import java.nio.file.StandardOpenOption;
 import java.util.Scanner;
 
 class WriteTextToFile {
-    public static void writeTextToFile() {
+    public static void writeTextToFile(Path path) {
         /*String file1 = "src\\main\\java\\com\\javarush\\user_roman\\readme.txt";
                 Path path = Path.of(file1);
                 try {
@@ -19,7 +19,6 @@ class WriteTextToFile {
         Scanner sc = new Scanner(System.in);
         System.out.println("Напишите текст для записи");
         String textConsole = sc.nextLine();
-        Path path = Path.of("src\\main\\java\\com\\javarush\\user_roman\\test.txt");
         try {
             Files.write(path, textConsole.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
             System.out.println("Строка успешно записана в файл.");

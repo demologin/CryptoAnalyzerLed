@@ -6,8 +6,7 @@ import java.nio.file.Path;
 import java.util.List;
 
 class ReadTextFromFile {
-    public static void readTextFromFile() {
-        Path path = Path.of("src\\main\\java\\com\\javarush\\user_roman\\test.txt");
+    public static void readTextFromFile(Path path) {
         List<String> strings = null;
         if (Files.exists(path)) {
             try {

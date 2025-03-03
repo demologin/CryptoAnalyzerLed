@@ -13,6 +13,9 @@ public class FinalConstant {
             + "\t5-Расшифровка \n "
             + "\t6-Выход \n"
             + "************************************************* \n";
+    private static final String KAOMOJI_ERROR = ".｡･ﾟﾟ･(＞_＜)･ﾟﾟ･｡. ";
+    private static final String KAOMOJI_NOT_FOUND = "¯\\_(ツ)_/¯";
+    private static final String KAOMOJI_FILE_WRITE = "(* ^ ω ^) ";
 
     public static Path getTest() {
         return TEST_PATH;
@@ -21,7 +24,20 @@ public class FinalConstant {
     public static Path getText() {
         return TEXT_PATH;
     }
-    public static String getMenuAction(){
+
+    public static String getMenuAction() {
         return MENU_ACTION;
+    }
+
+    public static String getKaomojiError() {
+        return KAOMOJI_ERROR;
+    }
+
+    public static String getKaomojiNotFound() {
+        return KAOMOJI_NOT_FOUND;
+    }
+
+    public static String getKaomojiFileWrite() {
+        return KAOMOJI_FILE_WRITE;
     }
 }

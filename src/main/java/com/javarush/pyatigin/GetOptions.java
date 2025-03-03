@@ -38,11 +38,15 @@ public class GetOptions {
         System.out.println(message);
         Path filePath;
         while (true) {
-            filePath = Paths.get(scanner.nextLine());
-            if (!isRegularFile(filePath)) {
-                System.out.println("File not found. Please try again.");
-            } else {
-                break;
+            try {
+                filePath = Paths.get(scanner.nextLine());
+                if (!isRegularFile(filePath)) {
+                    System.out.println("File not found. Please try again.");
+                } else {
+                    break;
+                }
+            } catch (Exception e) {
+                System.out.println("Invalid file path in. Please enter a valid path.");
             }
         }
         return filePath;

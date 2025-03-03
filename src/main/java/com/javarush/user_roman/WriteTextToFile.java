@@ -21,7 +21,7 @@ class WriteTextToFile {
         String textConsole = sc.nextLine();
         try {
             Files.write(path, textConsole.getBytes(StandardCharsets.UTF_8), StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-            System.out.println("Строка успешно записана в файл.");
+            System.out.println("Строка успешно записана в файл. " + FinalConstant.getKaomojiFileWrite());
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -42,7 +42,8 @@ public class Menu {
                         System.out.println("Нет такой команды");
                 }
             } catch (InputMismatchException e) {
-                throw new InputMismatchException("Вы ввели не целое число. Все сломалось");
+                throw new InputMismatchException("Вы ввели не целое число. Все сломалось."
+                        + FinalConstant.getKaomojiError());
             }
         }
     }

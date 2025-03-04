@@ -5,6 +5,7 @@ import com.javarush.pyatigin.constatnt.PopularLetters;
 
 import java.util.LinkedList;
 import java.util.Scanner;
+
 // Подумать логику, когда алфавит не знаем
 public class BruteForce {
 
@@ -15,11 +16,11 @@ public class BruteForce {
             int index = ALPHABET.getIndexOfAlphabet(PopularLetters.getCharPopularLetters(i));
             int index1 = ALPHABET.getIndexOfAlphabet(c);
             int key = Math.abs(index - index1);
-//            System.out.println("simbol text: " +c);
-//            System.out.println("key: " + key);
             Decode decode = new Decode();
             String textDecode = decode.getDecode(line, key);
             System.out.println(textDecode);
+            System.out.println("simbol text: " + c);
+            System.out.println("key: " + key);
             System.out.println("BruteForce: 1 ok 2 not");
             Scanner scanner = new Scanner(System.in);
             int resultEncode = scanner.nextInt();

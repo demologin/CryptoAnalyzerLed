@@ -26,11 +26,13 @@ public class StatisticalAnalyse {
         LinkedList<Character> list = new LinkedList<>();
         for (int i = 0; i < PopularLetters.getPopularLettersLength(); i++) {
             Character maxKey = getMaxKey(map);
-            list.addFirst(maxKey);
+            list.add(maxKey);
             map.remove(maxKey);
         }
-       return list;
+        System.out.println(list);
+        return list;
     }
+
     public static Character getMaxKey(Map<Character, Integer> map) {
         Character maxKey = null;
         Integer maxValue = Integer.MIN_VALUE;

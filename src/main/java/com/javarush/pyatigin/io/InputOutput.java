@@ -8,8 +8,13 @@ import com.javarush.pyatigin.encode.Encode;
 import java.io.*;
 import java.nio.file.Path;
 
-public class inputOutput {
-    public inputOutput(GetOptions getOptions) {
+public class InputOutput {
+
+
+    public InputOutput() {
+    }
+
+    public Path inputOutput(GetOptions getOptions) {
         Path pathFileInput = getOptions.getPath();
         Path pathFileOutput = new CreateFileWithDate().createFileNameWithDate(pathFileInput);
         try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(pathFileInput.toFile())))) {
@@ -36,5 +41,7 @@ public class inputOutput {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
+        return pathFileOutput;
     }
 }

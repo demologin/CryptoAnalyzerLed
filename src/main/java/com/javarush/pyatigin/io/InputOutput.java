@@ -6,6 +6,7 @@ import com.javarush.pyatigin.decode.Decode;
 import com.javarush.pyatigin.encode.Encode;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class InputOutput {
@@ -17,8 +18,8 @@ public class InputOutput {
     public Path inputOutput(GetOptions getOptions) {
         Path pathFileInput = getOptions.getPath();
         Path pathFileOutput = new CreateFileWithDate().createFileNameWithDate(pathFileInput);
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(pathFileInput.toFile())))) {
-            try (BufferedWriter writer = new BufferedWriter(new FileWriter(pathFileOutput.toFile()))) {
+        try (BufferedReader reader = Files.newBufferedReader(pathFileInput)) {
+            try (BufferedWriter writer = Files.newBufferedWriter(pathFileOutput)) {
                 String line;
                 while ((line = reader.readLine()) != null) {
                     switch (getOptions.getOption()) {

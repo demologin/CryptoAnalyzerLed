@@ -19,7 +19,7 @@ public class BruteForce {
             Decode decode = new Decode();
             String textDecode = decode.getDecode(line, key);
             System.out.println(textDecode);
-            System.out.println("simbol text: " + c);
+            System.out.println("symbol text: " + c);
             System.out.println("key: " + key);
             System.out.println("BruteForce: 1 ok 2 not");
             Scanner scanner = new Scanner(System.in);

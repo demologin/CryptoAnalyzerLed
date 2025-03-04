@@ -29,7 +29,7 @@ public class StatisticalAnalyse {
             list.add(maxKey);
             map.remove(maxKey);
         }
-        System.out.println(list);
+//        System.out.println(list);
         return list;
     }
 

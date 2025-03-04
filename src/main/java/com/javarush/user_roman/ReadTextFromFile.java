@@ -18,7 +18,7 @@ class ReadTextFromFile {
                 System.out.println(i);
             }
         } else {
-            System.out.println("Не найден файл" + FinalConstant.getKaomojiNotFound());
+            System.out.println("Не найден файл " + FinalConstant.getKaomojiNotFound());
         }
     }
 }

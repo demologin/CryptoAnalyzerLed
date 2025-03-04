@@ -1,8 +1,11 @@
 package com.javarush.bulimova;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class FileManager {
@@ -15,21 +18,22 @@ public class FileManager {
         this.pathCreate = pathCreate;
     }
 
-    public List<String> readFile() {
+    public List<Character> readFile() {
         // Логика чтения файла
 
-        List<String> words;
-        try {
-            Path path = Path.of(this.pathRead);
-            words = Files.readAllLines(path);
+         List<Character> words = new ArrayList<>();
+
+        char character = 0;
+        try (
+                BufferedReader reader = Files.newBufferedReader(Path.of(this.pathRead))) {
+            int value;
+            while ((value = reader.read()) > -1) {
+                words.add((char) value);
+
+            }
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-//        for (String str : words) {
-//            System.out.println(str);
-//            //выпилить  System.out.println("++");
-//        }
-
 
         return words;
     }

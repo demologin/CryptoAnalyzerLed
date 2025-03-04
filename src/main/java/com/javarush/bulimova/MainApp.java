@@ -16,9 +16,9 @@ public class MainApp {
         String path2 = scanner.nextLine();
         int key = Integer.parseInt(scanner.nextLine());
         FileManager fileManager = new FileManager(path, path2);
-        List<String> mainText = fileManager.readFile();
+        List<Character> mainText = fileManager.readFile();
         Cipher cipher = new Cipher(key);
-        List<String> encodeText = cipher.code(mainText);
+        List <Character> encodeText = cipher.code(mainText);
 
 
 

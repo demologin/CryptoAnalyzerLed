@@ -18,7 +18,7 @@ public class ConsoleRunner {
         String outputFilePath = scanner.nextLine();
         int key = 8; //Encryption key
         String text = readTextFromFile((inputFilePath));
-
+        text = text.toLowerCase();
         String encryptedText = encryptText(text, key); // Text Encryption
         writeTextToFile(outputFilePath, encryptedText); // Writing encrypted text to a file
 

@@ -10,6 +10,10 @@ public class ConsoleRunner {
         InputOutput inputOutput = new InputOutput();
 
         AppData inputData = menu.getInputData();
-        inputOutput.encryptDecryptFile(inputData);
+        if (inputData != null) {
+            inputOutput.encryptDecryptFile(inputData);
+        } else {
+            System.out.println("Выполнение программы прервано!");
+        }
     }
 }

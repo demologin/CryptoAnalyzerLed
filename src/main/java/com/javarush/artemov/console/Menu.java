@@ -3,7 +3,9 @@ package com.javarush.artemov.console;
 import com.javarush.artemov.config.AppData;
 import com.javarush.artemov.config.OperationType;
 import com.javarush.artemov.entity.ResultCode;
+import com.javarush.artemov.exception.AppException;
 
+import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Scanner;
@@ -55,21 +57,24 @@ public class Menu {
 
     private static ResultCode choosingOperation(Scanner console, AppData appData) {
         ResultCode resultCode;
+        label:
         while (true) {
             String operation = console.nextLine();
-            if (operation.equals("1")) {
-                appData.setOperation(OperationType.CODE);
-                resultCode = ResultCode.OK;
-                break;
-            } else if (operation.equals("2")) {
-                appData.setOperation(OperationType.DECODE);
-                resultCode = ResultCode.OK;
-                break;
-            } else if (operation.equals("0")) {
-                resultCode = ResultCode.CANCELED;
-                break;
-            }else {
-                System.out.println("Введите корректный номер операции");
+            switch (operation) {
+                case "1":
+                    appData.setOperation(OperationType.CODE);
+                    resultCode = ResultCode.OK;
+                    break label;
+                case "2":
+                    appData.setOperation(OperationType.DECODE);
+                    resultCode = ResultCode.OK;
+                    break label;
+                case "0":
+                    resultCode = ResultCode.CANCELED;
+                    break label;
+                default:
+                    System.out.println("Введите корректный номер операции");
+                    break;
             }
         }
         return resultCode;
@@ -84,7 +89,7 @@ public class Menu {
                 resultCode = ResultCode.CANCELED;
                 break;
             } else {
-                if (Files.exists(Path.of(inputFile))) {
+                if (Files.isRegularFile(Path.of(inputFile))) {
                     appData.setInputFile(inputFile);
                     resultCode = ResultCode.OK;
                     break;
@@ -105,16 +110,27 @@ public class Menu {
                 resultCode = ResultCode.CANCELED;
                 break;
             } else {
-                if (Files.exists(Path.of(outputFile))) {
+                if (Files.isRegularFile(Path.of(outputFile))) {
                     appData.setOutputFile(outputFile);
                     resultCode = ResultCode.OK;
                     break;
                 } else {
                     System.out.println("Файл не обнаружен! Для создания файла введите YES, для выхода - exit");
+                    if (console.nextLine().equalsIgnoreCase("yes")) {
+                        try {
+                            Files.createFile(Path.of(outputFile));
+                            appData.setOutputFile(outputFile);
+                            resultCode = ResultCode.OK;
+                            break;
+                        } catch (IOException e) {
+                            resultCode = ResultCode.ERROR;
+                            throw new AppException("Ошибка создания файла результата");
+                        }
+                    }
                 }
             }
         }
-        return resultCode;
+        return resultCode; // ./text/text.txt
     }
 
     private ResultCode enterKey(Scanner console, AppData appData) {

@@ -20,4 +20,7 @@ public class Alphabet {
             index.put(chars[i], i);
         }
     }
+
+
+
 }

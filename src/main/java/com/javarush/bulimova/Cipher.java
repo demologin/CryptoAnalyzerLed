@@ -1,5 +1,8 @@
 package com.javarush.bulimova;
 
+import com.javarush.khmelov.constant.Alphabet;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,24 +38,31 @@ public class Cipher {
     }
 
 
-
-    public List <Character>  code(List <Character> mainText) {
+    public List<Character>  code(List<Character> encodeText) {
         // Логика шифрования
-        String str1;
-//        for (String str : mainText) {
-//            char[] chars = str.toLowerCase().toCharArray();
-//            for (int i = 0; i < chars.length; i++) {
-//
-//            }
-//        }
 
+// найти символ на позиции смещенной на заданный сдвиг. И помним что в примере с игрушкой Y стала А (и не улетела в космос).
+// Как это гарантировать? (можно сделать (позиция буквы + сдвиг) %( размер алфавита). Процент - оператор получения остатка от деления).
+        List <Character> encodeText2= new ArrayList<>();
+        int length = ALPHABET.length;
+        for (Character c : encodeText) {
+            char ch = encodeText.get(c);
+            if (index.containsKey(ch)) {
+                Integer index = this.index.get(ch);
+                index = (index+key)%length;
+                encodeText2.add(ALPHABET[index]);
+            }
+
+        }
+
+        return encodeText2;
+    }
 
 
 
         
-
-return mainText;
-    }
+//        return encodeText;
+//    }
 //    public String deCode(String encryptedText, int shift) {
 //        // Логика расшифровки
 //

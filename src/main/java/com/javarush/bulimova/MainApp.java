@@ -19,9 +19,10 @@ public class MainApp {
         int key = Integer.parseInt(scanner.nextLine());
         FileManager fileManager = new FileManager(path, path2);
         List<Character> mainText = fileManager.readFile();
+        //char mainText = fileManager.readFile();
         Cipher cipher = new Cipher(key);
-//        List <Integer> encodeText = cipher.code(mainText);
-        fileManager.writeFile(mainText);
+        List<Character>  encodeText = cipher.code(mainText);
+        fileManager.writeFile(encodeText);
 
 
 

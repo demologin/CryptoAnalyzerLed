@@ -1,9 +1,7 @@
 package com.javarush.artemov.utils;
 
-import com.javarush.artemov.config.OperationType;
 
 import java.util.Map;
-import java.util.Set;
 
 public class Utils {
 

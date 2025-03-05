@@ -3,7 +3,6 @@ package com.javarush.artemov.console;
 import com.javarush.artemov.config.AppData;
 import com.javarush.artemov.config.OperationType;
 import com.javarush.artemov.entity.ResultCode;
-import com.javarush.artemov.exception.AppException;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

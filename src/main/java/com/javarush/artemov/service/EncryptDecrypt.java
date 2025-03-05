@@ -1,6 +1,5 @@
 package com.javarush.artemov.service;
 
-import com.javarush.artemov.exception.AppException;
 import com.javarush.artemov.utils.Utils;
 
 import java.util.Map;

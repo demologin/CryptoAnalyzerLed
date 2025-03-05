@@ -10,9 +10,9 @@ import java.nio.file.Path;
 import java.util.ArrayList;
 
 public class Encryption {
-    public void encryption(int key, String inputPath, String outputPath) throws IOException {
-        try(BufferedReader reader = Files.newBufferedReader(Path.of(inputPath));
-        BufferedWriter writer = Files.newBufferedWriter(Path.of(outputPath))) {
+    public void encryption(int key, Path inputPath, Path outputPath) throws IOException {
+        try(BufferedReader reader = Files.newBufferedReader(inputPath);
+        BufferedWriter writer = Files.newBufferedWriter(outputPath)) {
             ArrayList<Character> alphabet = Alphabet.getAlphabet();
             int symbol;
             while ((symbol = reader.read()) > -1) {

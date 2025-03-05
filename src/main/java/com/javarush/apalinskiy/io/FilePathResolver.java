@@ -2,14 +2,18 @@ package com.javarush.apalinskiy.io;
 
 import com.javarush.apalinskiy.constants.Const;
 
+import java.io.File;
 import java.nio.file.Path;
-import java.util.Scanner;
 
 
 public class FilePathResolver {
-    Scanner scanner = new Scanner(System.in);
-    private final Path inputPath = Path.of(scanner.nextLine());
-    private final Path outputPath = Path.of(Const.txtPath).toAbsolutePath();
+    private final Path inputPath = Path.of(Const.txtPathInput).toAbsolutePath();
+    private final Path outputPath = Path.of(Const.txtPathOutput).toAbsolutePath();
+    private final Path freshPath = Path.of(Const.freshTxt).toAbsolutePath();
+
+    public Path getFreshPath() {
+        return freshPath;
+    }
 
     public Path getInputPath() {
         return inputPath;
@@ -17,6 +21,37 @@ public class FilePathResolver {
 
     public Path getOutputPath() {
         return outputPath;
+    }
+
+
+    public Path buildFreshPath(String input){
+        if (input.isEmpty()) {
+            return freshPath;
+        } else if (!input.contains(File.separator)) {
+            return Path.of(Const.txtPath + input).toAbsolutePath();
+        } else {
+            return Path.of(input);
+        }
+    }
+
+    public Path buildInputPath(String input){
+        if (input.isEmpty()) {
+            return inputPath;
+        } else if (!input.contains(File.separator)) {
+            return Path.of(Const.txtPath + input).toAbsolutePath();
+        } else {
+            return Path.of(input);
+        }
+    }
+
+    public Path buildOutputPath(String input){
+        if (input.isEmpty()) {
+            return outputPath;
+        } else if (!input.contains(File.separator)) {
+            return Path.of(Const.txtPath + input).toAbsolutePath();
+        } else {
+            return Path.of(input);
+        }
     }
 
 }

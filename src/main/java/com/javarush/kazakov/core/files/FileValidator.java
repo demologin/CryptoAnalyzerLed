@@ -6,13 +6,29 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+/**
+ * The {@code FileValidator} class validates file paths. Throws exceptions if something goes wrong.
+ * <p>
+ * {@code FileValidator} includes public constructor that accepts the file paths awaiting validation.
+ *
+ */
 public class FileValidator {
     private final Path[] paths;
 
+    /**
+     * Creates an object of {@code FileValidator}.
+     *
+     * @param paths paths for validation
+     */
     public FileValidator(Path... paths) {
         this.paths = paths;
     }
 
+    /**
+     * This method checks file is an {@code txt} file and creates the necessary directories if they do not exist.
+     *
+     * @throws CryptoAnalyzerException
+     */
     public void validate() {
         for (Path path : paths) {
             isTxtFile(path);

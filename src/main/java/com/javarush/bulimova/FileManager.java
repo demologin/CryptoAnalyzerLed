@@ -13,9 +13,11 @@ public class FileManager {
     String pathRead;
     String pathCreate;
 
+
     public FileManager(String pathRead, String pathCreate) {
         this.pathRead = pathRead;
         this.pathCreate = pathCreate;
+
     }
 
     public List<Character>  readFile() {
@@ -39,7 +41,6 @@ public class FileManager {
 
     public void writeFile(List<Character> words) {
         // Логика записи файла
-
 
         try (BufferedWriter writer = Files.newBufferedWriter(Path.of(this.pathCreate))) {
             for (Character word : words) {

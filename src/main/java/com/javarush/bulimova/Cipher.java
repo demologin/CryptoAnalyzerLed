@@ -1,6 +1,6 @@
 package com.javarush.bulimova;
 
-import com.javarush.khmelov.constant.Alphabet;
+
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,9 +12,9 @@ public class Cipher {
 
     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',
             'и','к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
-            'ъ', 'ы', 'ь', 'э', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
+            'ъ', 'ы', 'ь', 'э', 'ю','я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
 
-    public final  static Map <Character, Integer> index = new HashMap<>();
+    public final  static Map <Character, Integer> indexes = new HashMap<>();
 
     public int getKey() {
         return key;
@@ -33,8 +33,10 @@ public class Cipher {
 
     static {
         for (int i = 0; i < ALPHABET.length; i++) {
-            index.put(ALPHABET[i], i);
+            indexes.put(ALPHABET[i], i);
+
         }
+         System.out.println(indexes);
     }
 
 
@@ -46,12 +48,16 @@ public class Cipher {
         List <Character> encodeText2= new ArrayList<>();
         int length = ALPHABET.length;
         for (Character c : encodeText) {
-            char ch = encodeText.get(c);
-            if (index.containsKey(ch)) {
-                Integer index = this.index.get(ch);
+            char ch = c;
+            if (indexes.containsKey(ch)) {
+                Integer index = indexes.get(ch);
+                //index = (index + key + Math.abs(key) * length) % length;
                 index = (index+key)%length;
                 encodeText2.add(ALPHABET[index]);
             }
+//            else if (ch == '\n') {
+//                encodeText2.add(ch);
+//            }
 
         }
 
@@ -60,12 +66,27 @@ public class Cipher {
 
 
 
-        
-//        return encodeText;
-//    }
-//    public String deCode(String encryptedText, int shift) {
-//        // Логика расшифровки
-//
-//    }
+
+    public List<Character>  deCode(List<Character> decodeText) {
+        // Логика расшифровки
+        List <Character> decodeText2= new ArrayList<>();
+        int length = ALPHABET.length;
+        for (Character c : decodeText) {
+            char ch = c;
+            if (indexes.containsKey(ch)) {
+                Integer index = indexes.get(ch);
+                index = (index+key)%length;
+                //index = (index - key - Math.abs(key) * length) % length;
+                decodeText2.add(ALPHABET[index]);
+            }
+//            else if (ch == '\n') {
+//                decodeText2.add(ch);
+//            }
+
+        }
+
+        return decodeText2;
+
+    }
 
 }

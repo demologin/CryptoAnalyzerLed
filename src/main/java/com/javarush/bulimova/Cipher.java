@@ -11,10 +11,10 @@ import java.util.Map;
 public class Cipher {
 
     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',
-            'и','к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
-            'ъ', 'ы', 'ь', 'э', 'ю','я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
+            'и', 'к', 'л', 'м', 'н', 'о', 'п', 'р', 'с', 'т', 'у', 'ф', 'х', 'ц', 'ч', 'ш', 'щ',
+            'ъ', 'ы', 'ь', 'э', 'ю', 'я', '.', ',', '«', '»', '"', '\'', ':', '!', '?', ' '};
 
-    public final  static Map <Character, Integer> indexes = new HashMap<>();
+    public final static Map<Character, Integer> indexes = new HashMap<>();
 
     public int getKey() {
         return key;
@@ -36,23 +36,23 @@ public class Cipher {
             indexes.put(ALPHABET[i], i);
 
         }
-         System.out.println(indexes);
+        System.out.println(indexes);
     }
 
 
-    public List<Character>  code(List<Character> encodeText) {
+    public List<Character> code(List<Character> encodeText) {
         // Логика шифрования
 
 // найти символ на позиции смещенной на заданный сдвиг. И помним что в примере с игрушкой Y стала А (и не улетела в космос).
 // Как это гарантировать? (можно сделать (позиция буквы + сдвиг) %( размер алфавита). Процент - оператор получения остатка от деления).
-        List <Character> encodeText2= new ArrayList<>();
+        List<Character> encodeText2 = new ArrayList<>();
         int length = ALPHABET.length;
         for (Character c : encodeText) {
             char ch = c;
             if (indexes.containsKey(ch)) {
                 Integer index = indexes.get(ch);
                 //index = (index + key + Math.abs(key) * length) % length;
-                index = (index+key)%length;
+                index = (index + key) % length;
                 encodeText2.add(ALPHABET[index]);
             }
 //            else if (ch == '\n') {
@@ -65,17 +65,15 @@ public class Cipher {
     }
 
 
-
-
-    public List<Character>  deCode(List<Character> decodeText) {
+    public List<Character> deCode(List<Character> mainText) {
         // Логика расшифровки
         List <Character> decodeText2= new ArrayList<>();
         int length = ALPHABET.length;
-        for (Character c : decodeText) {
+        for (Character c : mainText) {
             char ch = c;
             if (indexes.containsKey(ch)) {
                 Integer index = indexes.get(ch);
-                index = (index+key)%length;
+                index = (Math.abs(index-key))%length;
                 //index = (index - key - Math.abs(key) * length) % length;
                 decodeText2.add(ALPHABET[index]);
             }
@@ -89,4 +87,5 @@ public class Cipher {
 
     }
 
+//    }
 }

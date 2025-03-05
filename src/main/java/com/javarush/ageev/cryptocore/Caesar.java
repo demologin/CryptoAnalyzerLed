@@ -10,7 +10,7 @@ import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-public class Caesar implements Cipher{
+public class Caesar implements Cipher {
     private final Properties properties = new Properties();
     private static final int DEFAULT_OFFSET = 1;
     private int maxShift;
@@ -21,8 +21,7 @@ public class Caesar implements Cipher{
     private void loadProperties() {
         try (FileInputStream stream = new FileInputStream(Objects.requireNonNull(this.getClass().getResource("/ageev/app.properties")).getPath())) {
             properties.load(stream);
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
@@ -53,7 +52,7 @@ public class Caesar implements Cipher{
 
     public Caesar() {
         loadProperties();
-        this.maxShift = alphabet.length()-1;
+        this.maxShift = alphabet.length() - 1;
         setShift(DEFAULT_OFFSET);
     }
 
@@ -103,7 +102,7 @@ public class Caesar implements Cipher{
         return true;
     }
 
-    public String getSample (Path in, int size) {
+    public String getSample(Path in, int size) {
         try (BufferedReader reader = Files.newBufferedReader(in)) {
             char[] buffer = new char[size];
             int bytesRead = reader.read(buffer, 0, size);

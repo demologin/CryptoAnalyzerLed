@@ -82,7 +82,6 @@ public class Menu {
         while (true) {
             String inputFile = console.nextLine();
             if (inputFile.equals("exit")) {
-                appData.setInputFile(null);
                 resultCode = ResultCode.CANCELED;
                 break;
             } else {
@@ -104,12 +103,11 @@ public class Menu {
         while (true) {
             String outputFile = console.nextLine();
             if (outputFile.equals("exit")) {
-                appData.setInputFile(null);
                 resultCode = ResultCode.CANCELED;
                 break;
             } else {
                 if (Files.exists(Path.of(outputFile))) {
-                    appData.setInputFile(outputFile);
+                    appData.setOutputFile(outputFile);
                     resultCode = ResultCode.OK;
                     break;
                 } else {
@@ -123,20 +121,16 @@ public class Menu {
     private ResultCode enterKey(Scanner console, AppData appData) {
         ResultCode resultCode;
         System.out.println(KEY);
-        while (true) {
-            if (console.hasNextInt()) {
-                int key = console.nextInt();
-                if (key == 0) {
-                    resultCode = ResultCode.CANCELED;
-                    break;
-                } else {
-                    appData.setKey(key);
-                    resultCode = ResultCode.OK;
-                    break;
-                }
-            } else {
-                System.out.println("Введите корректное значение ключа или 0 для выхода");
-            }
+        while (!console.hasNextInt()) {
+            System.out.println("Введите корректное значение ключа или 0 для выхода");
+            console.nextLine();
+        }
+        int key = console.nextInt();
+        if (key == 0) {
+            resultCode = ResultCode.CANCELED;
+        } else {
+            appData.setKey(key);
+            resultCode = ResultCode.OK;
         }
         return resultCode;
     }

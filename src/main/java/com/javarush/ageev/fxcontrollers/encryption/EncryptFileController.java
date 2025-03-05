@@ -1,19 +1,17 @@
 package com.javarush.ageev.fxcontrollers.encryption;
 
-import com.javarush.ageev.cryptocore.CaesarCipher;
+import com.javarush.ageev.cryptocore.Caesar;
+import com.javarush.ageev.fxcontrollers.FileSelector;
+import com.javarush.ageev.fxcontrollers.FileSelectorEnum;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
 
 
 public class EncryptFileController {
@@ -22,53 +20,47 @@ public class EncryptFileController {
     @FXML
     public TextArea encryptedFileSample;
     @FXML
-    public TextArea clearFileSample;
+    public TextArea decryptedFileSample;
     @FXML
     public Spinner<Integer> shift;
     @FXML
     public TextField encryptedFilePath;
     @FXML
-    public TextField clearFilePath;
+    public TextField decryptedFilePath;
 
-    private final CaesarCipher cipher = new CaesarCipher();
+    private final Caesar cipher = new Caesar();
 
-    private File clearFile;
+    private File decryptedFile;
     private File encryptedFile;
 
     @FXML
     public void initialize() {
         SpinnerValueFactory<Integer> valueFactory =
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, cipher.getMaxOffset(), cipher.getOffset());
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(1, cipher.getMaxShift(), cipher.getShift());
         shift.setValueFactory(valueFactory);
         shift.valueProperty().addListener((observableValue, oldValue, newValue) -> {
-            cipher.setOffset(newValue);
-            previewEncryptedFile();
+            cipher.setShift(newValue);
+            preview();
         });
     }
 
-    public void clearFileOpenAction(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Выберите файл");
+    public void decryptedFileOpenAction(ActionEvent actionEvent) {
 
-        Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
 
-        clearFile = fileChooser.showOpenDialog(stage);
+        decryptedFile = FileSelector.fileDialog(actionEvent, FileSelectorEnum.OPEN_DIALOG);
 
-        if (clearFile != null) {
-            clearFilePath.setText(clearFile.getAbsolutePath());
-            encryptedFile = new File(clearFile.getAbsolutePath().concat(".enc"));
+        if (decryptedFile != null) {
+            decryptedFilePath.setText(decryptedFile.getAbsolutePath());
+            encryptedFile = new File(decryptedFile.getAbsolutePath().concat(".enc"));
             encryptedFilePath.setText(encryptedFile.getAbsolutePath());
-            previewClearFile();
+            preview();
         }
     }
 
     public void encryptedOpenAction(ActionEvent actionEvent) {
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Выберите файл");
 
-        Stage stage = (Stage) ((javafx.scene.Node) actionEvent.getSource()).getScene().getWindow();
 
-        encryptedFile = fileChooser.showSaveDialog(stage);
+        encryptedFile = decryptedFile = FileSelector.fileDialog(actionEvent, FileSelectorEnum.SAVE_DIALOG);
 
         if (encryptedFile != null) {
             encryptedFilePath.setText(encryptedFile.getAbsolutePath());
@@ -76,24 +68,20 @@ public class EncryptFileController {
     }
 
     public void encryptAction(ActionEvent actionEvent) {
-        cipher.fileEncrypt(clearFile.toPath(), encryptedFile.toPath());
-    }
-
-    private void previewClearFile() {
-        try (BufferedReader reader = Files.newBufferedReader(clearFile.toPath())) {
-            char[] buffer = new char[PREVIEW_BUFFER_SIZE];
-            int bytesRead = reader.read(buffer, 0, PREVIEW_BUFFER_SIZE);
-            String previewString = new String(buffer, 0, bytesRead);
-
-            clearFileSample.setText(previewString);
-            previewEncryptedFile();
-
+        try {
+            cipher.encrypt(decryptedFile.toPath(), encryptedFile.toPath());
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
 
-    private void previewEncryptedFile() {
-        encryptedFileSample.setText(cipher.textEncrypt(clearFileSample.getText()));
+    private void preview() {
+
+
+            decryptedFileSample.setText(cipher.getSample(decryptedFile.toPath(), PREVIEW_BUFFER_SIZE));
+            encryptedFileSample.setText(cipher.encrypt(decryptedFileSample.getText()));
+
+
     }
+
 }

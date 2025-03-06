@@ -1,9 +1,12 @@
 package com.javarush.chesnokov.command;
 
+import com.javarush.chesnokov.result.Result;
+import com.javarush.chesnokov.result.ResultCode;
+
 public class Exit implements Command{
 
     @Override
-    public void execute() {
-        System.out.println("Завершение программы...");
+    public Result execute() {
+        return new Result(ResultCode.OK, "Выход");
     }
 }

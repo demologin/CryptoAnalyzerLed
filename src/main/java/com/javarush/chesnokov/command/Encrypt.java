@@ -1,19 +1,18 @@
 package com.javarush.chesnokov.command;
 
-import com.javarush.chesnokov.Alphabet;
-import com.javarush.chesnokov.Cipher;
 
-public class Encrypt implements Command {
+import com.javarush.chesnokov.result.Result;
+
+public class Encrypt extends AbstractCommand {
 
     @Override
-    public void execute() {
+    public Result execute() {
         System.out.println("Выполняется шифрование...");
 
-        Cipher cipher = new Cipher(Alphabet.ALPHABET);
-        String text = "Тестовый текст для проверки";
         int shift = 1;
-        cipher.encrypt(text,shift);
+        String source = "C:\\Users\\derom\\IdeaProjects\\text.txt";
+        String target = "C:\\Users\\derom\\IdeaProjects\\encode.txt";
 
+        return copyWithKey(source, target, shift);
     }
-
 }

@@ -6,17 +6,15 @@ import java.util.Scanner;
 
 public class ConsoleRunner {
     public static void main(String[] args) {
-        Menu menu = new Menu();
         Scanner scanner = new Scanner(System.in);
-        boolean running = true;
+        Menu menu = new Menu(scanner);
+        boolean appRunning = true;
 
-        while (running) {
+        while (appRunning) {
             menu.showMenu();
-            CommandType command = menu.chooseCommand(scanner);
-            running = menu.executeCommand(command);
+            CommandType command = menu.chooseCommand();
+            appRunning = menu.executeCommand(command);
         }
-
-        System.out.println("Программа завершена.");
 
     }
 }

@@ -8,7 +8,6 @@ public class Controller {
 
     private final Runner runner;
     private final OutputError outputError;
-    private boolean isError;
 
     public Controller(Runner runner, OutputError outputError) {
         this.runner = runner;
@@ -16,8 +15,10 @@ public class Controller {
     }
 
     public void start() {
+        boolean isError;
         do {
             try {
+                isError = false;
                 runner.run();
             } catch (ApplicationException e) {
                 isError = true;

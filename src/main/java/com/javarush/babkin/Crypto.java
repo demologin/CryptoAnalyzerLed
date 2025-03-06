@@ -19,8 +19,8 @@ public class Crypto {
                 scrText = scrText + symb;
             }
         }
-        char[] outcCharArray = scrText.toCharArray();
-        return outcCharArray;
+        char[] outCharArray = scrText.toCharArray();
+        return outCharArray;
 
     }
 
@@ -39,8 +39,8 @@ public class Crypto {
                 scrText = scrText + symb;
             }
         }
-        char[] outcCharArray = scrText.toCharArray();
-        return outcCharArray;
+        char[] outCharArray = scrText.toCharArray();
+        return outCharArray;
 
     }
 

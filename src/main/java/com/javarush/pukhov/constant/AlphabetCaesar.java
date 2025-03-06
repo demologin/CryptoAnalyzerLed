@@ -9,7 +9,7 @@ public class AlphabetCaesar {
     }
 
     private static final String RUS_SYMBOLS = "йцукенгшщзхъфывапролджэячсмитьбюё";
-    private static final String PUNCTUATIONS = "\n”’:-!;*.,/\\?\"";
+    private static final String PUNCTUATIONS = "”’:-!;*.,/\\?\" " + System.lineSeparator();
 
     private static final char[] chars = (RUS_SYMBOLS + RUS_SYMBOLS.toUpperCase() + PUNCTUATIONS).toCharArray();
 

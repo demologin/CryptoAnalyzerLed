@@ -38,7 +38,7 @@ public class ActionContainer {
     static {
         final ActionName[] keys = ActionName.values();
         final Action[] valuesAction = {
-                new EncryptorCaesar(),
+                new EncryptCaesar(),
                 new DecryptKeys(),
                 new Bruteforce(),
                 new DecryptAnalyze(),
@@ -84,7 +84,7 @@ public class ActionContainer {
     public static ActionContainer get(String actionString) {
         ActionContainer actionContainer = null;
         ErrorHandler errorHandler = new ErrorHandlerConsole();
-        Validator<String> validator = new ValidatorActionContainer<>(errorHandler);
+        Validator<String> validator = new ValidatorActionContainer(errorHandler);
         if (validator.check(actionString)) {
             String validValue = validator.getValidValue();
             actionContainer = new ActionContainer(validValue);

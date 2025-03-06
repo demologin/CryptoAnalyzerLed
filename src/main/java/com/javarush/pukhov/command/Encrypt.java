@@ -2,7 +2,9 @@ package com.javarush.pukhov.command;
 
 import java.util.List;
 
-public abstract class Encryptor implements Action {
+public abstract class Encrypt<T> extends CipherAction<T> {
+
+    protected static final int ENCRYPT_MODE = 1;
 
     @Override
     public void execute(List<String> parameters) {

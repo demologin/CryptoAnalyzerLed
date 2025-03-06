@@ -3,6 +3,7 @@ package com.javarush.artemov.controller;
 import com.javarush.artemov.config.AppData;
 import com.javarush.artemov.config.OperationType;
 import com.javarush.artemov.config.Symbols;
+import com.javarush.artemov.entity.ResultCode;
 import com.javarush.artemov.service.EncryptDecrypt;
 import com.javarush.artemov.exception.AppException;
 
@@ -15,7 +16,7 @@ import java.nio.file.Path;
 public class InputOutput {
     EncryptDecrypt encryptDecrypt = new EncryptDecrypt();
 
-    public void encryptDecryptFile(AppData inputData) {
+    public ResultCode encryptDecryptFile(AppData inputData) {
         OperationType operation = inputData.getOperation();
         String inputFilePath = inputData.getInputFile();
         String outputFilePath = inputData.getOutputFile();
@@ -36,16 +37,16 @@ public class InputOutput {
         } catch (IOException e) {
             throw new AppException(e.getMessage(), e);
         }
+        return ResultCode.OK;
     }
 
     /**
      * вычисление ключа в зависимости от режима работы - шифрование / дешифрование
      */
     public int calculateOperationKey (int inputkey, OperationType operation) {
-        int key = switch(operation) {
+        return switch(operation) {
             case CODE -> inputkey;
             case DECODE -> inputkey * -1;
         };
-        return key;
     }
 }

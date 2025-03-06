@@ -5,11 +5,11 @@ import java.util.Map;
 
 public class Symbols {
     private static final String alphabetRus = "абвгдеёжзийклмнопрстуфхцчшщьыъэюя";
-    private static final String alphabetLat = "abcdefghijklmnopqrstuvwxyz";
+//    private static final String alphabetLat = "abcdefghijklmnopqrstuvwxyz";
     private static final String symbols = " ,.?!:;\"\r\n";
     private static final String numbers = "0123456789";
 
-    public static final char[] charsArray = (alphabetRus + alphabetLat + symbols + numbers).toCharArray();
+    public static final char[] charsArray = (alphabetRus + symbols + numbers).toCharArray();
 
     public static final Map<Character, Integer> symbolsMap = createSymbolsMap(Symbols.charsArray );
 

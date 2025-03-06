@@ -123,14 +123,13 @@ public class Menu {
                             resultCode = ResultCode.OK;
                             break;
                         } catch (IOException e) {
-                            resultCode = ResultCode.ERROR;
                             throw new AppException("Ошибка создания файла результата");
                         }
                     }
                 }
             }
         }
-        return resultCode; // ./text/text.txt
+        return resultCode;
     }
 
     private ResultCode enterKey(Scanner console, AppData appData) {

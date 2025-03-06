@@ -1,5 +1,7 @@
 package com.javarush.artemov.config;
 
+import com.javarush.artemov.entity.ResultCode;
+
 public class AppData {
     private OperationType operation;
     private String inputFile;

@@ -13,26 +13,27 @@ import com.javarush.pukhov.util.BuilderPath;
 
 public class ValidatorCipherAction<T extends List<String>> implements Validator<T> {
 
-    private final Action action;
     private T validValue;
     private Path source;
     private Path destination;
+    protected final ActionContainer container;
 
     /**
      * @param action
      */
     public ValidatorCipherAction(Action action) {
-        this.action = action;
+        container = ActionContainer.get(action.toString());
     }
 
     @Override
     public boolean check(T parameters) {
-        ActionContainer container = ActionContainer.get(action.toString());
         int countParameters = container.getDefaultValues().size();
         try {
             if (parameters.size() == countParameters) {
-                source = BuilderPath.buildPath(parameters.get(0));
-                destination = BuilderPath.buildPath(parameters.get(1));
+                int indexSrc = container.getIndexParameter(Constants.SOURCE);
+                int indexDest = container.getIndexParameter(Constants.DESTINATION);
+                source = BuilderPath.buildPath(parameters.get(indexSrc));
+                destination = BuilderPath.buildPath(parameters.get(indexDest));
                 if (Files.notExists(source)) {
                     String message = String.format(Constants.FILE_NOT_FOUND, source);
                     throw new ActionException(message, new FileNotFoundException());

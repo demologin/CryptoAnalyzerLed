@@ -29,10 +29,16 @@ public class Menu {
                         ReadTextFromFile.readTextFromFile(FinalConstant.getText());
                         break;
                     case 4:
-                        System.out.println("Шифрование");
+                        System.out.println("Шифрование файла text.txt");
+                        System.out.println("Введите сдвиг: ");
+                        int shift = sc.nextInt();
+                        Encrypt.encryptStart(shift);
                         break;
                     case 5:
-                        System.out.println("Расшифровка");
+                        System.out.println("Расшифровка файла text.txt");
+                        System.out.println("Введите сдвиг: ");
+                        int decryptShift = sc.nextInt();
+                        Encrypt.decryptStart(decryptShift);
                         break;
                     case 6:
                         System.out.println("Выход");
@@ -42,8 +48,8 @@ public class Menu {
                         System.out.println("Нет такой команды");
                 }
             } catch (InputMismatchException e) {
-                throw new InputMismatchException("Вы ввели не целое число. Все сломалось. "
-                        + FinalConstant.getKaomojiError());
+                throw new InputMismatchException(FinalConstant.getKaomojiError()
+                        + "\nВы ввели не целое число. Все сломалось.");
             }
         }
     }

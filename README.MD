@@ -3,11 +3,11 @@ Caesar's cipher - is one of the simplest and most widely known encryption techni
 
 ### Build:
 
-`mvn clean compile assembly:single`
+    mvn clean compile assembly:single
 
 ### Run:
 
-`java -jar .\CryptoAnalyzer.jar [-hV] [COMMAND]`
+    java -jar .\CryptoAnalyzer.jar [-hV] [COMMAND]
 
 ### Usage:
 

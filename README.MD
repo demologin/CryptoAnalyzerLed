@@ -17,15 +17,15 @@ Caesar's cipher - is one of the simplest and most widely known encryption techni
 
 ### Commands:
 
-    encrypt -i=<input> -o=<output> -k=<key>               Runs CryptoAnalyzer to encrypt text.
+    encrypt -i=<input> -o=<output> -k=<key>              Runs CryptoAnalyzer to encrypt text.
 
-    decrypt -i=<input> -o=<output> -k=<key>               Runs CryptoAnalyzer to decrypt text.
+    decrypt -i=<input> -o=<output> -k=<key>              Runs CryptoAnalyzer to decrypt text.
 
-    bf -i=<input> [-o=<output>]                           Runs CryptoAnalyzer to brute force decrypt text.
+    bf -i=<input> [-o=<output>]                          Runs CryptoAnalyzer to brute force decrypt text.
 
-    analyze -i=<input> -r=<representative> [-o=<output>]  Runs CryptoAnalyzer to analyze encrypted text.
+    analyze -i=<input> -r=<representative> [-o=<output>] Runs CryptoAnalyzer to analyze encrypted text.
 
-    gui                                                   Runs CryptoAnalyzer at gui mode.
+    gui                                                  Runs CryptoAnalyzer at gui mode.
 
 # Криптоанализатор
 

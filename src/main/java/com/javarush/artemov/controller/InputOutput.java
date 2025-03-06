@@ -41,11 +41,11 @@ public class InputOutput {
         return ResultCode.OK;
     }
 
-    public ResultCode bruteForse(AppData inputData){
+    public ResultCode bruteForse(AppData inputData) {
         String inputFilePath = inputData.getInputFile();
         Path source = Path.of(inputFilePath);
         String sourceText = "";
-        int numberLinesToParse = 20;
+        int numberLinesToParse = 20; // количество строк для анализа
 
         try (
                 BufferedReader reader = Files.newBufferedReader(source)
@@ -54,47 +54,75 @@ public class InputOutput {
             for (int i = 0; i < numberLinesToParse && reader.ready(); i++) {
                 sourceText = sourceText + reader.readLine();
             }
-
-            // создали массив с результатами дешифровки с помощью Symbols.charsArray.length количеством ключей
-            String[] result = new String[Symbols.charsArray.length];
-            char[] charArrayToParse = sourceText.toCharArray();
-            for (int i = 0; i < Symbols.charsArray.length; i++) {
-                for (int j = 0; j < charArrayToParse.length; j++) {
-                    char newCharacter = encryptDecrypt.process(Symbols.symbolsMap, Symbols.charsArray, charArrayToParse[j], i * -1);
-                    result[i] = result[i] + newCharacter;
-                }
-            }
-
-            String[] arrayTestWords = {"но", "ну", "не", "да", "от", "ты", "мы", "вы", "по", "он", "она", "они", "для", "был", "что", "нет", "как"};
-
-            // считаем количество совпадений слов для каждой строки со словами эталонного массива
-            int[][] numberMatches = new int[Symbols.charsArray.length][arrayTestWords.length];
-            for (int i = 0; i < result.length; i++) {
-                String[] arrayWords = result[i].split("\\s+");
-                System.out.println("i = " + i + " " + Arrays.toString(arrayWords));
-                for (String word : arrayWords){
-                    for (int j = 0; j < arrayTestWords.length; j++) {
-                        if (word.equalsIgnoreCase(arrayTestWords[j])) {
-                            numberMatches[i][j]++;
-                        }
-                    }
-                }
-            }
-
-            System.out.println(Arrays.deepToString(numberMatches));
-
-
         } catch (IOException e) {
             throw new AppException(e.getMessage(), e);
         }
-        return ResultCode.OK;
+
+        String[] result = getMultiKeyDecryptStrings(sourceText);
+        int[][] numberMatches = countWordMatches(result);
+        int bestKey = getBestKey(numberMatches);
+        inputData.setKey(bestKey);
+
+        return encryptDecryptFile(inputData);
     }
 
     /**
-     * вычисление ключа в зависимости от режима работы - шифрование / дешифрование
+     * возвращает массив с результатами дешифровки для каждого из i ключей
      */
-    public int calculateOperationKey (int inputkey, OperationType operation) {
-        return switch(operation) {
+    private String[] getMultiKeyDecryptStrings(String sourceText) {
+        String[] result = new String[Symbols.charsArray.length];
+        char[] charArrayToParse = sourceText.toCharArray();
+        for (int i = 0; i < Symbols.charsArray.length; i++) {
+            for (int j = 0; j < charArrayToParse.length; j++) {
+                char newCharacter = encryptDecrypt.process(Symbols.symbolsMap, Symbols.charsArray, charArrayToParse[j], i * -1);
+                result[i] = result[i] + newCharacter;
+            }
+        }
+        return result;
+    }
+
+    /**
+     * считает количество совпадений слов для каждого элемента массива дешифровки со словами эталонного массива
+     */
+    private static int[][] countWordMatches(String[] result) {
+        int[][] numberMatches = new int[Symbols.charsArray.length][Symbols.arrayTestWords.length];
+        for (int i = 0; i < result.length; i++) {
+            String[] arrayWords = result[i].split("\\s+");
+            for (String word : arrayWords) {
+                for (int j = 0; j < Symbols.arrayTestWords.length; j++) {
+                    if (word.equalsIgnoreCase(Symbols.arrayTestWords[j])) {
+                        numberMatches[i][j]++;
+                    }
+                }
+            }
+        }
+        return numberMatches;
+    }
+
+    /**
+     * вычисляет лучший ключ по максимальному количеству совпадений слов каждого элемента массива дешифровки со словами эталонного массива
+     */
+    private static int getBestKey(int[][] numberMatches) {
+        int maxMatches = 0;
+        int bestKey = 0;
+        for (int i = 0; i < numberMatches.length; i++) {
+            int sum = 0;
+            for (int j = 0; j < numberMatches[i].length; j++) {
+                sum = sum + numberMatches[i][j];
+            }
+            if (maxMatches < sum) {
+                maxMatches = sum;
+                bestKey = i;
+            }
+        }
+        return bestKey;
+    }
+
+    /**
+     * вычисляет ключ в зависимости от режима работы - шифрование / дешифрование / brute force
+     */
+    public int calculateOperationKey(int inputkey, OperationType operation) {
+        return switch (operation) {
             case CODE -> inputkey;
             case DECODE -> inputkey * -1;
             case BRUTE_FORCE -> inputkey * -1;

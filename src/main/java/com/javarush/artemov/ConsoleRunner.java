@@ -16,11 +16,12 @@ public class ConsoleRunner {
             inputData = menu.getInputData();
             if (inputData != null) {
                 ResultCode result = switch (inputData.getOperation()) {
-                    case CODE ->  inputOutput.encryptDecryptFile(inputData);
+                    case CODE -> inputOutput.encryptDecryptFile(inputData);
                     case DECODE -> inputOutput.encryptDecryptFile(inputData);
                     case BRUTE_FORCE -> inputOutput.bruteForse(inputData);
                 };
-                System.out.printf("Операция %s завершена - %s. Файл результата %s", inputData.getOperation(), result, inputData.getOutputFile());
+                System.out.printf("Операция %s завершена - %s. Файл результата %s. Ключ - %d", inputData.getOperation(),
+                        result, inputData.getOutputFile(), inputData.getKey());
             } else {
                 System.out.println("Выполнение программы прервано!");
             }

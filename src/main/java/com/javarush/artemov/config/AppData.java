@@ -9,7 +9,6 @@ public class AppData {
     private int key;
 
 
-
     public OperationType getOperation() {
         return operation;
     }

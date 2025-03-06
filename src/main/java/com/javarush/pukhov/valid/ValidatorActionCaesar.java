@@ -6,7 +6,7 @@ import com.javarush.pukhov.command.Action;
 import com.javarush.pukhov.exception.ActionException;
 import com.javarush.pukhov.view.console.constants.Messages;
 
-public class ValidatorActionCaesar<T extends List<String>> extends ValidatorAction<T> {
+public class ValidatorActionCaesar<T extends List<String>> extends ValidatorCipherAction<T> {
 
     private int key;
 

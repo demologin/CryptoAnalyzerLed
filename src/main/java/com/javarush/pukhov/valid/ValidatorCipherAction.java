@@ -11,7 +11,7 @@ import com.javarush.pukhov.constant.Constants;
 import com.javarush.pukhov.exception.ActionException;
 import com.javarush.pukhov.util.BuilderPath;
 
-public class ValidatorAction<T extends List<String>> implements Validator<T> {
+public class ValidatorCipherAction<T extends List<String>> implements Validator<T> {
 
     private final Action action;
     private T validValue;
@@ -21,7 +21,7 @@ public class ValidatorAction<T extends List<String>> implements Validator<T> {
     /**
      * @param action
      */
-    public ValidatorAction(Action action) {
+    public ValidatorCipherAction(Action action) {
         this.action = action;
     }
 

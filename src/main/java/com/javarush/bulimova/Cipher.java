@@ -56,10 +56,6 @@ public class Cipher {
                 index = (index + key) % length;
                 encodeText2.add(ALPHABET[index]);
             }
-//            else if (ch == '\n') {
-//                encodeText2.add(ch);
-//            }
-
         }
 
         return encodeText2;
@@ -74,8 +70,6 @@ public class Cipher {
             char ch = c;
             if (indexes.containsKey(ch)) {
                 Integer index = indexes.get(ch);
-
-                //index = (index - key) % length;
                 if ((index - key) > 0) {
                     index = (index - key) % length;
                     decodeText2.add(ALPHABET[index]);

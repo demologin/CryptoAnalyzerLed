@@ -40,7 +40,7 @@ public class Cipher {
             indexes.put(ALPHABET[i], i);
 
         }
-        System.out.println(indexes);
+       // System.out.println(indexes);
     }
 
 
@@ -86,7 +86,6 @@ public class Cipher {
 
             }
         }
-
 
 
         return decodeText2;

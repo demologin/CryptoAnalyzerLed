@@ -18,6 +18,5 @@ public class ConsoleRunner {
         application.run(args);
     }
 
-
 }
 

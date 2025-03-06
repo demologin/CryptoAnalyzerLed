@@ -21,6 +21,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.javarush.pukhov.constant.Constants;
 import com.javarush.pukhov.exception.ErrorHandler;
 import com.javarush.pukhov.exception.ErrorHandlerConsole;
 import com.javarush.pukhov.valid.Validator;
@@ -31,9 +32,11 @@ public class ActionContainer {
     private final Action action;
     private final List<String> subqueries;
     private final List<String> defaultValues;
+    private final Map<String, Integer> indexParameters;
     private static final Map<String, Action> mapAction = new HashMap<>();
     private static final Map<String, List<String>> mapDefaultValues = new HashMap<>();
     private static final Map<String, List<String>> mapSubqueries = new HashMap<>();
+    private static final Map<String, Map<String, Integer>> mapParameters = new HashMap<>();
 
     static {
         final ActionName[] keys = ActionName.values();
@@ -68,10 +71,18 @@ public class ActionContainer {
                 Collections.EMPTY_LIST
         };
 
+        List<Map<String, Integer>> valuesParameter = List.of(
+                Map.of(Constants.SOURCE, 0, Constants.DESTINATION, 1, Constants.KEY, 2),
+                Map.of(Constants.SOURCE, 0, Constants.DESTINATION, 1, Constants.KEY, 2),
+                Map.of(Constants.SOURCE, 0, Constants.DESTINATION, 1),
+                Map.of(Constants.SOURCE, 0, Constants.DESTINATION, 2, Constants.DICTIONARY, 1),
+                Collections.EMPTY_MAP);
+
         for (int i = 0; i < keys.length; i++) {
             mapAction.put(keys[i].toString(), valuesAction[i]);
             mapSubqueries.put(keys[i].toString(), valuesSubquery[i]);
             mapDefaultValues.put(keys[i].toString(), valuesFile[i]);
+            mapParameters.put(keys[i].toString(), valuesParameter.get(i));
         }
     }
 
@@ -79,6 +90,7 @@ public class ActionContainer {
         action = mapAction.get(actionName);
         subqueries = mapSubqueries.get(actionName);
         defaultValues = mapDefaultValues.get(actionName);
+        indexParameters = mapParameters.get(actionName);
     }
 
     public static ActionContainer get(String actionString) {
@@ -112,6 +124,13 @@ public class ActionContainer {
      */
     public List<String> getDefaultValues() {
         return defaultValues;
+    }
+
+    /**
+     * @return the index parameter
+     */
+    public int getIndexParameter(String nameParameter) {
+        return indexParameters.get(nameParameter);
     }
 
 }

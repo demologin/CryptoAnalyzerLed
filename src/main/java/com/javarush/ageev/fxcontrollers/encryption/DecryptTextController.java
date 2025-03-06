@@ -2,11 +2,13 @@ package com.javarush.ageev.fxcontrollers.encryption;
 
 
 import com.javarush.ageev.cryptocore.Caesar;
-import javafx.event.ActionEvent;
+import com.javarush.ageev.fxcontrollers.ExceptionHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextArea;
+
+import java.io.IOException;
 
 public class DecryptTextController {
     @FXML
@@ -15,10 +17,15 @@ public class DecryptTextController {
     private TextArea encryptedText;
     @FXML
     private Spinner<Integer> shift;
-    private final Caesar cipher = new Caesar();
+    private Caesar cipher;
 
-    @FXML
     public void initialize() {
+        try {
+            cipher = new Caesar();
+        } catch (IOException e) {
+            ExceptionHandler.handleException(e);
+        }
+
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, cipher.getMaxShift(), cipher.getShift());
         shift.setValueFactory(valueFactory);
@@ -30,7 +37,7 @@ public class DecryptTextController {
 
 
 
-    public void decryptAction(ActionEvent actionEvent) {
+    public void decryptAction() {
         decryptedText.setText(cipher.decrypt(encryptedText.getText()));
     }
 }

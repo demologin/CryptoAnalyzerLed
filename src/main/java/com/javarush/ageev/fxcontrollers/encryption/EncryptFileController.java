@@ -1,6 +1,7 @@
 package com.javarush.ageev.fxcontrollers.encryption;
 
 import com.javarush.ageev.cryptocore.Caesar;
+import com.javarush.ageev.fxcontrollers.ExceptionHandler;
 import com.javarush.ageev.fxcontrollers.FileSelector;
 import com.javarush.ageev.fxcontrollers.FileSelectorEnum;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class EncryptFileController {
 
-    private final int PREVIEW_BUFFER_SIZE = 400;
+    private static final int PREVIEW_BUFFER_SIZE = 400;
     @FXML
     public TextArea encryptedFileSample;
     @FXML
@@ -28,13 +29,18 @@ public class EncryptFileController {
     @FXML
     public TextField decryptedFilePath;
 
-    private final Caesar cipher = new Caesar();
+    private Caesar cipher;
 
     private File decryptedFile;
     private File encryptedFile;
 
-    @FXML
     public void initialize() {
+        try {
+            cipher = new Caesar();
+        } catch (IOException e) {
+            ExceptionHandler.handleException(e);
+        }
+
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, cipher.getMaxShift(), cipher.getShift());
         shift.setValueFactory(valueFactory);
@@ -67,19 +73,23 @@ public class EncryptFileController {
         }
     }
 
-    public void encryptAction(ActionEvent actionEvent) {
+    public void encryptAction() {
         try {
             cipher.encrypt(decryptedFile.toPath(), encryptedFile.toPath());
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            ExceptionHandler.handleException(e);
         }
     }
 
     private void preview() {
 
 
+        try {
             decryptedFileSample.setText(cipher.getSample(decryptedFile.toPath(), PREVIEW_BUFFER_SIZE));
-            encryptedFileSample.setText(cipher.encrypt(decryptedFileSample.getText()));
+        } catch (IOException e) {
+            ExceptionHandler.handleException(e);
+        }
+        encryptedFileSample.setText(cipher.encrypt(decryptedFileSample.getText()));
 
 
     }

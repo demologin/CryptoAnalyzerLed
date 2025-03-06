@@ -21,4 +21,6 @@ public class FileSelector {
 
         return null;
     }
+
+    private FileSelector() {}
 }

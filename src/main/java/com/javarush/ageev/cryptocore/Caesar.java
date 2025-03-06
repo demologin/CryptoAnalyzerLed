@@ -1,12 +1,8 @@
 package com.javarush.ageev.cryptocore;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Objects;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
@@ -18,17 +14,14 @@ public class Caesar implements Cipher {
     private String shiftedAlphabet;
     private int shift;
 
-    private void loadProperties() {
-        try (FileInputStream stream = new FileInputStream(Objects.requireNonNull(this.getClass().getResource("/ageev/app.properties")).getPath())) {
+    private void loadProperties() throws IOException {
+        String propertyPath = this.getClass().getResource("/ageev/app.properties").getPath();
+        try (FileInputStream stream = new FileInputStream(propertyPath)) {
             properties.load(stream);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
         if (properties.containsKey("cesarAlphabet")) {
             this.alphabet = properties.getProperty("cesarAlphabet");
-        } else {
-            throw new RuntimeException("Configuration file is not support Cesar cipher (cesarAlphabet)");
         }
 
     }
@@ -50,7 +43,7 @@ public class Caesar implements Cipher {
         return this.maxShift;
     }
 
-    public Caesar() {
+    public Caesar() throws IOException {
         loadProperties();
         this.maxShift = alphabet.length() - 1;
         setShift(DEFAULT_OFFSET);
@@ -83,34 +76,28 @@ public class Caesar implements Cipher {
             while (reader.ready()) {
                 writer.append(encrypt((char) reader.read()));
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
         return true;
     }
 
     @Override
-    public boolean decrypt(Path in, Path out) {
+    public boolean decrypt(Path in, Path out) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(in);
              BufferedWriter writer = Files.newBufferedWriter(out)) {
             while (reader.ready()) {
                 writer.append(decrypt((char) reader.read()));
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
+
         return true;
     }
 
-    public String getSample(Path in, int size) {
+    public String getSample(Path in, int size) throws IOException {
         try (BufferedReader reader = Files.newBufferedReader(in)) {
             char[] buffer = new char[size];
             int bytesRead = reader.read(buffer, 0, size);
 
             return new String(buffer, 0, bytesRead);
-
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
 
     }

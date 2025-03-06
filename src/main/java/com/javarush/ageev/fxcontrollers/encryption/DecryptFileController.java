@@ -1,6 +1,7 @@
 package com.javarush.ageev.fxcontrollers.encryption;
 
 import com.javarush.ageev.cryptocore.Caesar;
+import com.javarush.ageev.fxcontrollers.ExceptionHandler;
 import com.javarush.ageev.fxcontrollers.FileSelector;
 import com.javarush.ageev.fxcontrollers.FileSelectorEnum;
 import javafx.event.ActionEvent;
@@ -16,7 +17,7 @@ import java.io.IOException;
 
 public class DecryptFileController {
 
-    private final int PREVIEW_BUFFER_SIZE = 400;
+    private static final int PREVIEW_BUFFER_SIZE = 400;
     @FXML
     public TextArea encryptedFileSample;
     @FXML
@@ -28,13 +29,20 @@ public class DecryptFileController {
     @FXML
     public TextField decryptedFilePath;
 
-    private final Caesar cipher = new Caesar();
+    private Caesar cipher;
 
     private File decryptedFile;
     private File encryptedFile;
 
-    @FXML
+
     public void initialize() {
+
+        try {
+            cipher = new Caesar();
+        } catch (IOException e) {
+            ExceptionHandler.handleException(e);
+        }
+
         SpinnerValueFactory<Integer> valueFactory =
                 new SpinnerValueFactory.IntegerSpinnerValueFactory(1, cipher.getMaxShift(), cipher.getShift());
         shift.setValueFactory(valueFactory);
@@ -46,7 +54,7 @@ public class DecryptFileController {
 
     public void decryptedFileOpenAction(ActionEvent actionEvent) {
 
-        decryptedFile = decryptedFile = FileSelector.fileDialog(actionEvent, FileSelectorEnum.SAVE_DIALOG);
+        decryptedFile = FileSelector.fileDialog(actionEvent, FileSelectorEnum.SAVE_DIALOG);
 
         if (decryptedFile != null) {
             decryptedFilePath.setText(decryptedFile.getAbsolutePath());
@@ -67,14 +75,22 @@ public class DecryptFileController {
 
     }
 
-    public void decryptAction(ActionEvent actionEvent) {
-        cipher.decrypt(encryptedFile.toPath(), decryptedFile.toPath());
+    public void decryptAction() {
+        try {
+            cipher.decrypt(encryptedFile.toPath(), decryptedFile.toPath());
+        } catch (IOException e) {
+            ExceptionHandler.handleException(e);
+        }
     }
 
     private void preview() {
 
 
-        encryptedFileSample.setText(cipher.getSample(encryptedFile.toPath(), PREVIEW_BUFFER_SIZE));
+        try {
+            encryptedFileSample.setText(cipher.getSample(encryptedFile.toPath(), PREVIEW_BUFFER_SIZE));
+        } catch (IOException e) {
+            ExceptionHandler.handleException(e);
+        }
         decryptedFileSample.setText(cipher.decrypt(encryptedFileSample.getText()));
 
 

@@ -14,5 +14,5 @@ public interface Cipher {
 
     public boolean encrypt(Path in, Path out) throws IOException;
 
-    public boolean decrypt(Path in, Path out);
+    public boolean decrypt(Path in, Path out) throws IOException;
 }

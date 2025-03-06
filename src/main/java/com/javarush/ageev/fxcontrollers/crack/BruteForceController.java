@@ -2,9 +2,9 @@ package com.javarush.ageev.fxcontrollers.crack;
 
 import com.javarush.ageev.cryptocore.BruteForce;
 import com.javarush.ageev.cryptocore.BruteForceEntry;
+import com.javarush.ageev.fxcontrollers.ExceptionHandler;
 import com.javarush.ageev.fxcontrollers.FileSelector;
 import com.javarush.ageev.fxcontrollers.FileSelectorEnum;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,6 +14,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.File;
+import java.io.IOException;
 
 public class BruteForceController {
     public TableColumn<BruteForceEntry, Integer> shiftColumn;
@@ -38,8 +39,13 @@ public class BruteForceController {
         }
     }
 
-    public void bruteForce(ActionEvent actionEvent) {
-        BruteForce bruteForce = new BruteForce(encryptedFile.toPath());
+    public void bruteForce() {
+        BruteForce bruteForce = null;
+        try {
+            bruteForce = new BruteForce(encryptedFile.toPath());
+        } catch (IOException e) {
+            ExceptionHandler.handleException(e);
+        }
         ObservableList<BruteForceEntry> data = FXCollections.observableArrayList();
         data.setAll(bruteForce.getBruteForceList());
         bruteForceTable.setItems(data);

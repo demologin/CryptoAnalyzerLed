@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javarush.ageev.fxcontrollers.encryption.DecryptTextController">
+    <children>
+        <Label layoutX="14.0" layoutY="5.0" text="Input text" />
+        <TextArea fx:id="encryptedText" layoutX="15.0" layoutY="22.0" prefHeight="150.0" prefWidth="570.0" />
+        <TextArea fx:id="decryptedText" layoutX="15.0" layoutY="200.0" prefHeight="150.0" prefWidth="570.0" />
+        <Label layoutX="14.0" layoutY="181.0" text="Output text" />
+        <Spinner fx:id="shift" editable="true" layoutX="46.0" layoutY="361.0" />
+        <Label layoutX="14.0" layoutY="365.0" text="Shift" />
+        <Button layoutX="533.0" layoutY="361.0" mnemonicParsing="false" onAction="#decryptAction" text="Decrypt" />
+    </children>
+</AnchorPane>

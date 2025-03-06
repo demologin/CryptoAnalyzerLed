@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.javarush.ageev.fxcontrollers.MainController">
+   <children>
+      <MenuBar>
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="menuItemClose" onAction="#menuItemAction" mnemonicParsing="false" text="Close" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Encryption">
+            <items>
+              <MenuItem fx:id="menuItemEncText" onAction="#menuItemAction" mnemonicParsing="false" text="Encrypt text" />
+              <MenuItem fx:id="menuItemDecText" onAction="#menuItemAction" mnemonicParsing="false" text="Decrypt text" />
+              <MenuItem fx:id="menuItemEncFile" onAction="#menuItemAction" mnemonicParsing="false" text="Encrypt file" />
+              <MenuItem fx:id="menuItemDecFile" onAction="#menuItemAction" mnemonicParsing="false" text="Decrypt file" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Crack">
+            <items>
+              <MenuItem fx:id="menuItemBruteForce" onAction="#menuItemAction" mnemonicParsing="false" text="BruteForce" />
+              <MenuItem fx:id="menuItemStatAnalysis" onAction="#menuItemAction" mnemonicParsing="false" text="Statistical analysis" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+     <StackPane fx:id="mainContainer">
+       <fx:include fx:id="templateContainer" source="welcome.fxml" />
+     </StackPane>
+   </children>
+</VBox>

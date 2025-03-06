@@ -45,8 +45,11 @@ public class Menu {
         args.put("sourceFile", defaultValue(Messages.DEFAULT_SOURCE_FILE_DECRYPT));
         writeMessage(Messages.DESTINATION_FILE_DECRYPT_MESSAGE);
         args.put("destinationFile", defaultValue(Messages.DEFAULT_DESTINATION_FILE_DECRYPT));
-        writeMessage(Messages.DECRYPT_KEY_MESSAGE);
-        defaultKeyValue();
+        if (args.get("modeFlag").equals("2")){
+            writeMessage(Messages.DECRYPT_KEY_MESSAGE);
+            defaultKeyValue();
+        }
+
     }
 
     //asking encrypt params

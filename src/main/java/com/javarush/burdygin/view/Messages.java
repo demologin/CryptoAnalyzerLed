@@ -7,7 +7,7 @@ interface Messages {
             Select mode:
             1 Encode
             2 Decode
-            3 Brut Force
+            3 Brute Force
             Exit""";
 
        //source messages

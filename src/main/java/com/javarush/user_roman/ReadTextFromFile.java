@@ -7,8 +7,8 @@ import java.util.List;
 
 class ReadTextFromFile {
     public static void readTextFromFile(Path path) {
-        List<String> strings = null;
         if (Files.exists(path)) {
+            List<String> strings = null;
             try {
                 strings = Files.readAllLines(path);
             } catch (IOException e) {

@@ -48,6 +48,7 @@ public class Actions {
         int key;
         FileProcessor fileProcessor = new FileProcessor();
         System.out.println("Please enter file to read: ");
+        System.out.println("text.txt or full path for encryption, decr.txt or full path for decryption ");
         String pathToRead = scanner.nextLine();
         fileProcessor.readFile(pathToRead);
         key = keyValidation(scanner);
@@ -60,6 +61,7 @@ public class Actions {
             text = new char[0];
         }
         System.out.println("Please enter file to write: ");
+        System.out.println("decr.txt or full path for encryption, encr.txt or full path for decryption ");
         String pathToWrite = scanner.nextLine();
         fileProcessor.writeFile(text, pathToWrite);
     }

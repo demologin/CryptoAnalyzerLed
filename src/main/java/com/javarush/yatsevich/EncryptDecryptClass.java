@@ -31,7 +31,7 @@ public class EncryptDecryptClass {
 
     public static int findKey(char[] encryptedText, char[] sourceText) {
 
-        for (int key = 0; key <= 50; key++) {
+        for (int key = 0; key <= 100; key++) {
             char[] decryptedText = decrypt(encryptedText, key);
             if ((Arrays.toString(decryptedText)).equals((Arrays.toString(sourceText)))) {
                 return key;
@@ -39,7 +39,7 @@ public class EncryptDecryptClass {
         }
         return -1;
     }
-    //new String
+
 
 
 }

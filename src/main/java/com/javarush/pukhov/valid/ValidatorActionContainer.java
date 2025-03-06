@@ -5,11 +5,11 @@ import com.javarush.pukhov.exception.ActionContainerException;
 import com.javarush.pukhov.exception.ErrorHandler;
 import com.javarush.pukhov.view.console.constants.Messages;
 
-public class ValidatorActionContainer<T extends CharSequence> implements Validator<T> {
+public class ValidatorActionContainer implements Validator<String> {
 
     private final ErrorHandler errorHandler;
-    private T validValue;
-    private T checkedObject;
+    private String validValue;
+    private String checkedObject;
 
     /**
      * @param handler
@@ -19,14 +19,14 @@ public class ValidatorActionContainer<T extends CharSequence> implements Validat
     }
 
     @Override
-    public boolean check(T object) {
+    public boolean check(String object) {
 
         checkedObject = object;
         int index = getIndexActionNameFor(checkedObject);
         if (index != -1) {
-            validValue = (T) getActionNameFor(index);
+            validValue = getActionNameFor(index);
         } else {
-            validValue = (T) getActionNameFor(checkedObject);
+            validValue = getActionNameFor(checkedObject);
         }
         if (!validValue.isEmpty()) {
             return true;
@@ -51,7 +51,7 @@ public class ValidatorActionContainer<T extends CharSequence> implements Validat
         }
     }
 
-    private String getActionNameFor(T object) {
+    private String getActionNameFor(String object) {
         try {
             if (object instanceof String checkString) {
                 ActionName actionName = ActionName.valueOf(checkString.toUpperCase().replace(" ", ""));
@@ -64,9 +64,9 @@ public class ValidatorActionContainer<T extends CharSequence> implements Validat
         return "";
     }
 
-    private int getIndexActionNameFor(T object) {
+    private int getIndexActionNameFor(String object) {
         try {
-            String checkString = object.toString();
+            String checkString = object;
             return Integer.parseInt(checkString);
         } catch (NumberFormatException e) {
             String message = String.format(Messages.INCORRECT_NUMBER,
@@ -77,7 +77,7 @@ public class ValidatorActionContainer<T extends CharSequence> implements Validat
     }
 
     @Override
-    public T getValidValue() {
+    public String getValidValue() {
         return validValue;
     }
 

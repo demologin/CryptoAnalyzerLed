@@ -3,13 +3,12 @@ package com.javarush.pukhov.io;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileInput<T,J> implements Input<InputStream, BufferedReader> {
+public class FileInput implements Input<InputStream, BufferedReader> {
 
-    private Path path;
+    private final Path path;
 
     /**
      * @param path

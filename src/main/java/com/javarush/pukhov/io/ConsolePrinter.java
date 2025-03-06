@@ -5,7 +5,7 @@ import java.io.OutputStream;
 import java.io.PrintWriter;
 import java.io.Writer;
 
-public class ConsolePrinter<T,J> implements OutputError {
+public class ConsolePrinter implements OutputError {
 
     @Override
     public void print(String message) {
@@ -14,7 +14,7 @@ public class ConsolePrinter<T,J> implements OutputError {
 
     @Override
     public void print(RuntimeException e) {
-        System.err.println(e.getMessage());
+        e.printStackTrace();
     }
 
     @Override

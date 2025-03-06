@@ -14,7 +14,7 @@ public class ApplicationAnalyzer {
     public static void main(String[] args) {
         ApplicationAnalyzer analyzer = new ApplicationAnalyzer();
         Runner runner = new ConsoleRunner();
-        OutputError outputError = new ConsolePrinter<>();
+        OutputError outputError = new ConsolePrinter();
         Controller controller = new Controller(runner, outputError);
         analyzer.start(controller);
     }

@@ -1,14 +1,21 @@
 package com.javarush.pukhov.command;
 
+import java.nio.file.Path;
 import java.util.List;
 
-public final class DecryptAnalyze extends Decryptor {
+public final class DecryptAnalyze extends Decrypt<Path> {
 
     @Override
     public void decrypt(List<String> parameters) {
         /*
          * TODO: Add impl
          */
+    }
+
+    @Override
+    protected void processSymbols(char[] buf, int countRead) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'processSymbols'");
     }
 
 }

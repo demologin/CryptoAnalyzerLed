@@ -1,5 +1,9 @@
 package com.javarush.pukhov.view.console;
 
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.Reader;
+import java.io.Writer;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,20 +14,20 @@ import com.javarush.pukhov.io.Output;
 import com.javarush.pukhov.view.console.menu.Menu;
 
 public class ConsoleApp {
-    Input input;
-    Output output;
+    Input<InputStream, Reader> input;
+    Output<OutputStream,Writer> output;
 
     /**
      * @param input
      * @param output
      */
-    public ConsoleApp(Input input, Output output) {
+    public ConsoleApp(Input<InputStream, Reader> input, Output<OutputStream, Writer> output) {
         this.input = input;
         this.output = output;
     }
 
     public void start() {
-        Action action = null;
+        Action action;
         do {
                 Menu menu = Menu.getInstance();
                 output.print(menu.show());

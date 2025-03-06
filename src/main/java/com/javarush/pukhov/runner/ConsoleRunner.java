@@ -15,8 +15,8 @@ public class ConsoleRunner implements Runner {
 
     @Override
     public void run() {
-        Input<InputStream, Reader> input = new ConsoleInput<>();
-        Output<OutputStream, Writer> output = new ConsolePrinter<>();
+        Input<InputStream, Reader> input = new ConsoleInput();
+        Output<OutputStream, Writer> output = new ConsolePrinter();
         ConsoleApp app = new ConsoleApp(input, output);
         app.start();
     }

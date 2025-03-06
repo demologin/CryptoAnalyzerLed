@@ -6,9 +6,9 @@ import java.io.OutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class FileOutput<T,J> implements Output<OutputStream, BufferedWriter> {
+public class FileOutput implements Output<OutputStream, BufferedWriter> {
 
-    private Path path;
+    private final Path path;
 
     /**
      * @param path

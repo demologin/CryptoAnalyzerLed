@@ -2,7 +2,7 @@ package com.javarush.pukhov.command;
 
 import java.util.List;
 
-public abstract class Encrypt<T> extends CipherAction<T> {
+public abstract class Encrypt extends CipherAction {
 
     protected static final int ENCRYPT_MODE = 1;
 

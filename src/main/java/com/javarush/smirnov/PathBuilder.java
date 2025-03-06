@@ -17,8 +17,6 @@ public class PathBuilder {
             flag = Files.isRegularFile(pathFile);
             if (!flag){
                 System.out.println(Constants.incorInput);
-            } else {
-                System.out.println(Constants.corInput);
             }
         }
         return pathFile;
@@ -36,8 +34,6 @@ public class PathBuilder {
             flag = Files.isRegularFile(pathSaveFileToEncoding);
             if (!flag){
                 System.out.println(Constants.incorInput);
-            } else {
-                System.out.println(Constants.corInput);
             }
         }
 
@@ -56,8 +52,6 @@ public class PathBuilder {
             flag = Files.isRegularFile(pathSaveFileToDecoding);
             if (!flag){
                 System.out.println(Constants.incorInput);
-            } else {
-                System.out.println(Constants.corInput);
             }
         }
         return pathSaveFileToDecoding;

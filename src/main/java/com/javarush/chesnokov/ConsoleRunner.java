@@ -10,13 +10,13 @@ public class ConsoleRunner {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Menu menu = new Menu(scanner);
-        Result appRunning;
+        Result result;
 
         do {
             menu.showMenu();
             CommandType command = menu.chooseCommand();
-            appRunning = menu.executeCommand(command);
-            System.out.println(appRunning);
-        } while (appRunning.code == ResultCode.ERROR);
+            result = menu.executeCommand(command);
+            result.printResult();
+        } while (result.code == ResultCode.ERROR);
     }
 }

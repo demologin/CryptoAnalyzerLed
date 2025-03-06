@@ -11,6 +11,11 @@ public class Constants {
     public static final String ANALYZE = "Analyze";
     public static final String EXIT = "Exit";
 
+    public static final String SOURCE = "source";
+    public static final String DESTINATION = "destination";
+    public static final String DICTIONARY = "dictionary";
+    public static final String KEY = "key";
+
     public static final String FILE_NOT_FOUND = "%1$s file not exists";
     public static final String INCORRECT_PATH_FILE = "Incorrect path to file - %1$s";
 

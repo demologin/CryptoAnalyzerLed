@@ -24,34 +24,13 @@ public class FilePathResolver {
     }
 
 
-    public Path buildFreshPath(String input){
+    public Path buildPath(String input, Path path){
         if (input.isEmpty()) {
-            return freshPath;
+            return path;
         } else if (!input.contains(File.separator)) {
             return Path.of(Const.txtPath + input).toAbsolutePath();
         } else {
             return Path.of(input);
         }
     }
-
-    public Path buildInputPath(String input){
-        if (input.isEmpty()) {
-            return inputPath;
-        } else if (!input.contains(File.separator)) {
-            return Path.of(Const.txtPath + input).toAbsolutePath();
-        } else {
-            return Path.of(input);
-        }
-    }
-
-    public Path buildOutputPath(String input){
-        if (input.isEmpty()) {
-            return outputPath;
-        } else if (!input.contains(File.separator)) {
-            return Path.of(Const.txtPath + input).toAbsolutePath();
-        } else {
-            return Path.of(input);
-        }
-    }
-
 }

@@ -15,7 +15,7 @@ import com.javarush.pukhov.view.console.menu.Menu;
 
 public class ConsoleApp {
     Input<InputStream, Reader> input;
-    Output<OutputStream,Writer> output;
+    Output<OutputStream, Writer> output;
 
     /**
      * @param input
@@ -29,18 +29,20 @@ public class ConsoleApp {
     public void start() {
         Action action;
         do {
-                Menu menu = Menu.getInstance();
-                output.print(menu.show());
-                action = menu.selectAction(input.read());
-                List<String> parameters = new ArrayList<>(4);
-                while (menu.isExistsSubqueries()) {
-                    output.print(menu.showSubquery());
-                    String answer = input.read();
-                    if (answer.isEmpty()) {
-                        parameters.add(menu.getDefaultValue());
-                    }
+            Menu menu = Menu.getInstance();
+            output.print(menu.show());
+            action = menu.selectAction(input.read());
+            List<String> parameters = new ArrayList<>(4);
+            while (menu.isExistsSubqueries()) {
+                output.print(menu.showSubquery());
+                String answer = input.read();
+                if (answer.isEmpty()) {
+                    parameters.add(menu.getDefaultValue());
+                } else {
+                    parameters.add(answer);
                 }
-                action.execute(parameters);
+            }
+            action.execute(parameters);
         } while (!(action instanceof Exit));
     }
 

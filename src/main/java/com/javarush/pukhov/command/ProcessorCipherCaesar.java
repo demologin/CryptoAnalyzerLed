@@ -3,12 +3,13 @@ package com.javarush.pukhov.command;
 import java.util.Map;
 
 import com.javarush.pukhov.constant.AlphabetCaesar;
-import com.javarush.pukhov.exception.ApplicationException;
 
 public class ProcessorCipherCaesar {
 
     private final int key;
     private final int mode;
+    private char symbol;
+    private int countSymbol;
 
     /**
      * @param key
@@ -19,24 +20,36 @@ public class ProcessorCipherCaesar {
         this.mode = mode;
     }
 
-
-
-    public void processSymbolsWithKey(char[] buf, int countSymbols) {
+    public char[] processSymbolsWithKey(char[] buf, int countSymbols) {
+        char[] newArray = new char[countSymbols];
         Map<Character, Integer> alphabet = AlphabetCaesar.getAlphabet();
         for (int i = 0; i < countSymbols; i++) {
-            try {
-                if (alphabet.containsKey(buf[i])) {
-                    int indexAlphabet = alphabet.get(buf[i]);
-                    int indexNewChar = Math.abs(indexAlphabet + key * mode) % alphabet.size();
-                    char newChar = AlphabetCaesar.getSymbol(indexNewChar);
-                    buf[i] = newChar;
+            if (alphabet.containsKey(buf[i])) {
+                int indexAlphabet = alphabet.get(buf[i]);
+                int indexNewChar = (indexAlphabet + key * mode + Math.abs(key) * alphabet.size()) % alphabet.size();
+                char newChar = AlphabetCaesar.getSymbol(indexNewChar);
+                if (symbol != Character.MIN_VALUE && symbol == newChar) {
+                    countSymbol++;
                 }
-            } catch (NullPointerException e) {
-                e.printStackTrace();
-                String message = String.format("i = %d, buf[i] = %c", i, buf[i]);
-                throw new ApplicationException(message, e);
+                newArray[i] = newChar;
+            } else {
+                newArray[i] = buf[i];
             }
         }
+        return newArray;
     }
+
+    public void setCharacterCount(char symbol) {
+        this.symbol = symbol;
+    }
+
+    /**
+     * @return the countSymbol
+     */
+    public int getCountSymbol() {
+        return countSymbol;
+    }
+
+    
 
 }

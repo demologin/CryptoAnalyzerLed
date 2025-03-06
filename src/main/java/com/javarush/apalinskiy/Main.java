@@ -6,7 +6,6 @@ import com.javarush.apalinskiy.exceptions.ExceptionMessage;
 import com.javarush.apalinskiy.view.MainMenu;
 
 import java.io.IOException;
-import java.nio.file.NoSuchFileException;
 
 public class Main {
     public static void main(String[] args) {
@@ -16,9 +15,6 @@ public class Main {
             try {
                 menu.Menu();
             } catch (AppException e) {
-                i = -1;
-            } catch (NoSuchFileException e) {
-                System.out.println(ExceptionMessage.getSuchFileExc());
                 i = -1;
             } catch (IOException e) {
                 System.out.println(ExceptionMessage.getIoExc());

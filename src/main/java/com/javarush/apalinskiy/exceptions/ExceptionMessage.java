@@ -2,6 +2,8 @@ package com.javarush.apalinskiy.exceptions;
 
 import com.javarush.apalinskiy.constants.Const;
 
+import java.nio.file.Path;
+
 
 public class ExceptionMessage {
     private static final String message = Const.ANSI_RED + "\nIncorrect number.\n";
@@ -12,8 +14,8 @@ public class ExceptionMessage {
     private static final String ioExc = Const.ANSI_RED + "\nInput and output error\n";
     private static final String nfExc = Const.ANSI_RED + "\nIt's not a number.\n";
 
-    public static String getSuchFileExc() {
-        return suchFileExc;
+    public static String getSuchFileExc(Path path) {
+        return suchFileExc + path + "\n";
     }
 
     public static String getBruteforceMessage() {

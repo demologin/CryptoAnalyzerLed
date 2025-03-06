@@ -19,6 +19,7 @@ public class Menu {
             "* Выберете операцию:  *",
             "* 1. Шифрование       *",
             "* 2. Дешифрование     *",
+            "* 3. Brute Force      *",
             "* 0. Выход            *",
             "***********************"
     };
@@ -47,9 +48,11 @@ public class Menu {
             return null;
         }
 
-        resultCode = enterKey(console, appData);
-        if (resultCode.equals(ResultCode.CANCELED)) {
-            return null;
+        if (appData.getOperation() != OperationType.BRUTE_FORCE) {
+            resultCode = enterKey(console, appData);
+            if (resultCode.equals(ResultCode.CANCELED)) {
+                return null;
+            }
         }
 
         return appData;
@@ -67,6 +70,10 @@ public class Menu {
                     break label;
                 case "2":
                     appData.setOperation(OperationType.DECODE);
+                    resultCode = ResultCode.OK;
+                    break label;
+                case "3":
+                    appData.setOperation(OperationType.BRUTE_FORCE);
                     resultCode = ResultCode.OK;
                     break label;
                 case "0":

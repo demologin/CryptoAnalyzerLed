@@ -15,7 +15,11 @@ public class ConsoleRunner {
         try {
             inputData = menu.getInputData();
             if (inputData != null) {
-                ResultCode result = inputOutput.encryptDecryptFile(inputData);
+                ResultCode result = switch (inputData.getOperation()) {
+                    case CODE ->  inputOutput.encryptDecryptFile(inputData);
+                    case DECODE -> inputOutput.encryptDecryptFile(inputData);
+                    case BRUTE_FORCE -> inputOutput.bruteForse(inputData);
+                };
                 System.out.printf("Операция %s завершена - %s. Файл результата %s", inputData.getOperation(), result, inputData.getOutputFile());
             } else {
                 System.out.println("Выполнение программы прервано!");

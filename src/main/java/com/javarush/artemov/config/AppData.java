@@ -8,6 +8,8 @@ public class AppData {
     private String outputFile;
     private int key;
 
+
+
     public OperationType getOperation() {
         return operation;
     }

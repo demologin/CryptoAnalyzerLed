@@ -5,7 +5,7 @@ import java.util.*;
 public class Alphabet {
 
     private final static String RUS_ALPHABET = "абвгдеёжзийклмнопрстуфхцчшщъыьэюя";
-    private final static String PUNCTUATION_MARKS = "\n,.`~' -/!? :;%№\"\\";
+    private final static String PUNCTUATION_MARKS = ",.`~' -/!? :;%№\"\\";
     private final static char[] bookmarksArray = RUS_ALPHABET.toLowerCase().toCharArray();
     private final static char[] signsArray = PUNCTUATION_MARKS.toLowerCase().toCharArray();
     private static char[] rusExtAlphabet;
@@ -21,6 +21,10 @@ public class Alphabet {
         for (int i = 0; i < arraysSize; i++) {
             charArr.add(rusExtAlphabet[i]);
         }
+    }
+
+    public static int getRuLength(){
+        return rusExtAlphabet.length;
     }
 
     public static int getIndex(char character) {

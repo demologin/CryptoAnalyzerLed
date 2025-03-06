@@ -9,4 +9,6 @@ public class Const {
     public static final String txtPath = "text" + File.separator;
     public static final String input = "input";
     public static final String output = "output";
+    public static final String ANSI_GREEN = "\u001B[32m";
+    public static final String ANSI_YELLOW = "\u001B[33m";
 }

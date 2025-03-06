@@ -42,7 +42,11 @@ public class Menu {
             return new Result(ResultCode.ERROR, Const.INCORRECT_COMMAND);
         }
         Command cmd = commands.get(command);
-        return cmd.execute();
+        try {
+            return cmd.execute(getParameters(command));
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Application error:" + e.getMessage(), e);
+        }
     }
 
     public CommandType chooseCommand() {
@@ -55,4 +59,17 @@ public class Menu {
         return CommandType.fromCode(code);
     }
 
+    public String[] getParameters(CommandType commandType) {
+        String[] parameters = new String[3];
+        if (commandType == CommandType.ENCRYPT ||
+                commandType == CommandType.DECRYPT) {
+            System.out.println("Enter full path to source file");
+            parameters[0] = scanner.next();
+            System.out.println("Enter full path to destination file");
+            parameters[1] = scanner.next();
+            System.out.println("Enter key");
+            parameters[2] = scanner.next();
+        }
+        return parameters;
+    }
 }

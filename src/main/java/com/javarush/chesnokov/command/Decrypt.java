@@ -5,13 +5,11 @@ import com.javarush.chesnokov.result.Result;
 public class Decrypt extends AbstractCommand{
 
     @Override
-    public Result execute() {
-        System.out.println("Выполняется дешифрование...");
+    public Result execute(String[] parameters) {
+        String source = parameters[0];
+        String target = parameters[1];
+        int shift = Integer.parseInt(parameters[2]);
 
-        int shift = 1;
-        String source = "C:\\Users\\derom\\IdeaProjects\\encode.txt";
-        String target = "C:\\Users\\derom\\IdeaProjects\\decode.txt";
-
-        return copyWithKey(source, target, -shift);
+        return copyWithKey(source, target, -1 * shift);
     }
 }

@@ -4,5 +4,5 @@ import com.javarush.chesnokov.result.Result;
 
 public interface Command {
 
-    Result execute();
+    Result execute(String[] parameters);
 }

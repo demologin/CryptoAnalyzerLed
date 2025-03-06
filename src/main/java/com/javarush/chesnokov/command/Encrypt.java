@@ -6,12 +6,11 @@ import com.javarush.chesnokov.result.Result;
 public class Encrypt extends AbstractCommand {
 
     @Override
-    public Result execute() {
-        System.out.println("Выполняется шифрование...");
+    public Result execute(String[] parameters) {
 
-        int shift = 1;
-        String source = "C:\\Users\\derom\\IdeaProjects\\text.txt";
-        String target = "C:\\Users\\derom\\IdeaProjects\\encode.txt";
+        String source = parameters[0];
+        String target = parameters[1];
+        int shift = Integer.parseInt(parameters[2]);
 
         return copyWithKey(source, target, shift);
     }

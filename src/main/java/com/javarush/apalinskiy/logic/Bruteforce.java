@@ -1,6 +1,8 @@
 package com.javarush.apalinskiy.logic;
 
 import com.javarush.apalinskiy.constants.MostUsageWords;
+import com.javarush.apalinskiy.exceptions.AppException;
+import com.javarush.apalinskiy.exceptions.ExceptionMessage;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -22,7 +24,9 @@ public class Bruteforce {
                     count++;
                 }
             }
-            if (count >= 37) {
+            if (i == 80 && count < 37) {
+                throw new AppException(ExceptionMessage.getBruteforceMessage());
+            } else if (count >= 37) {
                 try (BufferedWriter writer = Files.newBufferedWriter(outputPath)) {
                     writer.write(decryptedText);
                 }

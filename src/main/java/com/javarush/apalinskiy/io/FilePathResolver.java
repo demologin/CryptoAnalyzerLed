@@ -24,7 +24,7 @@ public class FilePathResolver {
     }
 
 
-    public Path buildPath(String input, Path path){
+    public Path buildPath(String input, Path path) {
         if (input.isEmpty()) {
             return path;
         } else if (!input.contains(File.separator)) {

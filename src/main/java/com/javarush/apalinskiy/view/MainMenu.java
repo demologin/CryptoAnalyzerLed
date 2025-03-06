@@ -6,7 +6,7 @@ import java.io.IOException;
 
 public class MainMenu {
     public void Menu() throws IOException {
-        System.out.println(Const.ANSI_GREEN + "-".repeat(20));
+        System.out.println(Const.ANSI_CYAN + "-".repeat(20));
         System.out.println("Select an action:");
         System.out.println("1. Encode.");
         System.out.println("2. Decode.");

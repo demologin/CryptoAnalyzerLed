@@ -2,6 +2,7 @@ package com.javarush.chesnokov;
 
 import com.javarush.chesnokov.command.*;
 import com.javarush.chesnokov.result.Result;
+import com.javarush.chesnokov.result.ResultCode;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -23,7 +24,6 @@ public class Menu {
         commands.put(CommandType.ENCRYPT, new Encrypt());
         commands.put(CommandType.DECRYPT, new Decrypt());
         commands.put(CommandType.BRUTE_FORCE, new BruteForce());
-        commands.put(CommandType.ANALYZE, new Analyze());
         commands.put(CommandType.EXIT, new Exit());
     }
 
@@ -37,18 +37,12 @@ public class Menu {
         System.out.println("-".repeat(DECORATION_COUNT));
     }
 
-    public boolean executeCommand(CommandType command) {
+    public Result executeCommand(CommandType command) {
         if (command == null) {
-            System.out.println(Const.INCORRECT_COMMAND);
-            return true;
+            return new Result(ResultCode.ERROR, Const.INCORRECT_COMMAND);
         }
         Command cmd = commands.get(command);
-        if (cmd != null) {
-            Result result = cmd.execute();
-            System.out.println(result);
-            return command != CommandType.EXIT;
-        }
-        return true;
+        return cmd.execute();
     }
 
     public CommandType chooseCommand() {

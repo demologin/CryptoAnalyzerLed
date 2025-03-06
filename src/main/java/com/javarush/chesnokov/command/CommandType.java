@@ -4,7 +4,6 @@ public enum CommandType {
     ENCRYPT(1, "Encrypt"),
     DECRYPT(2, "Decrypt"),
     BRUTE_FORCE(3, "Brute force"),
-    ANALYZE(4, "Analyze"),
     EXIT(5, "Exit");
 
     private final int code;

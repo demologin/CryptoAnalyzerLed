@@ -8,7 +8,7 @@ import static com.javarush.kazakov.constants.CLIConstants.*;
 import static picocli.CommandLine.*;
 
 
-@Command(name = "decrypt", description = "Runs Caesar to decrypt text", mixinStandardHelpOptions = true)
+@Command(name = "decrypt", description = "Runs CryptoAnalyzer to decrypt text", mixinStandardHelpOptions = true)
 public class DecryptCLI implements Runnable {
     @Option(names = {"-i", "--input"}, description = ENC_INPUT_PATH, required = true)
     Path input;

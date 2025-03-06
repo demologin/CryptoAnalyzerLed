@@ -27,7 +27,7 @@ public class FileValidator {
     /**
      * This method checks file is an {@code txt} file and creates the necessary directories if they do not exist.
      *
-     * @throws CryptoAnalyzerException
+     * @throws CryptoAnalyzerException throws cryptoanalyzer exception
      */
     public void validate() {
         for (Path path : paths) {

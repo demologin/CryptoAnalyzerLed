@@ -8,7 +8,7 @@ import java.nio.file.Path;
 import static com.javarush.kazakov.constants.CLIConstants.*;
 import static picocli.CommandLine.*;
 
-@Command(name = "analyze", description = "Runs Caesar to analyze encrypted text", mixinStandardHelpOptions = true)
+@Command(name = "analyze", description = "Runs CryptoAnalyzer to analyze encrypted text", mixinStandardHelpOptions = true)
 public class AnalyzeCLI implements Runnable {
     @Option(names = {"-i", "--input"}, description = ENC_INPUT_PATH, required = true)
     Path input;

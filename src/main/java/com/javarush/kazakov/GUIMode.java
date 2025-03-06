@@ -11,7 +11,9 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import picocli.CommandLine.Command;
 
-@Command(name = "gui", description = "Runs Caesar cipher at gui mode")
+import java.io.InputStream;
+
+@Command(name = "gui", description = "Runs CryptoAnalyzer at gui mode")
 public class GUIMode extends Application implements Runnable {
     @Override
     public void run() {
@@ -25,8 +27,11 @@ public class GUIMode extends Application implements Runnable {
         primaryStage.setTitle("CryptoAnalyzer");
         primaryStage.centerOnScreen();
         primaryStage.setResizable(false);
-        Image icon = new Image(getClass().getResourceAsStream("/icon.png"));
-        primaryStage.getIcons().add(icon);
+        InputStream iconStream = getClass().getResourceAsStream("/icon.png");
+        if (iconStream != null) {
+            Image icon = new Image(iconStream);
+            primaryStage.getIcons().add(icon);
+        }
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/menuBar.fxml"));
         Pane root = loader.load();

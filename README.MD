@@ -1,4 +1,33 @@
-<h1>Криптоанализатор</h1>
+# Info
+Caesar's cipher - is one of the simplest and most widely known encryption techniques.
+
+### Build:
+
+`mvn clean compile assembly:single`
+
+### Run:
+
+`java -jar .\CryptoAnalyzer.jar [-hV] [COMMAND]`
+
+### Usage:
+
+<u>_Run with no arguments starts interactive mode._</u>
+
+`-h` Show help message and exit.  
+
+### Commands:
+
+    encrypt -i=<input> -o=<output> -k=<key>               Runs CryptoAnalyzer to encrypt text.
+
+    decrypt -i=<input> -o=<output> -k=<key>               Runs CryptoAnalyzer to decrypt text.
+
+    bf -i=<input> [-o=<output>]                           Runs CryptoAnalyzer to brute force decrypt text.
+
+    analyze -i=<input> -r=<representative> [-o=<output>]  Runs CryptoAnalyzer to analyze encrypted text.
+
+    gui                                                   Runs CryptoAnalyzer at gui mode.
+
+# Криптоанализатор
 
 _(пример для группы Led Zeppelin)_
 

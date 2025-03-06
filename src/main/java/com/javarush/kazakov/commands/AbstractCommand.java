@@ -1,6 +1,5 @@
 package com.javarush.kazakov.commands;
 
-import com.javarush.kazakov.constants.Constants;
 import com.javarush.kazakov.core.Translator;
 import com.javarush.kazakov.core.files.FileManager;
 

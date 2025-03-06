@@ -17,7 +17,7 @@ import static com.javarush.kazakov.constants.InteractiveConstants.WELCOME_MESSAG
                 AnalyzeCLI.class,
                 GUIMode.class
         },
-        version = "Caesar cypher analyzer 0.0.1",
+        version = "CryptoAnalyzer 0.0.1",
         mixinStandardHelpOptions = true,
         description = WELCOME_MESSAGE + " Run with no arguments starts interactive mode.")
 public class Caesar implements Runnable {

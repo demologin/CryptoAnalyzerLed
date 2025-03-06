@@ -9,7 +9,7 @@ import static com.javarush.kazakov.constants.CLIConstants.DEC_OUTPUT_PATH;
 import static com.javarush.kazakov.constants.CLIConstants.ENC_INPUT_PATH;
 import static picocli.CommandLine.*;
 
-@Command(name = "bf", description = "Runs Caesar to brute force decrypt text", mixinStandardHelpOptions = true)
+@Command(name = "bf", description = "Runs CryptoAnalyzer to brute force decrypt text", mixinStandardHelpOptions = true)
 public class BruteForceCLI implements Runnable {
     @Option(names = {"-i", "--input"}, description = ENC_INPUT_PATH, required = true)
     Path input;

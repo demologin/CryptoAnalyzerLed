@@ -1,5 +1,8 @@
 package com.javarush.bulimova;
 
+import com.javarush.khmelov.constant.Const;
+import com.javarush.khmelov.exception.AppException;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -20,9 +23,9 @@ public class FileManager {
 
     }
 
-    public List<Character>  readFile() {
+    public List<Character> readFile() {
         // Логика чтения файла
-         List<Character> words = new ArrayList<>();
+        List<Character> words = new ArrayList<>();
         char character = 0;
         try (
                 BufferedReader reader = Files.newBufferedReader(Path.of(this.pathRead))) {
@@ -33,7 +36,8 @@ public class FileManager {
                 words.add(character);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            System.out.println("файл не найден");
+           // throw new RuntimeException(e);
         }
         return words;
     }

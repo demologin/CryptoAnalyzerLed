@@ -27,7 +27,7 @@ public abstract class AbstractCommand implements Command {
                 char character = (char) value;
                 int index = alphabet.indexOf(character);
                 if (index != -1) {
-                    int newIndex = (index + key) % length;
+                    int newIndex = (index + key + Math.abs(key) * length) % length;
                     writer.write(alphabet.charAt(newIndex));
                 } else {
                     writer.write(character);

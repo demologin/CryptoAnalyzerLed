@@ -1,5 +1,7 @@
 package com.javarush.burdygin.view;
 
+import com.javarush.burdygin.constant.Alphabet;
+
 import java.util.Random;
 import java.util.Scanner;
 
@@ -36,7 +38,6 @@ public class Menu {
                 args.put("modeFlag", "0");
             }
         }
-
     }
 
     //asking decrypt params
@@ -45,11 +46,10 @@ public class Menu {
         args.put("sourceFile", defaultValue(Messages.DEFAULT_SOURCE_FILE_DECRYPT));
         writeMessage(Messages.DESTINATION_FILE_DECRYPT_MESSAGE);
         args.put("destinationFile", defaultValue(Messages.DEFAULT_DESTINATION_FILE_DECRYPT));
-        if (args.get("modeFlag").equals("2")){
+        if (args.get("modeFlag").equals("2")) {
             writeMessage(Messages.DECRYPT_KEY_MESSAGE);
             defaultKeyValue();
         }
-
     }
 
     //asking encrypt params
@@ -84,7 +84,7 @@ public class Menu {
             args.put("modeFlag", "3");
         } else if (args.get("key").isEmpty()) {
             Random random = new Random();
-            String randomKey = String.valueOf(random.nextInt(10));
+            String randomKey = String.valueOf(random.nextInt(Alphabet.ALPHABET_LENGTH));
             args.put("key", randomKey);
             System.out.printf("key = %s", randomKey + '\n');
         }

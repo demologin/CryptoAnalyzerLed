@@ -4,6 +4,7 @@ import com.javarush.burdygin.activity.Activity;
 import com.javarush.burdygin.activity.BruteForce;
 import com.javarush.burdygin.activity.Decode;
 import com.javarush.burdygin.activity.Encode;
+import com.javarush.burdygin.inputOutput.CreatePath;
 import com.javarush.burdygin.view.Menu;
 
 import java.util.HashMap;
@@ -23,11 +24,17 @@ public class Controller {
 
     public void start() {
         menu.mainMenu();
-        switch (args.get("modeFlag")) {
-            case "1" -> new Encode().start(args, activity);
-            case "2" -> new Decode().start(args, activity);
-            case "3" -> new BruteForce().start(args, activity);
-            default -> System.exit(0);
+        try {
+            switch (args.get("modeFlag")) {
+                case "1" -> new Encode().start(args, activity);
+                case "2" -> new Decode().start(args, activity);
+                case "3" -> new BruteForce().start(args, activity);
+                default -> System.exit(0);
+            }
+        } catch (RuntimeException e) {
+            System.out.printf("File %s does not exist", CreatePath.get(args.get("sourceFile")).toAbsolutePath());
+        } finally {
+            System.out.print('\n' + "Complete!");
         }
     }
 }

@@ -18,32 +18,33 @@ public class BruteForce {
     int spaceCounter;
     char spaceChar;
 
+    static {
+        System.out.println("""
+                Brute Force
+                decoding...""");
+    }
+
     public void start(Map<String, String> args, Activity activity) {
 
         int key = 0;
         AlphabetLogic alphabetLogic = new AlphabetLogic();
         Path sourceFilePath = CreatePath.get(args.get("sourceFile"));
-
-            repeater(Alphabet.SPACE, Alphabet.COMMERCIAL_AT, sourceFilePath);
-            repeater(Alphabet.A_LAT, Alphabet.Z_LAT, sourceFilePath);
-            repeater(Alphabet.A_CYR, Alphabet.YA_CYR, sourceFilePath);
-            repeater(Alphabet.NEW_STRING, sourceFilePath);
-            repeater(Alphabet.CARRIAGE_RETURN, sourceFilePath);
-            repeater(Alphabet.YO_CYR, sourceFilePath);
-
+        repeater(Alphabet.SPACE, Alphabet.COMMERCIAL_AT, sourceFilePath);
+        repeater(Alphabet.A_LAT, Alphabet.Z_LAT, sourceFilePath);
+        repeater(Alphabet.A_CYR, Alphabet.YA_CYR, sourceFilePath);
+        repeater(Alphabet.NEW_STRING, sourceFilePath);
+        repeater(Alphabet.CARRIAGE_RETURN, sourceFilePath);
+        repeater(Alphabet.YO_CYR, sourceFilePath);
         while (spaceChar != Alphabet.SPACE) {
             if (alphabetLogic.isMiddleAlphabet(spaceChar)) {
                 spaceChar--;
             } else {
-                alphabetLogic.charSwitch(spaceChar, -1);
+                spaceChar = alphabetLogic.charSwitch(spaceChar, -1);
             }
             key--;
         }
-
-
         args.put("key", String.valueOf(key));
         activity.activity(args);
-        System.out.println("Brute Force");
     }
 
     private void repeater(char start, char end, Path sourceFilePath) {

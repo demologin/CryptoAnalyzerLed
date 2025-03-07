@@ -16,4 +16,5 @@ public interface Alphabet {
     char YU_CYR = 1102;
     char YA_CYR = 1103;
     char YO_CYR = 1105;
+    int ALPHABET_LENGTH = (COMMERCIAL_AT-(SPACE-1))+(Z_LAT-(A_LAT-1))+(YA_CYR-(A_CYR-1)+3); //symbol alphabet = 33, lat alphabet = 26, cyr alphabet = 32, 'yo' + '\n' + '\r' = 3
 }

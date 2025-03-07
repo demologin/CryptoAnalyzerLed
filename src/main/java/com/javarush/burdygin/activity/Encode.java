@@ -5,14 +5,10 @@ import java.util.Map;
 public class Encode {
 
     static {
-        System.out.println('\n' +"encoding...");
-
+        System.out.print('\n' + "encoding...");
     }
 
-    public void start(Map<String, String> args, Activity activity){
-
+    public void start(Map<String, String> args, Activity activity) {
         activity.activity(args);
     }
-
-
 }

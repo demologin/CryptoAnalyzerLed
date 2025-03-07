@@ -1,6 +1,6 @@
 package com.javarush.chesnokov.command;
 
-import com.javarush.chesnokov.Alphabet;
+import com.javarush.chesnokov.Const;
 import com.javarush.chesnokov.result.Result;
 import com.javarush.chesnokov.result.ResultCode;
 
@@ -34,7 +34,7 @@ public abstract class AbstractCommand implements Command {
                 }
             }
         } catch (IOException e) {
-            throw new RuntimeException("Incorrect file:" + e.getMessage(), e);
+            throw new RuntimeException(Const.INCORRECT_FILE + e.getMessage(), e);
         }
         return new Result(ResultCode.OK, targetTextFile);
     }

@@ -7,6 +7,6 @@ public class Exit implements Command{
 
     @Override
     public Result execute(String[] parameters) {
-        return new Result(ResultCode.OK, "Выход");
+        return new Result(ResultCode.OK, "Exit");
     }
 }

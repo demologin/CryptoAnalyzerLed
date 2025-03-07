@@ -45,13 +45,13 @@ public class Menu {
         try {
             return cmd.execute(getParameters(command));
         } catch (RuntimeException e) {
-            throw new RuntimeException("Application error:" + e.getMessage(), e);
+            throw new RuntimeException(Const.APPLICATION_ERROR + e.getMessage(), e);
         }
     }
 
     public CommandType chooseCommand() {
         while (!scanner.hasNextInt()) {
-            System.out.println("Ошибка! Введите целое число.\n");
+            System.out.println(Const.NOT_INTEGER);
             scanner.next();
             showMenu();
         }
@@ -62,12 +62,12 @@ public class Menu {
     public String[] getParameters(CommandType commandType) {
         String[] parameters = new String[3];
         if (commandType != CommandType.EXIT) {
-            System.out.println("Enter full path to source file");
+            System.out.println(Const.ENTER_SOURCE_PATH);
             parameters[0] = scanner.next();
-            System.out.println("Enter full path to destination file");
+            System.out.println(Const.ENTER_DESTINATION_PATH);
             parameters[1] = scanner.next();
             if (commandType != CommandType.BRUTE_FORCE) {
-                System.out.println("Enter key");
+                System.out.println(Const.ENTER_KEY);
                 parameters[2] = scanner.next();
             }
         }

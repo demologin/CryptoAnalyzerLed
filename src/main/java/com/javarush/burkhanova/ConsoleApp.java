@@ -1,15 +1,7 @@
 package com.javarush.burkhanova;
 
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.Scanner;
-
-import static com.javarush.burkhanova.Cipher.*;
-import static com.javarush.burkhanova.FileManager.readFile;
-import static com.javarush.burkhanova.FileManager.writeFile;
-import static com.javarush.burkhanova.Validator.countValidWords;
 
 public class ConsoleApp {
     public static void main(String[] args) throws IOException {
@@ -35,7 +27,7 @@ public class ConsoleApp {
 
                 case "1":
                     FileData encryptData = getFileData(scanner, validator, false);
-                    encryptFile(encryptData.inputPath, encryptData.outputPath, encryptData.key);
+                    FileProcessor.encryptFile(encryptData.inputPath, encryptData.outputPath, encryptData.key);
                     System.out.println("The file has been successfully encrypted and saved in " + encryptData.outputPath);
                     break;
 
@@ -43,13 +35,13 @@ public class ConsoleApp {
                 case "2":
 
                     FileData decryptData = getFileData(scanner, validator, false);
-                    decryptFile(decryptData.inputPath, decryptData.outputPath, decryptData.key);
+                    FileProcessor.decryptFile(decryptData.inputPath, decryptData.outputPath, decryptData.key);
                     System.out.println("The file has been successfully decrypted and saved in " + decryptData.outputPath);
                     break;
 
                 case "3":
                     FileData bruteForceData = getFileData(scanner, validator, true);
-                    bruteForceFile(bruteForceData.inputPath, bruteForceData.outputPath);
+                    FileProcessor.bruteForceFile(bruteForceData.inputPath, bruteForceData.outputPath);
                     System.out.println("The file has been successfully brute forced and saved in " + bruteForceData.outputPath);
                     break;
 
@@ -121,47 +113,6 @@ public class ConsoleApp {
 
 
         }
-    }
-
-
-    public static void encryptFile(String inputPath, String outputPath, int key) throws IOException {
-
-        String input = FileManager.readFile(inputPath);
-        String encryptedText = encrypt(input, key);
-        writeFile(encryptedText, outputPath);
-    }
-
-    public static void decryptFile(String inputPath, String outputPath, int key) throws IOException {
-
-        String input = FileManager.readFile(inputPath);
-        String decryptedText = decrypt(input, key);
-        writeFile(decryptedText, outputPath);
-    }
-
-    public static void bruteForceFile(String inputPath, String outputPath) throws IOException {
-        String input = FileManager.readFile(inputPath);
-        String bestMatch = "";
-        int bestMatchScore = Integer.MIN_VALUE;
-        int foundKey = -1;
-
-        for (int key = 1; key < 43; key++) {
-            String decryptedText = decrypt(input, key);
-            int validWords = countValidWords(decryptedText);
-
-            if (validWords > bestMatchScore) {
-                bestMatchScore = validWords;
-                bestMatch = decryptedText;
-                foundKey = key;
-            }
-        }
-        File outputFile = new File(outputPath);
-        if (!outputFile.exists()) {
-            Files.createDirectories(Paths.get(outputPath).getParent());
-            Files.createFile(Paths.get(outputPath));
-        }
-
-        writeFile(bestMatch, outputPath);
-        System.out.println("Brute force complete! Best key found: " + foundKey);
     }
 
 

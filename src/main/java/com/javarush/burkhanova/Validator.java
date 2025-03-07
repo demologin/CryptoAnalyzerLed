@@ -79,9 +79,9 @@ public class Validator {
     // For Brute Force method validation
     // Checking, if word is existed in dictionary
     public static boolean isValidWord(String word) {
-        Set<String> dictonary = Set.of("ну", "она", "в", "на", "он", "это", "есть", "был", "была", "были",
+        Set<String> dictionary = Set.of("ну", "она", "в", "на", "он", "это", "есть", "был", "была", "были",
                 "дом", "работа", "машина", "человек", "город", "страна", "день", "ночь");
-        return dictonary.contains(word.toLowerCase());
+        return dictionary.contains(word.toLowerCase());
     }
 
 

@@ -6,7 +6,7 @@ import com.javarush.tomchuk.constant.ResultCode;
 public class Encoder extends ActionHandler {
 
     @Override
-    ResultCode handle(String... arguments) {
+    public ResultCode handle(String... arguments) {
         String sourcePath = arguments[0];
         String targetPath = arguments[1];
         try {
@@ -18,7 +18,7 @@ public class Encoder extends ActionHandler {
             for (int i = 0; i < characters.length; i++) {
                 int alphabetIndex = Alphabet.getIndex(characters[i]);
                 characters[i] = alphabetIndex != -1
-                        ? Alphabet.getChar(alphabetIndex + codeKey)
+                        ? Alphabet.getCharPlus(alphabetIndex, codeKey)
                         : characters[i];
             }
             return writeChars(targetPath, characters);

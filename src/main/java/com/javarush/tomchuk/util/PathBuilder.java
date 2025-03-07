@@ -1,5 +1,6 @@
 package com.javarush.tomchuk.util;
 
+import java.io.File;
 import java.nio.file.Path;
 
 public class PathBuilder {
@@ -13,6 +14,6 @@ public class PathBuilder {
         if (filePath.isAbsolute()) {
             return filePath;
         }
-        return filePath.toAbsolutePath();
+        return Path.of(System.getProperty("user.dir") + File.separator + "text" + File.separator + fileName);
     }
 }

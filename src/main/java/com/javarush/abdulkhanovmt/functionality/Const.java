@@ -3,10 +3,11 @@ package com.javarush.abdulkhanovmt.functionality;
 import java.io.File;
 
 public interface Const {
-    String ENCODED_FILE_NAME = "abdulkhanovEncoded";
-    String DECODED_FILE_NAME = "abdulkhanovDecoded";
-    String BRUTEFORCED_FILE_NAME = "abdulkhanovBruteForce";
-    String ANALYZE_FILE_NAME = "abdulkhanovAnalyze";
+    String SOURCE_FILE_NAME = "text.txt";
+    String ENCODED_FILE_NAME = "abdulkhanovEncoded.txt";
+    String DECODED_FILE_NAME = "abdulkhanovDecoded.txt";
+    String BRUTEFORCED_FILE_NAME = "abdulkhanovBruteForce.txt";
+    String ANALYZE_FILE_NAME = "abdulkhanovAnalyze.txt";
 
     String TXT_FOLDER = System.getProperty("user.dir") +
             File.separator +

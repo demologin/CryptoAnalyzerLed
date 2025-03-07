@@ -25,10 +25,15 @@ public class Cipher {
         try (BufferedReader bufferedReader = Files.newBufferedReader(src);
              BufferedWriter bufferedWriter = Files.newBufferedWriter(dst)) {
             while (bufferedReader.ready()) {
-                String line = bufferedReader.readLine();
-                char[] charBuffer = line.toCharArray();
-                shiftCharacter(charBuffer, key);
-                bufferedWriter.write(charBuffer);
+                int value = bufferedReader.read();
+                char character = (char) value;
+//                char[] charBuffer = line.toCharArray();
+                if(!Alphabet.belongsToAlphabet(Character.toLowerCase(character))){
+                    bufferedWriter.write(character);
+                } else{
+                character = shiftCharacter(character, key);
+                bufferedWriter.write(character);
+                }
             }
         } catch (IOException e) {
             throw new CipherException(Const.INCORRECT_FILE + e.getMessage(), e);
@@ -41,11 +46,24 @@ public class Cipher {
                 charBuffer[i] = '\n';
             } else {
                 charBuffer[i] = Alphabet.getCharacter(Alphabet.getIndex(charBuffer[i]) + key);
-                if(charBuffer[i]=='\n'){
-                    charBuffer[i] = Alphabet.getCharacter(Alphabet.getIndex(charBuffer[i]) + 1);
-                }
+//                if(charBuffer[i]=='\n'){
+//                    charBuffer[i] = Alphabet.getCharacter(Alphabet.getIndex(charBuffer[i]) + 1);
+//                }
             }
         }
+    }
+
+    public static char shiftCharacter(char character, int key) {
+
+        if (character == '\n') {
+            character = '\n';
+        } else {
+            character = Alphabet.getCharacter(Alphabet.getIndex(character) + key);
+//                if(charBuffer[i]=='\n'){
+//                    charBuffer[i] = Alphabet.getCharacter(Alphabet.getIndex(charBuffer[i]) + 1);
+//                }
+        }
+        return character;
     }
 
 

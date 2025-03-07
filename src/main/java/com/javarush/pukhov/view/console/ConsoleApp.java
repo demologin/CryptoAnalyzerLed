@@ -28,8 +28,8 @@ public class ConsoleApp {
 
     public void start() {
         Action action;
+        Menu menu = Menu.getInstance();
         do {
-            Menu menu = Menu.getInstance();
             output.print(menu.show());
             action = menu.selectAction(input.read());
             List<String> parameters = new ArrayList<>(4);

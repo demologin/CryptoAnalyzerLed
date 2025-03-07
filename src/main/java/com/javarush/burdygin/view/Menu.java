@@ -1,11 +1,11 @@
 package com.javarush.burdygin.view;
 
-import com.javarush.burdygin.constant.Alphabet;
+import com.javarush.burdygin.constant.Constants;
+import com.javarush.burdygin.alphabet.Alphabet;
 
+import java.util.Map;
 import java.util.Random;
 import java.util.Scanner;
-
-import static com.javarush.burdygin.controller.Controller.*;
 
 public class Menu {
 
@@ -17,7 +17,7 @@ public class Menu {
      * 0 Exit
      * 1 Encode
      * 2 Decode
-     * 3 Brut Force
+     * 3 Brute Force
      */
 
     public Menu(Scanner scanner) {
@@ -25,41 +25,41 @@ public class Menu {
     }
 
     //main method of class Menu
-    public void mainMenu() {
+    public void getUserArguments(Map<String, String> args) {
         System.out.println("-".repeat(15));
         writeMessage(Messages.MODE_MESSAGE);
-        args.put("modeFlag", scanner.next());
-        switch (args.get("modeFlag")) {
-            case "1" -> encryptParams();
-            case "2", "3" -> decryptParams();
+        args.put(Constants.MODE_FLAG, scanner.next());
+        switch (args.get(Constants.MODE_FLAG)) {
+            case Constants.MODE_ENCODE -> askEncryptParams(args);
+            case Constants.MODE_DECODE, Constants.MODE_BRUTE_FORCE -> askDecryptParams(args);
             default -> {
                 System.out.println("-".repeat(15));
                 System.out.printf(Messages.EXIT_MESSAGE + '\n');
-                args.put("modeFlag", "0");
+                args.put(Constants.MODE_FLAG, Constants.MODE_EXIT);
             }
         }
     }
 
     //asking decrypt params
-    private void decryptParams() {
+    private void askDecryptParams(Map<String, String> args) {
         writeMessage(Messages.SOURCE_FILE_DECRYPT_MESSAGE);
-        args.put("sourceFile", defaultValue(Messages.DEFAULT_SOURCE_FILE_DECRYPT));
+        args.put(Constants.SOURCE_FILE, getDefaultFileName(Messages.DEFAULT_SOURCE_FILE_DECRYPT));
         writeMessage(Messages.DESTINATION_FILE_DECRYPT_MESSAGE);
-        args.put("destinationFile", defaultValue(Messages.DEFAULT_DESTINATION_FILE_DECRYPT));
-        if (args.get("modeFlag").equals("2")) {
+        args.put(Constants.DESTINATION_FILE, getDefaultFileName(Messages.DEFAULT_DESTINATION_FILE_DECRYPT));
+        if (args.get(Constants.MODE_FLAG).equals(Constants.MODE_DECODE)) {
             writeMessage(Messages.DECRYPT_KEY_MESSAGE);
-            defaultKeyValue();
+            getDefaultKeyValue(args);
         }
     }
 
     //asking encrypt params
-    private void encryptParams() {
+    private void askEncryptParams(Map<String, String> args) {
         writeMessage(Messages.SOURCE_FILE_ENCRYPT_MESSAGE);
-        args.put("sourceFile", defaultValue(Messages.DEFAULT_SOURCE_FILE_ENCRYPT));
+        args.put(Constants.SOURCE_FILE, getDefaultFileName(Messages.DEFAULT_SOURCE_FILE_ENCRYPT));
         writeMessage(Messages.DESTINATION_FILE_ENCRYPT_MESSAGE);
-        args.put("destinationFile", defaultValue(Messages.DEFAULT_DESTINATION_FILE_ENCRYPT));
+        args.put(Constants.DESTINATION_FILE, getDefaultFileName(Messages.DEFAULT_DESTINATION_FILE_ENCRYPT));
         writeMessage(Messages.ENCRYPT_KEY_MESSAGE);
-        defaultKeyValue();
+        getDefaultKeyValue(args);
     }
 
     //write message and line under
@@ -69,7 +69,7 @@ public class Menu {
     }
 
     //set default filename if necessary
-    private String defaultValue(String defaultFile) {
+    private String getDefaultFileName(String defaultFile) {
         String typeFile = scanner.next();
         if (typeFile.isEmpty()) {
             typeFile = defaultFile;
@@ -78,14 +78,14 @@ public class Menu {
     }
 
     //set key value
-    private void defaultKeyValue() {
-        args.put("key", scanner.next());
-        if (args.get("key").isEmpty() && args.get("modeFlag").equals("2")) {
-            args.put("modeFlag", "3");
-        } else if (args.get("key").isEmpty()) {
+    private void getDefaultKeyValue(Map<String, String> args) {
+        args.put(Constants.KEY, scanner.next());
+        if (args.get(Constants.KEY).isEmpty() && args.get(Constants.MODE_FLAG).equals(Constants.MODE_DECODE)) {
+            args.put(Constants.MODE_FLAG, Constants.MODE_BRUTE_FORCE);
+        } else if (args.get(Constants.KEY).isEmpty()) {
             Random random = new Random();
             String randomKey = String.valueOf(random.nextInt(Alphabet.ALPHABET_LENGTH));
-            args.put("key", randomKey);
+            args.put(Constants.KEY, randomKey);
             System.out.printf("key = %s", randomKey + '\n');
         }
     }

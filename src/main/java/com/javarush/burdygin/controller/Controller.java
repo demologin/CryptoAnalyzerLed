@@ -1,40 +1,26 @@
 package com.javarush.burdygin.controller;
 
-import com.javarush.burdygin.activity.Activity;
-import com.javarush.burdygin.activity.BruteForce;
-import com.javarush.burdygin.activity.Decode;
-import com.javarush.burdygin.activity.Encode;
-import com.javarush.burdygin.inputOutput.CreatePath;
-import com.javarush.burdygin.view.Menu;
+import com.javarush.burdygin.activity.*;
+import com.javarush.burdygin.constant.Constants;
+import com.javarush.burdygin.alphabet.AlphabetLogic;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class Controller {
 
-    public static Map<String, String> args = new HashMap<>();
+    private final AlphabetLogic alphabetLogic = new AlphabetLogic();
+    private final Activity activity = new Activity(alphabetLogic);
+    private final Map<String, Mode> map = new HashMap<>();
 
-    private final Menu menu;
-    private final Activity activity;
-
-    public Controller(Menu menu, Activity activity) {
-        this.menu = menu;
-        this.activity = activity;
+    {
+        map.put(Constants.MODE_ENCODE, new Encode());
+        map.put(Constants.MODE_DECODE, new Decode());
+        map.put(Constants.MODE_BRUTE_FORCE, new BruteForce(alphabetLogic));
     }
 
-    public void start() {
-        menu.mainMenu();
-        try {
-            switch (args.get("modeFlag")) {
-                case "1" -> new Encode().start(args, activity);
-                case "2" -> new Decode().start(args, activity);
-                case "3" -> new BruteForce().start(args, activity);
-                default -> System.exit(0);
-            }
-        } catch (RuntimeException e) {
-            System.out.printf("File %s does not exist", CreatePath.get(args.get("sourceFile")).toAbsolutePath());
-        } finally {
-            System.out.print('\n' + "Complete!");
-        }
+    public void start(Map<String, String> args) {
+        Mode mode = map.get(args.get(Constants.MODE_FLAG));
+        mode.start(args, activity);
     }
 }

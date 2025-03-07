@@ -1,4 +1,4 @@
-package com.javarush.burdygin.constant;
+package com.javarush.burdygin.alphabet;
 
 public interface Alphabet {
     char NEW_STRING = 10;

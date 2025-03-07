@@ -1,8 +1,10 @@
 package com.javarush.burdygin.activity;
 
-import com.javarush.burdygin.constant.Alphabet;
-import com.javarush.burdygin.constant.AlphabetLogic;
-import com.javarush.burdygin.inputOutput.CreatePath;
+import com.javarush.burdygin.constant.Constants;
+import com.javarush.burdygin.alphabet.Alphabet;
+import com.javarush.burdygin.alphabet.AlphabetLogic;
+import com.javarush.burdygin.exception.EmptyFileException;
+import com.javarush.burdygin.inputOutput.PathHelper;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -10,41 +12,43 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Map;
 
-public class BruteForce {
+public class BruteForce implements Mode {
 
-    public BruteForce() {
-    }
-
-    int spaceCounter;
+    AlphabetLogic alphabetLogic;
+    int spaceCounter = 0;
     char spaceChar;
 
-    static {
-        System.out.println("""
-                Brute Force
-                decoding...""");
+    public BruteForce(AlphabetLogic alphabetLogic){
+        this.alphabetLogic = alphabetLogic;
     }
 
     public void start(Map<String, String> args, Activity activity) {
 
         int key = 0;
-        AlphabetLogic alphabetLogic = new AlphabetLogic();
-        Path sourceFilePath = CreatePath.get(args.get("sourceFile"));
+
+        Path sourceFilePath = PathHelper.get(args.get(Constants.SOURCE_FILE));
         repeater(Alphabet.SPACE, Alphabet.COMMERCIAL_AT, sourceFilePath);
         repeater(Alphabet.A_LAT, Alphabet.Z_LAT, sourceFilePath);
         repeater(Alphabet.A_CYR, Alphabet.YA_CYR, sourceFilePath);
         repeater(Alphabet.NEW_STRING, sourceFilePath);
         repeater(Alphabet.CARRIAGE_RETURN, sourceFilePath);
         repeater(Alphabet.YO_CYR, sourceFilePath);
-        while (spaceChar != Alphabet.SPACE) {
-            if (alphabetLogic.isMiddleAlphabet(spaceChar)) {
-                spaceChar--;
-            } else {
-                spaceChar = alphabetLogic.charSwitch(spaceChar, -1);
+        if (spaceCounter != 0){
+            while (spaceChar != Alphabet.SPACE) {
+                if (alphabetLogic.isMiddleAlphabet(spaceChar)) {
+                    spaceChar--;
+                } else {
+                    spaceChar = alphabetLogic.charSwitch(spaceChar, -1);
+                }
+                key--;
             }
-            key--;
+            args.put(Constants.KEY, String.valueOf(key));
+            activity.startActivity(args);
+        } else {
+            throw new EmptyFileException();
         }
-        args.put("key", String.valueOf(key));
-        activity.activity(args);
+
+
     }
 
     private void repeater(char start, char end, Path sourceFilePath) {

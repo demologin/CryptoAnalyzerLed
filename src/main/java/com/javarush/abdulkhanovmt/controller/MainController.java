@@ -43,7 +43,6 @@ public class MainController {
             if (command.equalsIgnoreCase("end") || command.equalsIgnoreCase("exit")) {
                 break;
             }
-//            int commandNumber = Integer.parseInt(command);
             switch (command) {
                 case "1": {
                     Cipher.encrypt(this.sourceFilePath, this.encryptedFilePath, key);
@@ -65,14 +64,6 @@ public class MainController {
 //        String keyTxt = "1";
         System.out.println(keyTxt);
         return key = Integer.parseInt(keyTxt);
-//        enterKeyValue(input);
-//        if (!input.hasNextInt()) {
-//            System.out.println("Попробуйте ещё раз");
-//            enterKeyValue(input);
-//        } else if (input.hasNextInt()) {
-//            key = Integer.parseInt(input.nextLine());
-//        }
-//        return key;
     }
 
     private void greetings() {

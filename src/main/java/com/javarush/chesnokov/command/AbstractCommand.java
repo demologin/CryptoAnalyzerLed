@@ -12,9 +12,7 @@ import java.nio.file.Path;
 
 public abstract class AbstractCommand implements Command {
 
-    public Result copyWithKey(String sourceTextFile, String targetTextFile, int key) {
-
-        String alphabet = new Alphabet().getAlphabet();
+    public Result copyWithKey(String sourceTextFile, String targetTextFile, int key, String alphabet) {
 
         Path pathReader = Path.of(sourceTextFile);
         Path pathWriter = Path.of(targetTextFile);

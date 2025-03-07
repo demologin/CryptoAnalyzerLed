@@ -61,14 +61,15 @@ public class Menu {
 
     public String[] getParameters(CommandType commandType) {
         String[] parameters = new String[3];
-        if (commandType == CommandType.ENCRYPT ||
-                commandType == CommandType.DECRYPT) {
+        if (commandType != CommandType.EXIT) {
             System.out.println("Enter full path to source file");
             parameters[0] = scanner.next();
             System.out.println("Enter full path to destination file");
             parameters[1] = scanner.next();
-            System.out.println("Enter key");
-            parameters[2] = scanner.next();
+            if (commandType != CommandType.BRUTE_FORCE) {
+                System.out.println("Enter key");
+                parameters[2] = scanner.next();
+            }
         }
         return parameters;
     }

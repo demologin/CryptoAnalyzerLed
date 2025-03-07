@@ -1,12 +1,11 @@
 package com.javarush.artemov.config;
 
-import com.javarush.artemov.entity.ResultCode;
-
 public class AppData {
     private OperationType operation;
     private String inputFile;
     private String outputFile;
     private int key;
+    private int parseBruteForceLines;
 
 
     public OperationType getOperation() {
@@ -39,5 +38,13 @@ public class AppData {
 
     public void setKey(int key) {
         this.key = key;
+    }
+
+    public int getParseBruteForceLines() {
+        return parseBruteForceLines;
+    }
+
+    public void setParseBruteForceLines(int parseBruteForceLines) {
+        this.parseBruteForceLines = parseBruteForceLines;
     }
 }

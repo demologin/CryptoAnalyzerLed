@@ -8,12 +8,21 @@ import com.javarush.artemov.exception.AppException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Menu {
     private static final String INPUT_FILE = "Введите путь к исходному файлу. Для выхода наберите - exit";
     private static final String OUTPUT_FILE = "Укажите путь к файлу для сохранения результата. Для выхода наберите - exit";
-    private static final String KEY = "Введите ключ для шифрования / дешифрования - целое число. Для выхода наберите 0";
+    private static final String KEY = "Введите ключ для шифрования / дешифрования - положительное целое число. Для выхода наберите 0";
+    private static final String OPERATION_ERROR_MESSAGE = "Введите корректный номер операции";
+    private static final String INPUT_FILE_NO_FOUND_MESSAGE = "Исходный файл не обнаружен! Введите корректный путь к файлу или exit";
+    private static final String OUTPUT_FILE_NO_FOUND_MESSAGE = "Файл не обнаружен! Для создания файла введите YES, для выхода - exit";
+    private static final String OUTPUT_FILE_ERROR_MESSAGE = "Ошибка создания файла результата";
+    private static final String ENTER_KEY_ERROR_MESSAGE = "Введите корректное значение ключа - целое положительное число или 0 для выхода";
+    private static final String PARSE_BRUTE_FORCE_LINES = "Введите количество строк для анализа Brute Force от 5 до 20 или 0 для выхода";
+    private static final String ENTER_PARSE_BRUTE_FORCE_LINES_ERROR_MESSAGE = "Введите корректное значение количества строк " +
+            "для анализа Brute Force от 5 до 20 или 0 для выхода";
     private static final String[] MENU = {
             "***********************",
             "* Выберете операцию:  *",
@@ -48,11 +57,13 @@ public class Menu {
             return null;
         }
 
-        if (appData.getOperation() != OperationType.BRUTE_FORCE) {
+        if (appData.getOperation() == OperationType.BRUTE_FORCE) {
+            resultCode = enterParseBruteForceLines(console, appData);
+        } else {
             resultCode = enterKey(console, appData);
-            if (resultCode.equals(ResultCode.CANCELED)) {
-                return null;
-            }
+        }
+        if (resultCode.equals(ResultCode.CANCELED)) {
+            return null;
         }
 
         return appData;
@@ -80,7 +91,7 @@ public class Menu {
                     resultCode = ResultCode.CANCELED;
                     break label;
                 default:
-                    System.out.println("Введите корректный номер операции");
+                    System.out.println(OPERATION_ERROR_MESSAGE);
                     break;
             }
         }
@@ -101,7 +112,7 @@ public class Menu {
                     resultCode = ResultCode.OK;
                     break;
                 } else {
-                    System.out.println("Исходный файл не обнаружен! Введите корректный путь к файлу или exit");
+                    System.out.println(INPUT_FILE_NO_FOUND_MESSAGE);
                 }
             }
         }
@@ -122,7 +133,7 @@ public class Menu {
                     resultCode = ResultCode.OK;
                     break;
                 } else {
-                    System.out.println("Файл не обнаружен! Для создания файла введите YES, для выхода - exit");
+                    System.out.println(OUTPUT_FILE_NO_FOUND_MESSAGE);
                     if (console.nextLine().equalsIgnoreCase("yes")) {
                         try {
                             Files.createFile(Path.of(outputFile));
@@ -130,7 +141,7 @@ public class Menu {
                             resultCode = ResultCode.OK;
                             break;
                         } catch (IOException e) {
-                            throw new AppException("Ошибка создания файла результата");
+                            throw new AppException(OUTPUT_FILE_ERROR_MESSAGE);
                         }
                     }
                 }
@@ -139,20 +150,57 @@ public class Menu {
         return resultCode;
     }
 
+    private ResultCode enterParseBruteForceLines(Scanner console, AppData appData) {
+        ResultCode resultCode;
+        System.out.println(PARSE_BRUTE_FORCE_LINES);
+        int lines;
+        try {
+            do {
+                while (!console.hasNextInt()) {
+                    System.out.println(ENTER_PARSE_BRUTE_FORCE_LINES_ERROR_MESSAGE);
+                    console.nextLine();
+                }
+                lines = console.nextInt();
+                if (lines < 0 || (lines > 0 && lines < 5) || lines > 20) {
+                    System.out.println(ENTER_PARSE_BRUTE_FORCE_LINES_ERROR_MESSAGE);
+                }
+            } while (lines < 0 || (lines > 0 && lines < 5) || lines > 20);
+            if (lines == 0) {
+                resultCode = ResultCode.CANCELED;
+            } else {
+                appData.setParseBruteForceLines(lines);
+                resultCode = ResultCode.OK;
+            }
+            return resultCode;
+        } catch (InputMismatchException e) {
+            throw new AppException("Ошибка ввода количества строк для анализа Brute Force");
+        }
+    }
+
     private ResultCode enterKey(Scanner console, AppData appData) {
         ResultCode resultCode;
         System.out.println(KEY);
-        while (!console.hasNextInt()) {
-            System.out.println("Введите корректное значение ключа или 0 для выхода");
-            console.nextLine();
+        int key;
+        try {
+            do {
+                while (!console.hasNextInt()) {
+                    System.out.println(ENTER_KEY_ERROR_MESSAGE);
+                    console.nextLine();
+                }
+                key = console.nextInt();
+                if (key < 0) {
+                    System.out.println(ENTER_KEY_ERROR_MESSAGE);
+                }
+            } while (key < 0);
+            if (key == 0) {
+                resultCode = ResultCode.CANCELED;
+            } else {
+                appData.setKey(key);
+                resultCode = ResultCode.OK;
+            }
+            return resultCode;
+        } catch (InputMismatchException e) {
+            throw new AppException("Ошибка ввода значения ключа");
         }
-        int key = console.nextInt();
-        if (key == 0) {
-            resultCode = ResultCode.CANCELED;
-        } else {
-            appData.setKey(key);
-            resultCode = ResultCode.OK;
-        }
-        return resultCode;
     }
 }

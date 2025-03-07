@@ -12,7 +12,6 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Arrays;
 
 public class InputOutput {
     EncryptDecrypt encryptDecrypt = new EncryptDecrypt();
@@ -44,21 +43,21 @@ public class InputOutput {
     public ResultCode bruteForse(AppData inputData) {
         String inputFilePath = inputData.getInputFile();
         Path source = Path.of(inputFilePath);
-        String sourceText = "";
-        int numberLinesToParse = 20; // количество строк для анализа
+        StringBuilder sourceText = new StringBuilder();
+        int numberLinesToParse = inputData.getParseBruteForceLines(); // количество строк для анализа
 
         try (
                 BufferedReader reader = Files.newBufferedReader(source)
         ) {
             // считали n строк из файла для анализа
             for (int i = 0; i < numberLinesToParse && reader.ready(); i++) {
-                sourceText = sourceText + reader.readLine();
+                sourceText.append(reader.readLine());
             }
         } catch (IOException e) {
             throw new AppException(e.getMessage(), e);
         }
 
-        String[] result = getMultiKeyDecryptStrings(sourceText);
+        String[] result = getMultiKeyDecryptStrings(sourceText.toString());
         int[][] numberMatches = countWordMatches(result);
         int bestKey = getBestKey(numberMatches);
         inputData.setKey(bestKey);
@@ -73,8 +72,8 @@ public class InputOutput {
         String[] result = new String[Symbols.charsArray.length];
         char[] charArrayToParse = sourceText.toCharArray();
         for (int i = 0; i < Symbols.charsArray.length; i++) {
-            for (int j = 0; j < charArrayToParse.length; j++) {
-                char newCharacter = encryptDecrypt.process(Symbols.symbolsMap, Symbols.charsArray, charArrayToParse[j], i * -1);
+            for (char c : charArrayToParse) {
+                char newCharacter = encryptDecrypt.process(Symbols.symbolsMap, Symbols.charsArray, c, i * -1);
                 result[i] = result[i] + newCharacter;
             }
         }
@@ -124,8 +123,7 @@ public class InputOutput {
     public int calculateOperationKey(int inputkey, OperationType operation) {
         return switch (operation) {
             case CODE -> inputkey;
-            case DECODE -> inputkey * -1;
-            case BRUTE_FORCE -> inputkey * -1;
+            case DECODE, BRUTE_FORCE -> inputkey * -1;
         };
     }
 }

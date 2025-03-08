@@ -1,7 +1,10 @@
 package com.javarush.abdulkhanovmt.controller;
 
 
+import com.javarush.abdulkhanovmt.exception.CipherException;
+import com.javarush.abdulkhanovmt.functionality.BruteForce;
 import com.javarush.abdulkhanovmt.functionality.Cipher;
+import com.javarush.abdulkhanovmt.functionality.Const;
 
 import java.util.Scanner;
 
@@ -12,6 +15,8 @@ public class MainController {
     private String decryptedFilePath;
     private String bruteforcedFilePath;
     private String analyzedFilePath;
+    private boolean isEnd = false;
+    private int key = -1;
 
     public MainController(String sourceFilePath,
                           String encryptedFilePath,
@@ -28,42 +33,65 @@ public class MainController {
     public void run() {
         Scanner input = new Scanner(System.in);
         greetings();
-        int key = enterKeyValue(input);
-        executeCommand(input, key);
+        this.key = enterKeyValue(input);
+        executeCommand(input, this.key);
     }
 
     private void executeCommand(Scanner input, int key) {
 
-//        boolean isEnd = command.equalsIgnoreCase("End") || (command.equalsIgnoreCase("Exit"));
-        while (true) {
+        while (!this.isEnd) {
             System.out.println("Введите номер команды");
             String command = input.next();
-//            String command = "2";
             System.out.println(command);
             if (command.equalsIgnoreCase("end") || command.equalsIgnoreCase("exit")) {
-                break;
+                System.out.printf(Const.APPLICATION_CLOSED);
+                return;
             }
             switch (command) {
-                case "1": {
-                    Cipher.encrypt(this.sourceFilePath, this.encryptedFilePath, key);
-                    break;
-                }
-                case "2": {
-                    Cipher.decrypt(this.encryptedFilePath, this.decryptedFilePath, key);
-                    break;
-                }
+                case "1" -> Cipher.encrypt(this.sourceFilePath, this.encryptedFilePath, this.key);
+                case "2" -> Cipher.decrypt(this.encryptedFilePath, this.decryptedFilePath, this.key);
+                case "3" -> BruteForce.decodeByBruteForce(this.encryptedFilePath, this.bruteforcedFilePath);
+                default -> System.out.printf(Const.NOT_FOUND_ACTION_FORMAT, "the command doesn't exist\n");
             }
-            return;
+            nextMove(input);
+        }
+    }
+
+    private void nextMove(Scanner input) {
+        System.out.println("Выберите следующее действие");
+        detach();
+        System.out.println("""
+                \"1\" - ввести команду 
+                \"2\" - поменять ключ шифрования
+                \"3\" - закончить работу 
+                """);
+        while (!this.isEnd) {
+            String command = input.next();
+            System.out.println(command);
+            if (command.equalsIgnoreCase("end") || command.equalsIgnoreCase("exit")) {
+                System.out.printf(Const.APPLICATION_CLOSED);
+                this.isEnd = true;
+            }
+            switch (command) {
+                case "1" -> {
+                    executeCommand(input, this.key);
+                    return;
+                }
+                case "2" -> {
+                    enterKeyValue(input);
+                    return;
+                }
+                case "3" -> this.isEnd = true;
+                default -> System.out.printf(Const.NOT_FOUND_ACTION_FORMAT, "the command doesn't exist\n");
+            }
         }
     }
 
     private static int enterKeyValue(Scanner input) {
-        int key = 0;
         System.out.println("Введите целочисленный ключ шифрования");
         String keyTxt = input.next();
-//        String keyTxt = "1";
         System.out.println(keyTxt);
-        return key = Integer.parseInt(keyTxt);
+        return Integer.parseInt(keyTxt);
     }
 
     private void greetings() {

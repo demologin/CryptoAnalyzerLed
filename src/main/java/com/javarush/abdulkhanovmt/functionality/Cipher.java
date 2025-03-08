@@ -27,7 +27,6 @@ public class Cipher {
             while (bufferedReader.ready()) {
                 int value = bufferedReader.read();
                 char character = (char) value;
-//                char[] charBuffer = line.toCharArray();
                 if(!Alphabet.belongsToAlphabet(Character.toLowerCase(character))){
                     bufferedWriter.write(character);
                 } else{

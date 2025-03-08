@@ -1,5 +1,7 @@
 package com.javarush.mikhailov;
 
+import java.io.BufferedReader;
+import java.nio.file.Path;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -13,8 +15,9 @@ public class Alphabet {
     public static final char[] chars = (rus.toLowerCase() + symbols).toCharArray();
 
 
-    String string = "C:\\Users\\Дмитрий\\IdeaProjects\\CryptoAnalyzerLed\\text\\text.txt";
-    String getString = "hello";   // тестировал!!!
+Path path = Path.of("C:\\Users\\Дмитрий\\IdeaProjects\\CryptoAnalyzerLed\\text\\text.txt");
+Path path1 = Path.of("C:\\Users\\Дмитрий\\IdeaProjects\\CryptoAnalyzerLed\\text\\dict.txt");
+
     public static final Map <Character, Integer> index = new HashMap<>();
 
     static {

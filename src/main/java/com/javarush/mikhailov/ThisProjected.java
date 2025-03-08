@@ -9,8 +9,6 @@ public class ThisProjected {
 
     }
     public static void main(String[] args) throws RuntimeException {
-
-        Alphabet alphabet = new Alphabet();
         Cipher cipher = new Cipher();
 
         while (true) {

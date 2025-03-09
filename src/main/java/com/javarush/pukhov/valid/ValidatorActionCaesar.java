@@ -9,7 +9,6 @@ import com.javarush.pukhov.view.console.constants.Messages;
 
 public class ValidatorActionCaesar<T extends List<String>> extends ValidatorCipherAction<T> {
 
-
     private int key;
 
     public ValidatorActionCaesar(Action action) {

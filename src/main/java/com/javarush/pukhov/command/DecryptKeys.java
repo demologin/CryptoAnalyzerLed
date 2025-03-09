@@ -26,14 +26,13 @@ public final class DecryptKeys extends Decrypt {
         }
     }
 
-     @Override
+    @Override
     protected void getValuesFrom(ValidatorCipherAction<List<String>> validator) {
         super.getValuesFrom(validator);
         key = ((ValidatorActionCaesar<List<String>>) validator).getKey();
     }
 
-
-     @Override
+    @Override
     public String toString() {
         return Constants.DECRYPT;
     }

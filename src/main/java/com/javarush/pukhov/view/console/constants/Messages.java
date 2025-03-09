@@ -2,7 +2,6 @@ package com.javarush.pukhov.view.console.constants;
 
 public final class Messages {
 
-
         private Messages() {
         }
 
@@ -20,12 +19,12 @@ public final class Messages {
         public static final String FILE_DICTIONARY = "dict.txt";
         public static final String FILE_ANALYZE = "analyzed.txt";
         public static final String KEY = "1";
-        
+
         private static final String INPUT_SOURCE = "Enter source (full path OR only filename OR Enter for %s) :";
         private static final String INPUT_DESTINATION = "Enter destination (full path OR only filename OR Enter for %s) :";
 
         public static final String INPUT_SOURCE_ENCRYPT = String
-        .format(INPUT_SOURCE, FILE_SOURCE);
+                        .format(INPUT_SOURCE, FILE_SOURCE);
         public static final String INPUT_DESTINATION_ENCRYPT = String
                         .format(INPUT_DESTINATION, FILE_ENCRYPT);
 
@@ -46,4 +45,5 @@ public final class Messages {
 
         public static final String INPUT_KEY = String.format("Enter key (int number OR Enter for key=%s) :", KEY);
 
+        public static final String EXIT_PROGRAM = "Exit for program";
 }

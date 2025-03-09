@@ -8,6 +8,7 @@ import java.util.List;
 import com.javarush.pukhov.command.Action;
 import com.javarush.pukhov.command.ActionContainer;
 import com.javarush.pukhov.constant.Constants;
+import com.javarush.pukhov.constant.ErrorMessages;
 import com.javarush.pukhov.exception.ActionException;
 import com.javarush.pukhov.util.BuilderPath;
 
@@ -35,12 +36,12 @@ public class ValidatorCipherAction<T extends List<String>> implements Validator<
                 source = BuilderPath.buildPath(parameters.get(indexSrc));
                 destination = BuilderPath.buildPath(parameters.get(indexDest));
                 if (Files.notExists(source)) {
-                    String message = String.format(Constants.FILE_NOT_FOUND, source);
+                    String message = String.format(ErrorMessages.FILE_NOT_FOUND, source);
                     throw new ActionException(message, new FileNotFoundException());
                 }
             }
         } catch (IllegalArgumentException e) {
-            String message = String.format(Constants.INCORRECT_PATH_FILE, source);
+            String message = String.format(ErrorMessages.INCORRECT_PATH_FILE, source);
             throw new ActionException(message, e);
         }
         validValue = parameters;

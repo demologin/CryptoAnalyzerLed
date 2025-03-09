@@ -16,9 +16,6 @@ public class Constants {
     public static final String DICTIONARY = "dictionary";
     public static final String KEY = "key";
 
-    public static final String FILE_NOT_FOUND = "%1$s file not exists";
-    public static final String INCORRECT_PATH_FILE = "Incorrect path to file - %1$s";
-
     private static final String PATH_REPOSITORY_STRING = "/com/javarush/pukhov/repository/file";
     public static final String PATH_REPOSITORY = Constants.class.getResource(PATH_REPOSITORY_STRING).toExternalForm();
 

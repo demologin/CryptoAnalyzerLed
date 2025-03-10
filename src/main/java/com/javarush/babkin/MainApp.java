@@ -28,7 +28,7 @@ public class MainApp {
             while (reader.ready())
             {
                 int real = reader.read(buffer);
-                writer.write(Crypto.incrypt(buffer, 15), 0, real);
+                writer.write(Cryptoway.incrypt(buffer, 15), 0, real);
 
             }
         } catch (FileNotFoundException e) {
@@ -44,7 +44,7 @@ public class MainApp {
             while (reader.ready())
             {
                 int real = reader.read(buffer);
-                writer.write(Crypto.dicrypt(buffer, 15), 0, real);
+                writer.write(Cryptoway.dicrypt(buffer, 15), 0, real);
 
             }
         } catch (FileNotFoundException e) {

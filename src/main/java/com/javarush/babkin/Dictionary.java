@@ -20,7 +20,7 @@ public class Dictionary {
         }
     }
 
-    public static int getLengthCHAR_SYMBOLS() {
+    public static int getLengthCharSymbols() {
         return Dictionary.CHAR_SYMBOLS.length;
     }
 

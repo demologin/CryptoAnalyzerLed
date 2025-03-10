@@ -12,7 +12,7 @@ public class Cryptoway {
         for (char symb : input) {
             if (Dictionary.DICTIONARY.containsKey(symb)) {
 
-                int value = (Dictionary.DICTIONARY.get(symb) + key) % Dictionary.getLengthCHAR_SYMBOLS();
+                int value = (Dictionary.DICTIONARY.get(symb) + key) % Dictionary.getLengthCharSymbols();
                 char scryptText = getKeyToValue(Dictionary.DICTIONARY, value);
                 scrText = scrText + scryptText;
             } else {
@@ -32,7 +32,7 @@ public class Cryptoway {
         for (char symb : input) {
             if (Dictionary.DICTIONARY.containsKey(symb)) {
 
-                int value = (Dictionary.DICTIONARY.get(symb) - key) % Dictionary.getLengthCHAR_SYMBOLS();
+                int value = (Dictionary.DICTIONARY.get(symb) - key) % Dictionary.getLengthCharSymbols();
                 char scryptText = getKeyToValue(Dictionary.DICTIONARY, value);
                 scrText = scrText + scryptText;
             } else {

@@ -3,6 +3,8 @@ package com.javarush.pukhov.command;
 import java.util.Map;
 
 import com.javarush.pukhov.constant.AlphabetCaesar;
+import com.javarush.pukhov.constant.ErrorMessages;
+import com.javarush.pukhov.exception.ApplicationException;
 
 public class ProcessorCipherCaesar {
 
@@ -21,6 +23,10 @@ public class ProcessorCipherCaesar {
     }
 
     public char[] processSymbolsWithKey(char[] buf, int countSymbols) {
+        if (buf.length == 0 || countSymbols > buf.length) {
+            String message = String.format(ErrorMessages.LENGTH_IS_NOT_VALID,buf.length,countSymbols);
+            throw new ApplicationException(new IndexOutOfBoundsException(message));
+        }
         char[] newArray = new char[countSymbols];
         Map<Character, Integer> alphabet = AlphabetCaesar.getAlphabet();
         for (int i = 0; i < countSymbols; i++) {
@@ -50,6 +56,6 @@ public class ProcessorCipherCaesar {
         return countSymbol;
     }
 
-    
+
 
 }

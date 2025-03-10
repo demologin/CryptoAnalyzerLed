@@ -1,8 +1,9 @@
 package com.javarush.burdygin.controller;
 
 import com.javarush.burdygin.activity.*;
-import com.javarush.burdygin.constant.Constants;
 import com.javarush.burdygin.alphabet.AlphabetLogic;
+import com.javarush.burdygin.constant.Constants;
+
 
 import java.util.HashMap;
 import java.util.Map;

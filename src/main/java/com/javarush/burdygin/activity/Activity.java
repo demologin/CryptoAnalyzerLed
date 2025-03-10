@@ -1,7 +1,7 @@
 package com.javarush.burdygin.activity;
 
-import com.javarush.burdygin.constant.Constants;
 import com.javarush.burdygin.alphabet.AlphabetLogic;
+import com.javarush.burdygin.constant.Constants;
 import com.javarush.burdygin.exception.EmptyFileException;
 import com.javarush.burdygin.inputOutput.PathHelper;
 
@@ -26,10 +26,9 @@ public class Activity {
         Path destinationFilePath = PathHelper.get(args.get(Constants.DESTINATION_FILE));
         int key = Integer.parseInt(args.get(Constants.KEY)) > 0 ? 1 : -1;
 
-        try (
-                BufferedReader bufferedReader = Files.newBufferedReader(sourceFilePath);
-                BufferedWriter bufferedWriter = Files.newBufferedWriter(destinationFilePath)
-        ) {
+        try (BufferedReader bufferedReader = Files.newBufferedReader(sourceFilePath);
+             BufferedWriter bufferedWriter = Files.newBufferedWriter(destinationFilePath)) {
+
             if (!bufferedReader.ready()){
                 throw new EmptyFileException();
             }

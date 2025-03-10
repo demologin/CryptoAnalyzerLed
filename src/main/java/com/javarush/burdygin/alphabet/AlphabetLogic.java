@@ -1,48 +1,173 @@
 package com.javarush.burdygin.alphabet;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.ArrayList;
+import java.util.List;
+
 public class AlphabetLogic {
 
+
+    AlphabetObject alphabetObjectLatin = new AlphabetObject(Alphabet.A_LAT, Alphabet.B_LAT, Alphabet.Y_LAT, Alphabet.Z_LAT);
+    AlphabetObject alphabetObjectCyrillic = new AlphabetObject(Alphabet.A_CYR, Alphabet.B_CYR, Alphabet.YU_CYR, Alphabet.YA_CYR, Alphabet.YO_CYR);
+    AlphabetObject alphabetObjectSymbol = new AlphabetObject(Alphabet.SPACE, Alphabet.EXCLAMATION_MARK, Alphabet.QUESTION_MARK, Alphabet.COMMERCIAL_AT, Alphabet.NEW_STRING, Alphabet.CARRIAGE_RETURN);
+
+    List<AlphabetObject> alphabetsObjects = new ArrayList<>(List.of(alphabetObjectLatin, alphabetObjectCyrillic, alphabetObjectSymbol));
+
     public boolean isMiddleAlphabet(char c) {
-        return c > Alphabet.SPACE && c < Alphabet.COMMERCIAL_AT                         //symbol      ' ' = 32, '@' = 64
-                || c > Alphabet.A_LAT && c < Alphabet.Z_LAT                             //latin       'a' = 97, 'z' = 122
-                || c > Alphabet.A_CYR && c < Alphabet.YA_CYR;                           //cyrillic    'а' = 1072, 'я' = 1103
+        boolean result = false;
+        for (AlphabetObject alphabetsObject : alphabetsObjects) {
+            if (c > alphabetsObject.first && c < alphabetsObject.last) {
+                result = true;
+                break;
+            }
+        }
+        return result;
     }
 
-    public char charSwitch(char textChar, int key) {
-        //up
-        if (key == 1) {
-            switch (textChar) {
-                //for symbol
-                case Alphabet.NEW_STRING -> textChar = Alphabet.SPACE;                //'\n' -> ' '
-                case Alphabet.SPACE -> textChar = Alphabet.EXCLAMATION_MARK;          // ' ' -> '!'
-                case Alphabet.COMMERCIAL_AT -> textChar = Alphabet.CARRIAGE_RETURN;   // '@' -> '\r'
-                case Alphabet.CARRIAGE_RETURN -> textChar = Alphabet.A_LAT;           // '\r' -> 'a'
-                //for latin
-                case Alphabet.A_LAT -> textChar = Alphabet.B_LAT;                     // 'a' -> 'b'
-                case Alphabet.Z_LAT -> textChar = Alphabet.A_CYR;                     // 'z' -> 'а'
-                //for cyrillic
-                case Alphabet.A_CYR -> textChar = Alphabet.B_CYR;                     // 'а' -> 'б'
-                case Alphabet.YA_CYR -> textChar = Alphabet.YO_CYR;                   // 'я' -> 'ё'
-                case Alphabet.YO_CYR -> textChar = Alphabet.NEW_STRING;               // 'ё' -> '\n'
+    public char charSwitch(char c, int key) {
+        boolean isSwitched = false;
+        for (int i = 0; i < alphabetsObjects.size()
+                && !isSwitched
+                && key == 1; i++) {
+            AlphabetObject alphabetObject = alphabetsObjects.get(i);
+            AlphabetObject nextAlphabetObject = i != alphabetsObjects.size() - 1 ? alphabetsObjects.get(i + 1) : alphabetsObjects.getFirst();
+
+            if (c == alphabetObject.first) {
+                c = alphabetObject.second;
+                isSwitched = true;
+            } else if (c == alphabetObject.last) {
+                if (alphabetObject.exempts != null) {
+                    c = alphabetObject.exempts[0];
+                } else {
+                    c = nextAlphabetObject.first;
+                }
+                isSwitched = true;
+            } else if (alphabetObject.exempts != null) {
+                if (c == alphabetObject.exempts[alphabetObject.exempts.length - 1]) {
+                    c = nextAlphabetObject.first;
+                    isSwitched = true;
+                } else {
+                    for (int j = 0; j < alphabetObject.exempts.length - 1 && !isSwitched; j++) {
+                        if (c == alphabetObject.exempts[j]) {
+                            c = alphabetObject.exempts[j + 1];
+                            isSwitched = true;
+                        }
+                    }
+                }
+
             }
         }
-        //down
-        if (key == -1) {
-            switch (textChar) {
-                //for cyrillic
-                case Alphabet.YO_CYR -> textChar = Alphabet.YA_CYR;                   // 'ё' -> 'я'
-                case Alphabet.YA_CYR -> textChar = Alphabet.YU_CYR;                   // 'я' -> 'ю'
-                case Alphabet.A_CYR -> textChar = Alphabet.Z_LAT;                     // 'а' -> 'z'
-                // for latin
-                case Alphabet.Z_LAT -> textChar = Alphabet.Y_LAT;                     // 'z' -> 'y'
-                case Alphabet.A_LAT -> textChar = Alphabet.CARRIAGE_RETURN;           // 'a' -> '\r'
-                //for symbol
-                case Alphabet.CARRIAGE_RETURN -> textChar = Alphabet.COMMERCIAL_AT;   // '\r' -> '@'
-                case Alphabet.COMMERCIAL_AT -> textChar = Alphabet.QUESTION_MARK;     // '@' -> '?'
-                case Alphabet.SPACE -> textChar = Alphabet.NEW_STRING;                // ' ' -> '\n'
-                case Alphabet.NEW_STRING -> textChar = Alphabet.YO_CYR;               // '\n' -> 'ё'
+
+        for (int i = alphabetsObjects.size() - 1; i >= 0
+                && !isSwitched
+                && key == -1; i--) {
+            AlphabetObject alphabetObject = alphabetsObjects.get(i);
+            AlphabetObject previousAlphabetObject = i != 0 ? alphabetsObjects.get(i - 1) : alphabetsObjects.getLast();
+
+            if (c == alphabetObject.last) {
+                c = alphabetObject.penultimate;
+                isSwitched = true;
+            } else if (c == alphabetObject.first) {
+                if (previousAlphabetObject.exempts != null) {
+                    c = previousAlphabetObject.exempts[previousAlphabetObject.exempts.length - 1];
+                } else {
+                    c = previousAlphabetObject.last;
+                }
+                isSwitched = true;
+            } else if (alphabetObject.exempts != null) {
+                if (c == alphabetObject.exempts[0]) {
+                    c = alphabetObject.last;
+                    isSwitched = true;
+                } else {
+                    for (int j = alphabetObject.exempts.length - 1; j > 0 && !isSwitched; j--) {
+                        if (c == alphabetObject.exempts[j]) {
+                            c = alphabetObject.exempts[j - 1];
+                            isSwitched = true;
+                        }
+                    }
+                }
             }
         }
-        return textChar;
+        return c;
+    }
+
+    public char getMostUsageSymbol(Path sourceFilePath) {
+        int symbol = 0;
+        int symbolCounter = 0;
+        for (AlphabetObject alphabetsObject : alphabetsObjects) {
+            int[] intermediateAlphabetResult = checkMostUsageSymbolFromAlphabet(alphabetsObject, symbolCounter, sourceFilePath);
+            int[] intermediateResult = charCalculator(intermediateAlphabetResult[0], symbolCounter, symbol, intermediateAlphabetResult[1]);
+            symbol = intermediateResult[0];
+            symbolCounter = intermediateResult[1];
+            if (alphabetsObject.exempts != null) {
+                int[] intermediateAlphabetExemptsResult = checkAlphabetExempts(alphabetsObject, symbolCounter, sourceFilePath);
+                int[] intermediateResultWithExempts = charCalculator(intermediateAlphabetExemptsResult[0], symbolCounter, symbol, intermediateAlphabetExemptsResult[1]);
+                symbol = intermediateResultWithExempts[0];
+                symbolCounter = intermediateResultWithExempts[1];
+            }
+        }
+        return (char) symbol;
+    }
+
+
+    private int[] checkMostUsageSymbolFromAlphabet(AlphabetObject alphabetsObject, int symbolCounter, Path sourceFilePath) {
+        int middleCounter;
+        int middleChar = 0;
+        for (int i = alphabetsObject.first; i <= alphabetsObject.last; i++) {
+            middleCounter = checkingTheTextForCharCount(sourceFilePath, (char) i);
+            int[] intermediateCharResult = charCalculator(middleCounter, symbolCounter, middleChar, i);
+            middleChar = intermediateCharResult[0];
+            symbolCounter = intermediateCharResult[1];
+        }
+        return new int[]{symbolCounter, middleChar};
+    }
+
+    private int[] checkAlphabetExempts(AlphabetObject alphabetsObject, int symbolCounter, Path sourceFilePath) {
+        int middleCounter;
+        int middleChar = 0;
+        for (int i = 0; i < alphabetsObject.exempts.length; i++) {
+            middleCounter = checkingTheTextForCharCount(sourceFilePath, alphabetsObject.exempts[i]);
+            int[] intermediateCharExemptResult = charCalculator(middleCounter, symbolCounter, middleChar, alphabetsObject.exempts[i]);
+            middleChar = intermediateCharExemptResult[0];
+            symbolCounter = intermediateCharExemptResult[1];
+        }
+        return new int[]{symbolCounter, middleChar};
+    }
+
+    private int checkingTheTextForCharCount(Path sourceFilePath, char c) {
+        int middleCounter = 0;
+        try (BufferedReader bufferedReader = Files.newBufferedReader(sourceFilePath)) {
+            while (bufferedReader.ready()) {
+                char a = Character.toLowerCase((char) bufferedReader.read());
+                if (a == c) {
+                    middleCounter++;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return middleCounter;
+    }
+
+    private int[] charCalculator(int middleCounter, int symbolCounter, int middleChar, int currentChar) {
+        if (middleCounter > symbolCounter) {
+            middleChar = currentChar;
+            symbolCounter = middleCounter;
+        }
+        return new int[]{middleChar, symbolCounter};
+    }
+
+    public static int alphabetLength() {
+        int result = 0;
+        for (AlphabetObject alphabetObject : new AlphabetLogic().alphabetsObjects) {
+            result += alphabetObject.last - (alphabetObject.first - 1);
+            if (alphabetObject.exempts != null) {
+                result += alphabetObject.exempts.length;
+            }
+        }
+        return result;
     }
 }

@@ -34,21 +34,26 @@ public class ConsoleApplication {
                 isExit = true;
             }
         }
+
         if (!isExit) {
             try {
                 controller.start(args);
             } catch (NullPointerException e) {
                 System.out.println("Incorrect mode");
-            } catch (EmptyFileException e){
+            } catch (EmptyFileException e) {
                 System.out.println("Source file is empty");
             } catch (RuntimeException e) {
                 if (e.getCause() instanceof NoSuchFileException) {
                     String path = String.valueOf(PathHelper.get(Constants.SOURCE_FILE).toAbsolutePath());
                     System.out.printf("File %s not found", path);
+                } else {
+                    System.out.println("Unknown Error");
                 }
-                System.out.print('\n' + "Complete!");
             }
-
+            if (args.get(Constants.MODE_FLAG).equals(Constants.MODE_BRUTE_FORCE)){
+                System.out.printf("key = %s", Math.abs(Integer.parseInt(args.get(Constants.KEY))));
+            }
+            System.out.print('\n' + "Complete!");
         }
 
     }

@@ -19,8 +19,7 @@ public class Dicryptfile {
              BufferedWriter writer = Files.newBufferedWriter(pathOutput, StandardCharsets.UTF_8)
         ) {
             char[] buffer = new char[128]; // 128Kb
-            while (reader.ready())
-            {
+            while (reader.ready()) {
                 int real = reader.read(buffer);
                 writer.write(Cryptoway.dicrypt(buffer, key), 0, real);
 
@@ -32,4 +31,5 @@ public class Dicryptfile {
         }
 
         System.out.println("Text dicrypt");
+    }
 }

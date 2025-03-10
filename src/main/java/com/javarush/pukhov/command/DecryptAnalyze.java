@@ -27,8 +27,6 @@ public final class DecryptAnalyze extends Decrypt {
     private Path dictionary;
 
     private Statistic statistic;
-    private double[][] statisticsMatrixDictionaries;
-    private double[][] statisticsMatrixEncryptFiles;
 
     private List<Character> bestEncryptedAlphabet;
 
@@ -50,8 +48,8 @@ public final class DecryptAnalyze extends Decrypt {
 
             fillAlphabet();
 
-            statisticsMatrixDictionaries = getStatisticsMatrix(fileDictionary);
-            statisticsMatrixEncryptFiles = getStatisticsMatrix(fileInput);
+            double[][] statisticsMatrixDictionaries = getStatisticsMatrix(fileDictionary);
+            double[][] statisticsMatrixEncryptFiles = getStatisticsMatrix(fileInput);
 
             decryptAnalyze(statisticsMatrixEncryptFiles, statisticsMatrixDictionaries);
         }
@@ -124,12 +122,6 @@ public final class DecryptAnalyze extends Decrypt {
         bestEncryptedAlphabet = Arrays.asList(bestChars);
     }
 
-    private static List<Character> getCharacterList(char[] chars) {
-        return String.valueOf(chars)
-                .chars()
-                .mapToObj(c -> (char) c)
-                .toList();
-    }
 
     @Override
     protected void getValuesFrom(ValidatorCipherAction<List<String>> validator) {

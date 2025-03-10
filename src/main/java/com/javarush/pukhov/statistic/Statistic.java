@@ -7,8 +7,8 @@ import com.javarush.pukhov.exception.StatisticException;
 
 public class Statistic {
 
-    private double[][] matrix;
-    private Map<Character, Integer> alphabet;
+    private final double[][] matrix;
+    private final Map<Character, Integer> alphabet;
     private int pairCount;
     private char lastSymbol;
 

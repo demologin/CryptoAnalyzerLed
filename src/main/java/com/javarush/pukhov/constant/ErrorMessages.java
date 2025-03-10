@@ -15,4 +15,6 @@ public class ErrorMessages {
             length secondMatrix[0] = %d""";
 
     public static final String LENGTH_IS_NOT_VALID = "the buffer cannot be empty and the number of characters checked must not exceed its length, buf.length = %d, countSymbols = %d";
+
+    public static final String NO_ALPHABET = "unable to fill statistics matrix, alphabet not filled";
 }

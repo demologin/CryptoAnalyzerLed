@@ -3,7 +3,7 @@ package com.javarush.babkin;
 import java.util.Map;
 import java.util.Set;
 
-public class Crypto {
+public class Cryptoway {
     public static char[] incrypt(char[] input, int keyKrypt) {
 
         int key = keyKrypt;

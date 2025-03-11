@@ -1,6 +1,5 @@
 package com.javarush.burdygin.controller;
 
-import com.javarush.burdygin.activity.Activity;
 import com.javarush.burdygin.alphabet.Alphabet;
 import com.javarush.burdygin.alphabet.AlphabetLogic;
 import com.javarush.burdygin.alphabet.AlphabetObject;
@@ -17,13 +16,7 @@ public class AppConfig {
 
     private final AlphabetLogic alphabetLogic = new AlphabetLogic(alphabetsObjects);
 
-    private final Activity activity = new Activity(alphabetLogic);
-
     public AlphabetLogic getAlphabetLogic() {
         return alphabetLogic;
-    }
-
-    public Activity getActivity() {
-        return activity;
     }
 }

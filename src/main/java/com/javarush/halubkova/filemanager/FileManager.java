@@ -4,13 +4,12 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.nio.charset.StandardCharsets;
+import java.util.stream.Stream;
 
 public class FileManager {
-    public static String readFile(String filePath) throws IOException {
+    public static Stream<String> readFile(String filePath) throws IOException {
         Path path = Paths.get(filePath);
-        byte[] bytes = Files.readAllBytes(path);
-        return new String(bytes, StandardCharsets.UTF_8);
+        return Files.lines(path);
     }
 
     public static void createFile(String path) throws IOException {
@@ -21,12 +20,5 @@ public class FileManager {
         Path file = Path.of(filePath);
         Files.writeString(file, content);
     }
-
-
-    //Чтение/запись по частям. Для очень больших файлов, которые не помещаются в оперативную память,
-    // используйте методы Files.lines() для чтения по строкам или Files.newInputStream() для чтения по блокам.
-    //Буферизация. ИспользуйBufferedReader и BufferedWriter для буферизации операций ввода/вывода,
-    // что повышает производительность.
-
 
 }

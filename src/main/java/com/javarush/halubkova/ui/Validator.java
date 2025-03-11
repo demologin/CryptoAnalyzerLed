@@ -16,7 +16,7 @@ public class Validator {
     }
 
     public boolean isFileNameValid(String fileName) {
-        return Path.of(fileName).endsWith(".txt");
+        return fileName.endsWith(".txt");
     }
 
 }

@@ -2,22 +2,20 @@ package com.javarush.halubkova;
 
 import com.javarush.halubkova.cipher.Alphabet;
 import com.javarush.halubkova.cipher.Cipher;
-import com.javarush.halubkova.exception.CharNotFoundException;
-import com.javarush.halubkova.exception.FileNameException;
-import com.javarush.halubkova.exception.FileNotFoundException;
-import com.javarush.halubkova.exception.ShiftNotValidException;
+import com.javarush.halubkova.exception.*;
 import com.javarush.halubkova.filemanager.FileManager;
 import com.javarush.halubkova.ui.Dialog;
 import com.javarush.halubkova.ui.DialogDTO;
+
 import java.io.IOException;
 import java.nio.file.Path;
+import java.util.stream.Stream;
 
 public class MainApp {
     private static final int MODE_ENCODE = 1;
     private static final int MODE_DECODE = 2;
 
     public static void main(String[] args) throws CharNotFoundException, ShiftNotValidException, FileNameException, FileNotFoundException, IOException {
-
         Dialog dialog = new Dialog();
         DialogDTO dto = dialog.ask();
         int operation = dto.getOperation();
@@ -25,20 +23,26 @@ public class MainApp {
         int keyCipher = dto.getKeyCipher();
         String outputFileName = dto.getOutputFileName();
 
-        Cipher cip = new Cipher(Alphabet.getAlphabet());
-        String text = FileManager.readFile(inputFilePath);
-
-        String result = "";
-        if (operation == MODE_ENCODE) {
-            result = cip.encrypt(text, keyCipher);
-        }
-        if (operation == MODE_DECODE) {
-            result = cip.decrypt(text, keyCipher);
-        }
         String pathOfOutputFile = Path.of(inputFilePath).getParent() + "\\" + outputFileName;
         FileManager.createFile(pathOfOutputFile);
-        FileManager.writeFile(result, pathOfOutputFile);
+
+        Cipher cip = new Cipher(Alphabet.getAlphabet());
+        Stream<String> text = FileManager.readFile(inputFilePath);
+
+        text.forEach(str -> {
+            String result = "";
+            if (operation == MODE_ENCODE) {
+                result = cip.encrypt(str, keyCipher);
+            }
+            if (operation == MODE_DECODE) {
+                result = cip.decrypt(str, keyCipher);
+            }
+            try {
+                FileManager.writeFile(result, pathOfOutputFile);
+            } catch (IOException e) {
+                throw new OutputFileException();
+            }
+        });
 
     }
-
 }

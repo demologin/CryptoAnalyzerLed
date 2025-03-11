@@ -29,14 +29,9 @@ public class Cipher {
         }
 
         return exit.toString();
-        //как можно ускорить
-        // какую структуру данных нужно использовать чтобы ускорить
-        // этот процесс (раз в 15), ведь необязательно же сканировать всю библиотеку в поисках книги на
-        // букву Ы (Ладно, П).
     }
 
     public String decrypt(String encryptedText, int shift) throws CharNotFoundException {
-
         StringBuilder exit = new StringBuilder();
         for (int i = 0; i < encryptedText.length(); i++) {
             int position = alphabet.length;

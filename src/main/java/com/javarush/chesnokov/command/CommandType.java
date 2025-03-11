@@ -23,9 +23,9 @@ public enum CommandType {
     }
 
     public static CommandType fromCode(int code) {
-        for (CommandType com : values()) {
-            if (com.code == code) {
-                return com;
+        for (CommandType commandType : values()) {
+            if (commandType.code == code) {
+                return commandType;
             }
         }
         return null;

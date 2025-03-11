@@ -20,10 +20,9 @@ public class Alphabet {
         return alphabet;
     }
 
-    public void alphabetBuild(char start, char end, StringBuilder alphabetBuilder) {
+    private void alphabetBuild(char start, char end, StringBuilder alphabetBuilder) {
         for (char c = start; c <= end; c++) {
             alphabetBuilder.append(c);
         }
     }
-
 }

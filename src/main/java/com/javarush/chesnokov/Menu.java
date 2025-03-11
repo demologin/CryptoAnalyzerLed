@@ -59,7 +59,7 @@ public class Menu {
         return CommandType.fromCode(code);
     }
 
-    public String[] getParameters(CommandType commandType) {
+    private String[] getParameters(CommandType commandType) {
         String[] parameters = new String[3];
         if (commandType != CommandType.EXIT) {
             System.out.println(Const.ENTER_SOURCE_PATH);

@@ -6,18 +6,12 @@ public class Alphabet {
 
     public Alphabet() {
         StringBuilder alphabetBuilder = new StringBuilder();
-        for (char c = 'a'; c <= 'z'; c++) {
-            alphabetBuilder.append(c);
-        }
-        for (char c = 'A'; c <= 'Z'; c++) {
-            alphabetBuilder.append(c);
-        }
-        for (char c = 'а'; c <= 'я'; c++) {
-            alphabetBuilder.append(c);
-        }
-        for (char c = 'А'; c <= 'Я'; c++) {
-            alphabetBuilder.append(c);
-        }
+
+        alphabetBuild('a', 'z', alphabetBuilder);
+        alphabetBuild('A', 'Z', alphabetBuilder);
+        alphabetBuild('а', 'я', alphabetBuilder);
+        alphabetBuild('А', 'Я', alphabetBuilder);
+
         alphabetBuilder.append(" .,!?;:\"'()[]{}<>@#$%^&*`~");
         this.alphabet = alphabetBuilder.toString();
     }
@@ -25,4 +19,11 @@ public class Alphabet {
     public String getAlphabet() {
         return alphabet;
     }
+
+    public void alphabetBuild(char start, char end, StringBuilder alphabetBuilder) {
+        for (char c = start; c <= end; c++) {
+            alphabetBuilder.append(c);
+        }
+    }
+
 }

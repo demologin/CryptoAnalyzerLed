@@ -1,7 +1,6 @@
 package com.javarush.burdygin;
 
 import com.javarush.burdygin.activity.Activity;
-import com.javarush.burdygin.controller.AppConfig;
 import com.javarush.burdygin.controller.Controller;
 import com.javarush.burdygin.view.ConsoleApplication;
 import com.javarush.burdygin.view.Menu;

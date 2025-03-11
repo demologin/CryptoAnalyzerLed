@@ -1,4 +1,4 @@
-package com.javarush.burdygin.controller;
+package com.javarush.burdygin;
 
 import com.javarush.burdygin.alphabet.Alphabet;
 import com.javarush.burdygin.alphabet.AlphabetLogic;

@@ -1,4 +1,4 @@
-package com.javarush.halubkova;
+package com.javarush.halubkova.ui;
 
 public class DialogDTO {
     int operation;

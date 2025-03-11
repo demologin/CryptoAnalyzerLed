@@ -1,4 +1,4 @@
-package com.javarush.halubkova;
+package com.javarush.halubkova.exception;
 
 public class FileNotFoundException extends Exception{
     public FileNotFoundException(){

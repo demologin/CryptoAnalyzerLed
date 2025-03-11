@@ -1,4 +1,6 @@
-package com.javarush.halubkova;
+package com.javarush.halubkova.cipher;
+
+import com.javarush.halubkova.exception.CharNotFoundException;
 
 public class Cipher {
     private char[] alphabet;

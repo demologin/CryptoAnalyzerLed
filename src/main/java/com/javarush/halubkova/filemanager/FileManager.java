@@ -1,4 +1,4 @@
-package com.javarush.halubkova;
+package com.javarush.halubkova.filemanager;
 
 import java.io.IOException;
 import java.nio.file.Files;

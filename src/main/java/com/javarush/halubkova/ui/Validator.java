@@ -1,4 +1,4 @@
-package com.javarush.halubkova;
+package com.javarush.halubkova.ui;
 
 import java.nio.file.Files;
 import java.nio.file.Path;

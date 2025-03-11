@@ -1,4 +1,4 @@
-package com.javarush.halubkova;
+package com.javarush.halubkova.cipher;
 
 public class Alphabet {
     private static final char[] ALPHABET = {'а', 'б', 'в', 'г', 'д', 'е', 'ж', 'з',

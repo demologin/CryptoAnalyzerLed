@@ -24,11 +24,9 @@ public class ConsoleApplication {
         menu.getUserArguments(args);
         boolean isExit = false;
         switch (args.get(Constants.MODE_FLAG)) {
-            case Constants.MODE_ENCODE -> System.out.print('\n' + "encoding...");
-            case Constants.MODE_DECODE -> System.out.println('\n' + "decoding...");
-            case Constants.MODE_BRUTE_FORCE -> System.out.println("""
-                    Brute Force
-                    decoding...""");
+            case Constants.MODE_ENCODE -> System.out.print('\n' + Messages.ENCODING_MESSAGE);
+            case Constants.MODE_DECODE -> System.out.println('\n' + Messages.DECODING_MESSAGE);
+            case Constants.MODE_BRUTE_FORCE -> System.out.printf('\n' + Messages.BRUTE_FORCE_MESSAGE);
             case Constants.MODE_EXIT -> {
                 System.out.print(Messages.EXIT_MESSAGE);
                 isExit = true;
@@ -39,21 +37,21 @@ public class ConsoleApplication {
             try {
                 controller.start(args);
             } catch (NullPointerException e) {
-                System.out.println("Incorrect mode");
+                System.out.println(Messages.INCORRECT_MODE_MESSAGE);
             } catch (EmptyFileException e) {
-                System.out.println("Source file is empty");
+                System.out.println(Messages.EMPTY_FILE_MESSAGE);
             } catch (RuntimeException e) {
                 if (e.getCause() instanceof NoSuchFileException) {
                     String path = String.valueOf(PathHelper.get(Constants.SOURCE_FILE).toAbsolutePath());
-                    System.out.printf("File %s not found", path);
+                    System.out.printf(Messages.FILE_NOT_FOUND_MESSAGE, path);
                 } else {
-                    System.out.println("Unknown Error");
+                    System.out.println(Messages.UNKNOWN_ERROR_MESSAGE);
                 }
             }
             if (args.get(Constants.MODE_FLAG).equals(Constants.MODE_BRUTE_FORCE)){
                 System.out.printf("key = %s", Math.abs(Integer.parseInt(args.get(Constants.KEY))));
             }
-            System.out.print('\n' + "Complete!");
+            System.out.print('\n' + Messages.COMPLETE_MESSAGE);
         }
 
     }

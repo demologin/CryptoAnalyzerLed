@@ -4,17 +4,16 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.ArrayList;
 import java.util.List;
 
 public class AlphabetLogic {
 
 
-    AlphabetObject alphabetObjectLatin = new AlphabetObject(Alphabet.A_LAT, Alphabet.B_LAT, Alphabet.Y_LAT, Alphabet.Z_LAT);
-    AlphabetObject alphabetObjectCyrillic = new AlphabetObject(Alphabet.A_CYR, Alphabet.B_CYR, Alphabet.YU_CYR, Alphabet.YA_CYR, Alphabet.YO_CYR);
-    AlphabetObject alphabetObjectSymbol = new AlphabetObject(Alphabet.SPACE, Alphabet.EXCLAMATION_MARK, Alphabet.QUESTION_MARK, Alphabet.COMMERCIAL_AT, Alphabet.NEW_STRING, Alphabet.CARRIAGE_RETURN);
+    List<AlphabetObject> alphabetsObjects;
 
-    List<AlphabetObject> alphabetsObjects = new ArrayList<>(List.of(alphabetObjectLatin, alphabetObjectCyrillic, alphabetObjectSymbol));
+    public AlphabetLogic(List<AlphabetObject> alphabetsObjects) {
+        this.alphabetsObjects = alphabetsObjects;
+    }
 
     public boolean isMiddleAlphabet(char c) {
         boolean result = false;
@@ -160,9 +159,9 @@ public class AlphabetLogic {
         return new int[]{middleChar, symbolCounter};
     }
 
-    public static int alphabetLength() {
+    public int alphabetLength() {
         int result = 0;
-        for (AlphabetObject alphabetObject : new AlphabetLogic().alphabetsObjects) {
+        for (AlphabetObject alphabetObject : alphabetsObjects) {
             result += alphabetObject.last - (alphabetObject.first - 1);
             if (alphabetObject.exempts != null) {
                 result += alphabetObject.exempts.length;

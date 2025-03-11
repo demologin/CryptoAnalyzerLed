@@ -37,13 +37,13 @@ public class Menu {
         System.out.println("-".repeat(DECORATION_COUNT));
     }
 
-    public Result executeCommand(CommandType command) {
-        if (command == null) {
+    public Result executeCommand(CommandType commandType) {
+        if (commandType == null) {
             return new Result(ResultCode.ERROR, Const.INCORRECT_COMMAND);
         }
-        Command cmd = commands.get(command);
+        Command command = commands.get(commandType);
         try {
-            return cmd.execute(getParameters(command));
+            return command.execute(getParameters(commandType));
         } catch (RuntimeException e) {
             return new Result(ResultCode.ERROR, e.getMessage());
         }

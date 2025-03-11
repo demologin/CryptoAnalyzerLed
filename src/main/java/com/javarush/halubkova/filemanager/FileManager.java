@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.stream.Stream;
 
 public class FileManager {
@@ -18,7 +19,7 @@ public class FileManager {
 
     public static void writeFile(String content, String filePath) throws IOException {
         Path file = Path.of(filePath);
-        Files.writeString(file, content);
+        Files.writeString(file, content, StandardOpenOption.APPEND);
     }
 
 }

@@ -3,7 +3,7 @@ package com.javarush.halubkova.cipher;
 import com.javarush.halubkova.exception.CharNotFoundException;
 
 public class Cipher {
-    private char[] alphabet;
+    private final char[] alphabet;
 
     public Cipher(char[] alphabet) {
         this.alphabet = alphabet;
@@ -37,7 +37,7 @@ public class Cipher {
 
     public String decrypt(String encryptedText, int shift) throws CharNotFoundException {
 
-        String exit = "";
+        StringBuilder exit = new StringBuilder();
         for (int i = 0; i < encryptedText.length(); i++) {
             int position = alphabet.length;
             for (int j = 0; j < alphabet.length; j++) {
@@ -47,15 +47,14 @@ public class Cipher {
             }
             if (position < 0) {
                 position = alphabet.length + position;
-                exit = exit + String.valueOf(alphabet[position]);
+                exit.append(alphabet[position]);
             } else if (position == alphabet.length) {
                 throw new CharNotFoundException();
-                //System.out.println("исключение: нет такого символа");
             } else {
-                exit = exit + String.valueOf(alphabet[position]);
+                exit.append(alphabet[position]);
             }
         }
-        return exit;
+        return exit.toString();
     }
 
     //Ты будешь использовать этот код использовать в следующих подзадачах, поэтому выводить результат можно

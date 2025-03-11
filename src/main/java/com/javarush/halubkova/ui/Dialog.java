@@ -2,9 +2,8 @@ package com.javarush.halubkova.ui;
 
 import com.javarush.halubkova.cipher.Alphabet;
 import com.javarush.halubkova.exception.FileNameException;
+import com.javarush.halubkova.exception.FileNotFoundException;
 import com.javarush.halubkova.exception.ShiftNotValidException;
-
-import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Dialog {

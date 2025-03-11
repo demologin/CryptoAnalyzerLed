@@ -16,7 +16,7 @@ public class Result {
         if (code == ResultCode.OK){
             System.out.printf(Const.OK_MESSAGE + "\n"+ "result: %s", message);
         }else {
-            System.out.printf(Const.ERROR_MESSAGE + "\n" + "result: %s", message);
+            System.out.printf(Const.ERROR_MESSAGE + "\n" + "result: %s\n", message);
         }
     }
 

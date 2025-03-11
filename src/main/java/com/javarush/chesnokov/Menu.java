@@ -45,7 +45,7 @@ public class Menu {
         try {
             return cmd.execute(getParameters(command));
         } catch (RuntimeException e) {
-            throw new RuntimeException(Const.APPLICATION_ERROR + e.getMessage(), e);
+            return new Result(ResultCode.ERROR, e.getMessage());
         }
     }
 

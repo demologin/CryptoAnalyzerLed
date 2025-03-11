@@ -31,8 +31,8 @@ public class Menu {
         System.out.println("-".repeat(DECORATION_COUNT));
         System.out.println(Const.CHOSE_COMMAND);
 
-        for (CommandType ct : CommandType.values()) {
-            System.out.println(ct.getCode() + " - " + ct.getCommandName());
+        for (CommandType commandType : CommandType.values()) {
+            System.out.println(commandType.getCode() + " - " + commandType.getCommandName());
         }
         System.out.println("-".repeat(DECORATION_COUNT));
     }

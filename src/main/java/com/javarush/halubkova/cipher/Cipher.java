@@ -10,7 +10,7 @@ public class Cipher {
     }
 
     public String encrypt(String text, int shift) throws CharNotFoundException {
-        String exit = "";
+        StringBuilder exit = new StringBuilder();
         for (int i = 0; i < text.length(); i++) {
             int position = -1;
             for (int j = 0; j < alphabet.length; j++) {
@@ -20,14 +20,15 @@ public class Cipher {
             }
             if (position > alphabet.length - 1) {
                 position = position % alphabet.length;
-                exit = exit + String.valueOf(alphabet[position]);
+                exit.append(alphabet[position]);
             } else if (position == -1) {
                 throw new CharNotFoundException();
             } else {
-                exit = exit + String.valueOf(alphabet[position]);
+                exit.append(alphabet[position]);
             }
         }
-        return exit;
+
+        return exit.toString();
         //как можно ускорить
         // какую структуру данных нужно использовать чтобы ускорить
         // этот процесс (раз в 15), ведь необязательно же сканировать всю библиотеку в поисках книги на

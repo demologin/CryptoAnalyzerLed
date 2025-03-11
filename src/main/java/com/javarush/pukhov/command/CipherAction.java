@@ -16,19 +16,19 @@ public abstract class CipherAction implements Action {
     protected ValidatorCipherAction<List<String>> validator;
 
     protected void processFileStream(FileInput input,
-            FileOutput output, Option option) {
+            FileOutput output, OptionFile option) {
         try (
                 BufferedReader reader = input.getReader();
                 BufferedWriter writer = output.getWriter()) {
             char[] buf = new char[2048];
             int countRead;
             while ((countRead = reader.read(buf)) != -1) {
-                boolean process = option == Option.R || option == Option.RW;
+                boolean process = option == OptionFile.R || option == OptionFile.RW;
                 char[] processedSymbols = new char[countRead];
                 if (process) {
                     processedSymbols = processSymbols(buf, countRead);
                 }
-                if (option == Option.W || option == Option.RW) {
+                if (option == OptionFile.W || option == OptionFile.RW) {
                     writer.write(processedSymbols, 0, countRead);
                 }
             }

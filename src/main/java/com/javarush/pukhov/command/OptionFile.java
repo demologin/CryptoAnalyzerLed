@@ -1,5 +1,5 @@
 package com.javarush.pukhov.command;
 
-public enum Option {
+public enum OptionFile {
     R, W, RW
 }

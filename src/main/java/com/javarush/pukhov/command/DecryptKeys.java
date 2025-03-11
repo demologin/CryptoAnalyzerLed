@@ -22,7 +22,7 @@ public final class DecryptKeys extends Decrypt {
             fileInput = new FileInput(src);
             fileOutput = new FileOutput(destination);
 
-            processFileStream(fileInput, fileOutput, Option.RW);
+            processFileStream(fileInput, fileOutput, OptionFile.RW);
         }
     }
 

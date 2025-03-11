@@ -56,7 +56,7 @@ public final class DecryptAnalyze extends Decrypt {
     }
 
     private void fillAlphabet() {
-        processFileStream(fileDictionary, fileOutput, Option.R);
+        processFileStream(fileDictionary, fileOutput, OptionFile.R);
         charsAlphabet = alphabet.keySet().toArray(new Character[0]);
         isAlphabetFilled = true;
     }
@@ -73,7 +73,7 @@ public final class DecryptAnalyze extends Decrypt {
 
     private void readFile(FileInput fileInput) {
         isReadFile = true;
-        processFileStream(fileInput, fileOutput, Option.R);
+        processFileStream(fileInput, fileOutput, OptionFile.R);
         isReadFile = false;
     }
 
@@ -101,7 +101,7 @@ public final class DecryptAnalyze extends Decrypt {
 
     private void decryptAnalyze(double[][] firstMatrix, double[][] secondMatrix) {
         findBestAlphabet(firstMatrix, secondMatrix);
-        processFileStream(fileInput, fileOutput, Option.RW);
+        processFileStream(fileInput, fileOutput, OptionFile.RW);
     }
 
     private void findBestAlphabet(double[][] sourceMatrix, double[][] original) {
@@ -121,7 +121,6 @@ public final class DecryptAnalyze extends Decrypt {
         }
         bestEncryptedAlphabet = Arrays.asList(bestChars);
     }
-
 
     @Override
     protected void getValuesFrom(ValidatorCipherAction<List<String>> validator) {

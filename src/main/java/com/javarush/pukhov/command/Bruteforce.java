@@ -28,14 +28,14 @@ public final class Bruteforce extends Decrypt {
             fileInput = new FileInput(src);
             fileOutput = new FileOutput(destination);
 
-            processFileStream(fileInput, fileOutput, Option.R);
+            processFileStream(fileInput, fileOutput, OptionFile.R);
             if (countSpace != 0) {
                 Map<Character, Integer> alphabet = AlphabetCaesar.getAlphabet();
                 foundKey = alphabet.get(foundSymbol);
             } else {
                 throw new ActionException("Brute force failed");
             }
-            processFileStream(fileInput, fileOutput, Option.RW);
+            processFileStream(fileInput, fileOutput, OptionFile.RW);
         }
     }
 

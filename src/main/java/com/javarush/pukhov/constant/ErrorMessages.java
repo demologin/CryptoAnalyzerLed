@@ -1,8 +1,12 @@
 package com.javarush.pukhov.constant;
 
 public class ErrorMessages {
+
+
     private ErrorMessages() {
     }
+    
+    public static final String BRUTE_FORCE_FAILED = "Brute force failed";
 
     public static final String FILE_NOT_FOUND = "%1$s file not exists";
     public static final String INCORRECT_PATH_FILE = "Incorrect path to file - %1$s";

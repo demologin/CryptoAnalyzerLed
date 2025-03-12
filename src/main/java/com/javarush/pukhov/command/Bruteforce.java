@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.javarush.pukhov.constant.AlphabetCaesar;
 import com.javarush.pukhov.constant.Constants;
+import com.javarush.pukhov.constant.ErrorMessages;
 import com.javarush.pukhov.exception.ActionException;
 import com.javarush.pukhov.io.FileInput;
 import com.javarush.pukhov.io.FileOutput;
@@ -33,7 +34,7 @@ public final class Bruteforce extends Decrypt {
                 Map<Character, Integer> alphabet = AlphabetCaesar.getAlphabet();
                 foundKey = alphabet.get(foundSymbol);
             } else {
-                throw new ActionException("Brute force failed");
+                throw new ActionException(ErrorMessages.BRUTE_FORCE_FAILED);
             }
             processFileStream(fileInput, fileOutput, OptionFile.RW);
         }

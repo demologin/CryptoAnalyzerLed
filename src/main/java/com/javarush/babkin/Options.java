@@ -1,6 +1,7 @@
 package com.javarush.babkin;
 
 
+import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Options {
@@ -25,15 +26,17 @@ public class Options {
                     System.out.println(Textconstant.TEXT_NUMBER);
                 } else if (numberOption == 1) {
 
-                    System.out.println(Textconstant.TEXT_FILE_INPUT);
+                    System.out.println(Textconstant.TEXT_FILE_INPUT_INCRYPT);
                     String dst = scanner.nextLine();
+
                     if (dst == "") {
-                        dst = "Textfile";
+                        dst = "Textfile.txt";
                     }
                     System.out.println(Textconstant.TEXT_FILE_OUTPUT_INCRYPT);
                     String src = scanner.nextLine();
+
                     if (src == "") {
-                        src = "Fileincrypt";
+                        src = "Fileincrypt.txt";
                     }
                     System.out.println(Textconstant.TEXT_KEY);
                     String keyCrypt = scanner.nextLine();
@@ -43,15 +46,15 @@ public class Options {
                     boo = true;
                 } else if (numberOption == 2) {
 
-                    System.out.println(Textconstant.TEXT_FILE_INPUT);
+                    System.out.println(Textconstant.TEXT_FILE_INPUT_DICRYPT);
                     String dst = scanner.nextLine();
                     if (dst == "") {
-                        dst = "Textfileincrypt";
+                        dst = "Textfileincrypt.txt";
                     }
                     System.out.println(Textconstant.TEXT_FILE_OUTPUT_DICRYPT);
                     String src = scanner.nextLine();
                     if (src == "") {
-                        src = "Filedicrypt";
+                        src = "Filedicrypt.txt";
                     }
                     System.out.println(Textconstant.TEXT_KEY);
                     String keyCrypt = scanner.nextLine();

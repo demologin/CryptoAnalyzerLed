@@ -3,19 +3,20 @@ package com.javarush.burdygin.activity;
 import com.javarush.burdygin.alphabet.AlphabetLogic;
 import com.javarush.burdygin.constant.Constants;
 import com.javarush.burdygin.alphabet.Alphabet;
+import com.javarush.burdygin.controller.Controller;
 import com.javarush.burdygin.inputOutput.PathHelper;
 
 import java.nio.file.Path;
 import java.util.Map;
 
-public class BruteForce implements Mode {
+public class BruteForce extends Mode {
 
-    AlphabetLogic alphabetLogic;
+    AlphabetLogic alphabetLogic = Controller.getAlphabetLogic();
 
-    public BruteForce(AlphabetLogic alphabetLogic) {
-        this.alphabetLogic = alphabetLogic;
+    public BruteForce() {
     }
 
+    @Override
     public void start(Map<String, String> args, Activity activity) {
 
         int key = 0;

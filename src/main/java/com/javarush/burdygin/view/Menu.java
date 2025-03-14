@@ -37,7 +37,6 @@ public class Menu {
             case Constants.MODE_DECODE, Constants.MODE_BRUTE_FORCE -> askDecryptParams(args);
             default -> {
                 System.out.println("-".repeat(15));
-                System.out.printf(Messages.EXIT_MESSAGE + '\n');
                 args.put(Constants.MODE_FLAG, Constants.MODE_EXIT);
             }
         }
@@ -87,7 +86,7 @@ public class Menu {
             args.put(Constants.MODE_FLAG, Constants.MODE_BRUTE_FORCE);
         } else if (args.get(Constants.KEY).isEmpty()) {
             Random random = new Random();
-            String randomKey = String.valueOf(random.nextInt(1, alphabetLogic.alphabetLength()));
+            String randomKey = String.valueOf(random.nextInt(1, AlphabetLogic.alphabetLength()));
             args.put(Constants.KEY, randomKey);
             System.out.printf("key = %s", randomKey + '\n');
         }

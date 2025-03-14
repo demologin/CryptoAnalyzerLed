@@ -9,10 +9,21 @@ import java.util.List;
 public class AlphabetLogic {
 
 
-    List<AlphabetObject> alphabetsObjects;
+    static List<AlphabetObject> alphabetsObjects;
+
+    public static int alphabetLength() {
+        int result = 0;
+        for (AlphabetObject alphabetObject : alphabetsObjects) {
+            result += alphabetObject.last - (alphabetObject.first - 1);
+            if (alphabetObject.exempts != null) {
+                result += alphabetObject.exempts.length;
+            }
+        }
+        return result;
+    }
 
     public AlphabetLogic(List<AlphabetObject> alphabetsObjects) {
-        this.alphabetsObjects = alphabetsObjects;
+        AlphabetLogic.alphabetsObjects = alphabetsObjects;
     }
 
     public boolean isMiddleAlphabet(char c) {
@@ -157,16 +168,5 @@ public class AlphabetLogic {
             symbolCounter = middleCounter;
         }
         return new int[]{middleChar, symbolCounter};
-    }
-
-    public int alphabetLength() {
-        int result = 0;
-        for (AlphabetObject alphabetObject : alphabetsObjects) {
-            result += alphabetObject.last - (alphabetObject.first - 1);
-            if (alphabetObject.exempts != null) {
-                result += alphabetObject.exempts.length;
-            }
-        }
-        return result;
     }
 }

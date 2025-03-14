@@ -3,6 +3,7 @@ package com.javarush.burdygin.view;
 import com.javarush.burdygin.constant.Constants;
 import com.javarush.burdygin.controller.Controller;
 import com.javarush.burdygin.exception.EmptyFileException;
+import com.javarush.burdygin.exception.IncorrectModeException;
 import com.javarush.burdygin.inputOutput.PathHelper;
 
 import java.nio.file.NoSuchFileException;
@@ -36,7 +37,7 @@ public class ConsoleApplication {
         if (!isExit) {
             try {
                 controller.start(args);
-            } catch (NullPointerException e) {
+            } catch (IncorrectModeException e) {
                 System.out.println(Messages.INCORRECT_MODE_MESSAGE);
             } catch (EmptyFileException e) {
                 System.out.println(Messages.EMPTY_FILE_MESSAGE);

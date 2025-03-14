@@ -3,6 +3,7 @@ package com.javarush.burdygin.activity;
 import com.javarush.burdygin.alphabet.AlphabetLogic;
 import com.javarush.burdygin.constant.Constants;
 import com.javarush.burdygin.exception.EmptyFileException;
+import com.javarush.burdygin.exception.FileNotFoundException;
 import com.javarush.burdygin.inputOutput.PathHelper;
 
 import java.io.BufferedReader;
@@ -45,7 +46,7 @@ public class Activity {
                 bufferedWriter.write(textChar);
             }
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new FileNotFoundException();
         }
     }
 }
